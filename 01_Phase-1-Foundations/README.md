@@ -53,11 +53,7 @@ An LLM, or Large Language Model, is a type of AI system designed to understand a
   </div>
 </div>
 
-* **Prediction Engine:** It takes a sequence of words (like a sentence) and predicts the most likely words to follow. For example, if you input "The sky is," it might predict "blue" as the next word based on common patterns.
 
-* **Probability Assignment:** The model calculates probabilities for possible next words or sequences, then picks one by sampling from those options.
-
-* **Repetition Until Done:** This process repeats—adding words one by one—until it reaches a stopping point, like the end of a response.
 
 ---
 
@@ -97,11 +93,6 @@ A prompt is the text you give to an AI model, like a question or instruction, be
   </div>
 </div>
 
-* **Prompt:** The input you provide to an AI, such as a question or task.
-
-* **Prompt Engineering:** The skill of crafting better inputs to get more accurate, useful responses from AI models like GPT-3 or GPT-4.
-
-It involves making prompts clear, specific, and tailored to improve the AI's performance and relevance.
 
 ---
 
@@ -152,7 +143,7 @@ Simple prompts yield basic answers, while refined ones add depth and specifics.
   </div>
 </div>
 
-Before creating a prompt for an AI model, take time to prepare. This makes your prompts more effective, cuts down on trial-and-error, and leads to better results. Follow this step-by-step checklist to get ready.
+
 
 **Great work!** You now know exactly what an LLM is, how it thinks, what a prompt really is, and why careful preparation before writing any prompt saves you hours of frustration.  
 
