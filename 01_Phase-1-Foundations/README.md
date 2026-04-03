@@ -32,8 +32,6 @@ An LLM, or Large Language Model, is a type of AI system designed to understand a
 
 ## How It Works
 
-## How It Works
-
 <div style="display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap;">
   <!-- Left: Text -->
   <div style="flex: 1; min-width: 280px;">
