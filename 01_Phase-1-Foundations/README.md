@@ -32,16 +32,24 @@ An LLM, or Large Language Model, is a type of AI system designed to understand a
 
 ## How It Works
 
-<div style="display: flex; align-items: flex-start; gap: 25px; flex-wrap: wrap;">
-  <div style="flex: 1; min-width: 300px;">
+## How It Works
+
+<div style="display: flex; align-items: flex-start; gap: 30px; flex-wrap: wrap;">
+  <!-- Left: Text -->
+  <div style="flex: 1; min-width: 320px;">
     <ul>
       <li><strong>Prediction Engine:</strong> It takes a sequence of words (like a sentence) and predicts the most likely words to follow. For example, if you input "The sky is," it might predict "blue" as the next word based on common patterns.</li>
       <li><strong>Probability Assignment:</strong> The model calculates probabilities for possible next words or sequences, then picks one by sampling from those options.</li>
       <li><strong>Repetition Until Done:</strong> This process repeats—adding words one by one—until it reaches a stopping point, like the end of a response.</li>
     </ul>
   </div>
+  
+  <!-- Right: Image -->
   <div style="flex: 1; min-width: 280px; text-align: right;">
-    <img src="../assets/images/phase1-how-it-works-flowchart.png" width="25%" alt="How an LLM Works - Prediction Engine Flowchart" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    <img src="../assets/images/phase1-how-it-works-flowchart.png" 
+         width="25%" 
+         alt="How an LLM Works - Prediction Engine Flowchart" 
+         style="border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);">
   </div>
 </div>
 
