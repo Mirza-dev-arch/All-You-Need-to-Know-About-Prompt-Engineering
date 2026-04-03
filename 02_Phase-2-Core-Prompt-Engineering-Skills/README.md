@@ -100,4 +100,4 @@ As a prompt engineer, inputs for LLMs like Grok include understanding **"prompt 
 | Impact on LLM           | Guides the thinking process               | Ensures logical flow                      | Reduces misinterpretation              |
 | Engineering Tip         | Experiment with benchmarks                | Use for complex prompts                   | Test for model-specific quirks         |
 
- Sandwich">
+
