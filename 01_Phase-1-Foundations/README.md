@@ -18,7 +18,7 @@ In this phase, you will understand what LLMs really are, how they think, what a 
 - [What is Prompt Engineering?](#what-is-prompt-engineering)
 - [Why It Matters?](#why-it-matters)
 - [Example: AI in Healthcare](#example-ai-in-healthcare)
-- [Pre-Prompt Preparation](#pre-prompt-preparation)
+- [Pre-Prompt Preparation](#pre-prompt-preparation-what-to-do-before-writing-prompts)
 
 **[← Back to Main README](../../README.md)**  **[Next → Phase 2](../02_Phase-2-Core-Prompt-Engineering-Skills/README.md)**
 
