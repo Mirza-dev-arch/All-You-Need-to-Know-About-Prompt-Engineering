@@ -33,22 +33,13 @@ In this phase you will master the **three core layers** every professional promp
 
 ## Understanding Technique vs Structure vs Format
 
-As a prompt engineer, inputs for LLMs like Grok include understanding **"prompt technique," "prompt structure,"** and **"prompt format"** — they are related but distinct layers in a well-designed prompt.
+As a prompt engineer, inputs for LLMs like Grok include understanding **"prompt technique," "prompt structure,"** and **"prompt format"** — they are related but operate at different levels of abstraction and focus in a well-designed prompt.
 
-<div style="display: flex; align-items: flex-start; gap: 25px; flex-wrap: wrap;">
-  <div style="flex: 1; min-width: 300px;">
-    Think of them as layers:
-  </div>
-  <div style="flex: 1; min-width: 280px; text-align: right;">
-    <img src="../assets/images/phase2-technique-structure-format.png" width="88%" alt="Technique vs Structure vs Format Layers" style="border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);">
-  </div>
-</div>
 
----
 
 ## 1. Prompt Technique
 
-**Definition:** The high-level method or strategy you employ to elicit the desired response from an LLM.
+**Definition:** This is the high-level method or strategy you employ to elicit the desired response from an LLM. It's about leveraging psychological or logical patterns that models have learned from training data to improve output quality, reduce hallucinations, or handle complex tasks.
 
 **Key Focus:** Why you’re prompting in a certain way and what cognitive process you’re simulating.
 
@@ -59,29 +50,31 @@ As a prompt engineer, inputs for LLMs like Grok include understanding **"prompt 
 - **Few-Shot Prompting:** "Translate these: 'Hello' → 'Bonjour'. 'Goodbye' → 'Au revoir'. Now: 'Thank you' →"
 - **Role-Playing:** "You are a pirate captain. Describe finding treasure."
 
-**Prompt Engineer Tip:** Techniques are iterative — test with A/B variations.
+**Prompt Engineer Tip:** Techniques are iterative—test them with A/B variations to measure response accuracy or coherence. They're the "art" side of prompting, often requiring experimentation.
+
 
 ---
 
 ## 2. Prompt Structure
 
-**Definition:** The overall organisation and logical flow of the prompt’s content.
+**Definition:** This refers to the overall organisation and logical flow of the prompt's content. It's like the skeleton that holds everything together, ensuring the model processes information in a sequence that makes sense.
 
 **Key Focus:** Hierarchy and sequencing of elements.
 
-**When to Use:** For multi-step tasks or long prompts.
+**When to Use:**  Helps manage complexity, especially in multi-step tasks or long prompts, by breaking them into digestible parts.
 
 **Examples:**
 - Basic: `[Instructions] + [Context] + [Query]`
 - Advanced: Sections like "Task", "Constraints", "Examples", "Input"
 
-**Prompt Engineer Tip:** Always start with clear instructions and end with a direct call-to-action.
+**Prompt Engineer Tip:** Good structure minimises token waste and improves consistency. Always start with clear instructions to "prime" the model, and end with a direct call-to-action to focus the output.
+
 
 ---
 
 ## 3. Prompt Format
 
-**Definition:** The stylistic and syntactic presentation of the prompt.
+**Definition:** The stylistic and syntactic presentation of the prompt that makes it easier for the model to parse and respond.
 
 **Key Focus:** Readability and machine-friendliness.
 
@@ -107,68 +100,4 @@ As a prompt engineer, inputs for LLMs like Grok include understanding **"prompt 
 | Impact on LLM           | Guides the thinking process               | Ensures logical flow                      | Reduces misinterpretation              |
 | Engineering Tip         | Experiment with benchmarks                | Use for complex prompts                   | Test for model-specific quirks         |
 
----
-
-## Setting Up a System Prompt (or Meta Prompt)
-
-<img src="../assets/images/phase2-system-prompt-setup.png" width="42%" align="right" style="margin-left: 25px; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" alt="System Prompt Setup">
-
-**Why Use a System Prompt?**  
-It boosts the model's performance by defining role, tone, output format, and safety rules.
-
-**Example Structure:**
-- System: You're an AI assistant that helps people find information and responds in rhyme...
-- User: What can you tell about me, John Doe?
-- Assistant: Dear John...
-
-**Key Concepts:**
-- Role and Scope
-- Output Contract
-- Audience and Tone
-- Tools and Data (Optional)
-- Safety Constraints
-
-<br clear="right"/>
-
----
-
-## Creating Maintainable System Prompts + Best Practices + Safety
-
-**System Message Template**
-- Act as a [role].
-- Your job is to [task] about [topic].
-- ...
-
-**Common Pitfalls**
-- Conflicting instructions
-- Overly long messages
-- Hidden requirements
-
-**Best Practices**
-- Use clear language
-- Be concise
-- Emphasize key words with **bold**
-- Refer to the AI in second person ("You are...")
-
-**What is a Safety System Message?**  
-It sets clear boundaries and refusal rules.
-
-**Techniques for Safety** and **Recommended System Messages** are shown in the tables below (use the PDF screenshots for visual reference).
-
----
-
-## Prompting Techniques (1–7)
-
-All 7 categories (Basic Reasoning, Advanced Reasoning, Example-Driven, Self-Correction, Role/Creative, Structured & Framework, Optimization & Automation) are covered with full comparison tables in your original document.
-
-**Use the screenshots from PDF pages 12–19** for the visual tables.
-
----
-
-## Prompt Structures + Prompting Format + How to Combine Layers
-
-All remaining tables (Prompt Structures, Prompting Format, Combining Technique+Structure+Format, Top 15, Top 10, etc.) are converted to clean Markdown tables in your original content.
-
-**Place the main “Combine Layers” screenshot** using the Denis2054 style if you have it:
-```html
-<img src="../assets/images/phase2-combining-technique-structure-format.png" width="42%" align="left" style="margin-right: 25px; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" alt="Combining Layers Sandwich">
+ Sandwich">
