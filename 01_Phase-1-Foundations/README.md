@@ -32,16 +32,16 @@ An LLM, or Large Language Model, is a type of AI system designed to understand a
 
 ## How It Works
 
-<div style="display: flex; align-items: flex-start; gap: 20px;">
-  <div style="flex: 1;">
+<div style="display: flex; align-items: flex-start; gap: 25px; flex-wrap: wrap;">
+  <div style="flex: 1; min-width: 300px;">
     <ul>
       <li><strong>Prediction Engine:</strong> It takes a sequence of words (like a sentence) and predicts the most likely words to follow. For example, if you input "The sky is," it might predict "blue" as the next word based on common patterns.</li>
       <li><strong>Probability Assignment:</strong> The model calculates probabilities for possible next words or sequences, then picks one by sampling from those options.</li>
       <li><strong>Repetition Until Done:</strong> This process repeats—adding words one by one—until it reaches a stopping point, like the end of a response.</li>
     </ul>
   </div>
-  <div style="flex: 1;">
-    <img src="../assets/images/phase1-how-it-works-flowchart.png" width="25%" alt="How an LLM Works - Prediction Engine Flowchart" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  <div style="flex: 1; min-width: 280px; text-align: right;">
+    <img src="../assets/images/phase1-how-it-works-flowchart.png" width="25%" alt="How an LLM Works - Prediction Engine Flowchart" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
   </div>
 </div>
 
@@ -76,16 +76,16 @@ A prompt is the text you give to an AI model, like a question or instruction, be
 
 ## What is Prompt Engineering?
 
-<div style="display: flex; align-items: flex-start; gap: 20px;">
-  <div style="flex: 1;">
+<div style="display: flex; align-items: flex-start; gap: 25px; flex-wrap: wrap;">
+  <div style="flex: 1; min-width: 280px; order: 2;">
+    <img src="../assets/images/phase1-prompt-engineering-bridge.png" width="45%" alt="Prompt Engineering Bridge" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+  </div>
+  <div style="flex: 1; min-width: 300px; order: 1;">
     <ul>
       <li><strong>Prompt:</strong> The input you provide to an AI, such as a question or task.</li>
       <li><strong>Prompt Engineering:</strong> The skill of crafting better inputs to get more accurate, useful responses from AI models like GPT-3 or GPT-4.</li>
     </ul>
     <p>It involves making prompts clear, specific, and tailored to improve the AI's performance and relevance.</p>
-  </div>
-  <div style="flex: 1;">
-    <img src="../assets/images/phase1-prompt-engineering-bridge.png" width="45%" alt="Prompt Engineering Bridge" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
   </div>
 </div>
 
