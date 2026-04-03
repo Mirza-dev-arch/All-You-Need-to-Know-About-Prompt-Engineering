@@ -87,7 +87,6 @@ A prompt is the text you give to an AI model, like a question or instruction, be
 <p>It involves making prompts clear, specific, and tailored to improve the AI's performance and relevance.</p>
 
 <br clear="left"/>
----
 
 ## Why It Matters?
 
