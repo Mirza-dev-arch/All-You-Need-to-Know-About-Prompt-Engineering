@@ -73,20 +73,20 @@ A prompt is the text you give to an AI model, like a question or instruction, be
 
 ## What is Prompt Engineering?
 
-<div style="display: flex; align-items: flex-start; gap: 25px; flex-wrap: wrap;">
-  <div style="flex: 1; min-width: 280px; order: 2;">
-    <img src="../assets/images/phase1-prompt-engineering-bridge.png" width="55%" alt="Prompt Engineering Bridge" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-  </div>
-  <div style="flex: 1; min-width: 280px; order: 1;">
-    <ul>
-      <li><strong>Prompt:</strong> The input you provide to an AI, such as a question or task.</li>
-      <li><strong>Prompt Engineering:</strong> The skill of crafting better inputs to get more accurate, useful responses from AI models like GPT-3 or GPT-4.</li>
-    </ul>
-    <p>It involves making prompts clear, specific, and tailored to improve the AI's performance and relevance.</p>
-  </div>
-</div>
+<img src="../assets/images/phase1-prompt-engineering-bridge.png" 
+     width="55%" 
+     align="left" 
+     style="margin-right: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);" 
+     alt="Prompt Engineering Bridge">
 
+<ul>
+  <li><strong>Prompt:</strong> The input you provide to an AI, such as a question or task.</li>
+  <li><strong>Prompt Engineering:</strong> The skill of crafting better inputs to get more accurate, useful responses from AI models like GPT-3 or GPT-4.</li>
+</ul>
 
+<p>It involves making prompts clear, specific, and tailored to improve the AI's performance and relevance.</p>
+
+<br clear="left"/>
 ---
 
 ## Why It Matters?
