@@ -41,7 +41,7 @@ An LLM, or Large Language Model, is a type of AI system designed to understand a
     </ul>
   </div>
   <div style="flex: 1;">
-    <img src="../assets/images/phase1-how-it-works-flowchart.png" width="85%" alt="How an LLM Works - Prediction Engine Flowchart" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <img src="../assets/images/phase1-how-it-works-flowchart.png" width="45%" alt="How an LLM Works - Prediction Engine Flowchart" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
   </div>
 </div>
 
@@ -85,7 +85,7 @@ A prompt is the text you give to an AI model, like a question or instruction, be
     <p>It involves making prompts clear, specific, and tailored to improve the AI's performance and relevance.</p>
   </div>
   <div style="flex: 1;">
-    <img src="../assets/images/phase1-prompt-engineering-bridge.png" width="85%" alt="Prompt Engineering Bridge" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <img src="../assets/images/phase1-prompt-engineering-bridge.png" width="45%" alt="Prompt Engineering Bridge" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
   </div>
 </div>
 
