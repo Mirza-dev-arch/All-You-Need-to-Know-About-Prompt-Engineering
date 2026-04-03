@@ -37,7 +37,7 @@ An LLM, or Large Language Model, is a type of AI system designed to understand a
 <img src="../assets/images/phase1-how-it-works-flowchart.png" 
      width="25%" 
      align="right" 
-     style="margin-left: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);" 
+     style="margin-left: 35px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);" 
      alt="How an LLM Works - Prediction Engine Flowchart">
 
 <ul>
