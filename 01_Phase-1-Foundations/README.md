@@ -5,7 +5,7 @@
 ![Core Concepts](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
 
 **Welcome to the beginning of your Prompt Engineering journey.**  
-In this phase you will understand what LLMs really are, how they think, what a prompt actually is, and why preparation before writing any prompt saves you hours of frustration.
+In this phase, you will understand what LLMs really are, how they think, what a prompt actually is, and why preparation before writing any prompt saves you hours of frustration.
 
 ---
 
@@ -32,7 +32,7 @@ An LLM, or Large Language Model, is a type of AI system designed to understand a
 
 ## How It Works
 
-![How an LLM Works - Prediction Engine Flowchart](../../assets/images/phase1-how-it-works-flowchart.png)
+![How an LLM Works - Prediction Engine Flowchart](../assets/images/phase1-how-it-works-flowchart.png)
 
 * **Prediction Engine:** It takes a sequence of words (like a sentence) and predicts the most likely words to follow. For example, if you input "The sky is," it might predict "blue" as the next word based on common patterns.
 
@@ -65,7 +65,7 @@ A prompt is the text you give to an AI model, like a question or instruction, be
 
 ## What is Prompt Engineering?
 
-![Prompt Engineering Bridge](../../assets/images/phase1-prompt-engineering-bridge.png)
+![Prompt Engineering Bridge](../assets/images/phase1-prompt-engineering-bridge.png)
 
 * **Prompt:** The input you provide to an AI, such as a question or task.
 
@@ -113,7 +113,7 @@ Simple prompts yield basic answers, while refined ones add depth and specifics.
 
 ## Pre-Prompt Preparation: What to Do Before Writing Prompts
 
-![Pre-Prompt Preparation Checklist](../../assets/images/phase1-pre-prompt-preparation-checklist.png)
+![Pre-Prompt Preparation Checklist](../assets/images/phase1-pre-prompt-preparation-checklist.png)
 
 Before creating a prompt for an AI model, take time to prepare. This makes your prompts more effective, cuts down on trial-and-error, and leads to better results. Follow this step-by-step checklist to get ready.
 
