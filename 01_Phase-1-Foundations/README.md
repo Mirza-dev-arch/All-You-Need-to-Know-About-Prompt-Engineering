@@ -135,7 +135,14 @@ Simple prompts yield basic answers, while refined ones add depth and specifics.
 
 ## Pre-Prompt Preparation: What to Do Before Writing Prompts
 
-![Pre-Prompt Preparation Checklist](../assets/images/phase1-pre-prompt-preparation-checklist.png)
+<div style="display: flex; align-items: flex-start; gap: 20px;">
+  <div style="flex: 1;">
+    <p>Before creating a prompt for an AI model, take time to prepare. This makes your prompts more effective, cuts down on trial-and-error, and leads to better results. Follow this step-by-step checklist to get ready.</p>
+  </div>
+  <div style="flex: 1;">
+    <img src="../assets/images/phase1-pre-prompt-preparation-checklist.png" width="65%" alt="Pre-Prompt Preparation Checklist" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  </div>
+</div>
 
 Before creating a prompt for an AI model, take time to prepare. This makes your prompts more effective, cuts down on trial-and-error, and leads to better results. Follow this step-by-step checklist to get ready.
 
