@@ -1,0 +1,9 @@
+# Ignore large files
+*.pdf
+*.docx
+.DS_Store
+Thumbs.db
+
+# Optional: ignore your local notes
+notes/
+temp/
