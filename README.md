@@ -23,23 +23,6 @@ Every section includes **simple explanations, real examples, practical tips, tab
 
 ---
 
-## Learning Roadmap
-
-```mermaid
-flowchart TD
-    A[🎯 Phase 1: Foundations<br><small>What are LLMs? • What is a Prompt?</small>] 
-    --> B[🔧 Phase 2: Core Prompt Engineering Skills<br><small>Technique vs Structure vs Format • System Prompts • Safety</small>]
-    --> C[⚡ Phase 3: Mastery & Experimentation<br><small>All Prompting Techniques • Tables & Decision Trees</small>]
-    --> D[💻 Phase 4: Prompt Engineering in Developer Mode<br><small>Advanced Patterns • API • Production</small>]
-    --> E[🧠 Phase 5: Local LLMs & Advanced Chatbots<br><small>Running models locally • Building agents</small>]
-
-    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
-    style B fill:#e8f5e9,stroke:#388e3c,stroke-width:3px
-    style C fill:#fff3e0,stroke:#f57c00,stroke-width:3px
-    style D fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px
-    style E fill:#fce4ec,stroke:#c2185b,stroke-width:3px
-
-
 
 ## 🚀 How to Use This Repository
 
@@ -70,4 +53,28 @@ This project is licensed under the **MIT License** — feel free to use, fork, o
 > *“Turning my learning journey into a clean, shareable portfolio asset.”*
 
 ---
+
+
+
+
+
+
+
+---
+
+## Learning Roadmap
+
+```mermaid
+flowchart TD
+    A[🎯 Phase 1: Foundations<br><small>What are LLMs? • What is a Prompt?</small>] 
+    --> B[🔧 Phase 2: Core Prompt Engineering Skills<br><small>Technique vs Structure vs Format • System Prompts • Safety</small>]
+    --> C[⚡ Phase 3: Mastery & Experimentation<br><small>All Prompting Techniques • Tables & Decision Trees</small>]
+    --> D[💻 Phase 4: Prompt Engineering in Developer Mode<br><small>Advanced Patterns • API • Production</small>]
+    --> E[🧠 Phase 5: Local LLMs & Advanced Chatbots<br><small>Running models locally • Building agents</small>]
+
+    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
+    style B fill:#e8f5e9,stroke:#388e3c,stroke-width:3px
+    style C fill:#fff3e0,stroke:#f57c00,stroke-width:3px
+    style D fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px
+    style E fill:#fce4ec,stroke:#c2185b,stroke-width:3px
 
