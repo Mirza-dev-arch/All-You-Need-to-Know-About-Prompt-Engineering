@@ -81,7 +81,7 @@ A prompt is the text you give to an AI model, like a question or instruction, be
 
 <div style="display: flex; align-items: flex-start; gap: 25px; flex-wrap: wrap;">
   <div style="flex: 1; min-width: 280px; order: 2;">
-    <img src="../assets/images/phase1-prompt-engineering-bridge.png" width="45%" alt="Prompt Engineering Bridge" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    <img src="../assets/images/phase1-prompt-engineering-bridge.png" width="55%" alt="Prompt Engineering Bridge" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
   </div>
   <div style="flex: 1; min-width: 280px; order: 1;">
     <ul>
