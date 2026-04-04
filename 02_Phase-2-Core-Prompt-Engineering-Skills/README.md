@@ -295,4 +295,60 @@ You now have a comprehensive overview of all major prompting techniques, grouped
 
 **[Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  **[Continue to Prompt Structures →](#prompt-structures)**
 
+## Prompt Structures
+
+<img src="../assets/images/phase2-prompt-evolution.png" 
+     width="42%" 
+     align="left" 
+     style="margin-right: 25px; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="Prompt Evolution - From Unstructured to Structured">
+
+Good structures prevent overwhelming the model with unstructured walls of text, especially in long prompts. They work best on **instruction-tuned models** (e.g., Grok, GPT-4, Claude) that handle hierarchy well.
+
+However, they may underperform on smaller or raw models (e.g., base GPT-3) with limited reasoning or context capacity — in those cases, simpler structures are often better to avoid overload.
+
+**General Rule:** Match structure to prompt length/task type. Test variations to see what minimises hallucinations.
+
+<br clear="left"/>
+
+### Prompt Structure Comparison Table
+
+| Structure Name              | Sequence of Elements                                      | Description with Example                                                                 | Best Use Case & When to Use                                      | When Not to Use                                      | Models It Works Well On                  | Why It Works Well There |
+|-----------------------------|-----------------------------------------------------------|------------------------------------------------------------------------------------------|------------------------------------------------------------------|------------------------------------------------------|------------------------------------------|-------------------------|
+| Basic Instruction + Query   | Instructions > Query                                      | Simple: Start with what to do, then the input.<br>Example: "Summarise this article: [text]." | Quick, straightforward tasks like fact checks or translations. Use when no context/examples needed. | Complex tasks requiring reasoning or constraints, as it lacks depth. | All LLMs, especially smaller ones like GPT-3.5. | Minimalist; doesn't tax limited context. |
+| Context-First               | Context > Instructions > Query                            | Provide background first.<br>Example: "You're analysing sales data from 2023. Calculate growth: [data]." | When background is key (e.g., domain-specific). Use to set the scene without overwhelming. | General knowledge queries where context adds noise. | Knowledge-rich models like Grok or Claude. | Leverages pre-trained knowledge. |
+| Objective-Driven            | Objective > Context > Instructions > Query                | Lead with a goal.<br>Example: "Goal: Optimize code for speed. Context: Python script. Instructions: Refactor. Query: [code]." | Goal-oriented tasks like planning. Use to focus on the result. | Creative/open-ended, where rigid goals stifle. | Reasoning models like GPT-4 or Grok. | Aligns with instruction-tuning. |
+| Constrained                 | Instructions > Constraints > Query > Output Format        | Add limits early.<br>Example: "Generate ideas. Constraints: Under 100 words, no jargon. Query: Brainstorm apps. Output: Bullet list." | Controlled outputs (e.g., concise responses). Use to enforce rules. | Free-form creativity where constraints limit ideas. | API-tuned models like Grok (with tools). | Handles boundaries well. |
+| Example-Led                 | Instructions > Examples > Query                           | Show patterns.<br>Example: "Classify sentiment. Examples: 'Great!' > Positive. 'Bad.' > Negative. Query: 'Okay.'" | Pattern-matching like classification. Use when they clarify. | Novel tasks without good examples, as it biases. | In-context learners like the GPT series. | Excels at few-shot adaptation. |
+| CO-STAR (or similar frameworks) | Context > Objective > Style > Tone > Audience > Response Format | Structured for content.<br>Example: "Context: Sci-fi world. Objective: Write a chapter. Style: Descriptive. Tone: Mysterious. Audience: Teens. Format: Paragraphs." | Content creation (e.g., writing/marketing). Use for tailored outputs. | Technical/logical tasks where style overcomplicates. | Creative models like Grok or DALL-E integrated. | Supports nuanced generation. |
+| Modular/Sectioned           | [Section1: Instructions] > [Section2: Context] > ...     | Divided sections.<br>Example: "Instructions: Debug code. Context: Error log. Examples: [fix1]. Query: [buggy code]. Format: Steps." | Complex, multi-part prompts (e.g., debugging). Use for organisation in long inputs. | Short queries, as sections add token overhead. | Large-context models like Claude or Grok. | Manages big windows without losing flow. |
+| Hierarchical/Decomposed     | Main Task > Sub-Tasks > Query > Integration               | Break down.<br>Example: "Main: Design app. Sub1: UI. Sub2: Backend. Query: Specs. Integrate: Combine." | Hierarchical problems (e.g., architecture). Use for scalability. | Flat/simple tasks without layers. | Decomposition models like GPT-4. | Trained on breakdowns, reduces errors in parts. |
+| Feedback-Loop               | Instructions > Query > Negative Examples/Comments > Desired Adjustments | Include critiques.<br>Example: "Generate story. Query: [plot]. Negative: Avoid clichés like 'happily ever after'. Adjust: Make ending twisty." | Iterative refinement. Use to avoid common pitfalls. | First-pass generation without known issues. | Reflective models like Grok. | Encourages self-correction. |
+| Full Sequence               | Context > Objective > Constraints > Output Format > Examples > Negative Comments | Comprehensive.<br>Example: "Context: Medical report. Objective: Summarise. Constraints: HIPAA compliant. Format: Bullets. Examples: [good summary]. Negative: Don't speculate." | High-stakes/precise tasks (e.g., legal). Use for control. | Casual queries where a full setup is overkill. | Advanced LLMs like GPT-4 or Grok. | Handles multi-faceted priming due to strong reasoning. |
+
+---
+
+### Which Prompt Structure Should I Use?
+
+<img src="../assets/images/phase2-which-prompt-structure.png" 
+     width="48%" 
+     align="center" 
+     style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="Decision Tree - Which Prompt Structure to Choose">
+
+**Quick Decision Guide:**
+- Simple & fast task → **Basic Instruction + Query**
+- Need background → **Context-First**
+- Goal-oriented → **Objective-Driven**
+- Need strict control → **Constrained**
+- Need examples → **Example-Led**
+- Creative/content work → **CO-STAR**
+- Complex/long prompt → **Modular/Sectioned** or **Full Sequence**
+
+---
+
+**Pro Tip:** Always test your chosen structure with a short version first. If the model performs well, scale it up. If it feels bloated, simplify.
+
+**[Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  **[Continue to Prompting Format →](#prompting-format)**
+
 *Phase 2 of "All You Need to Know About Prompt Engineering" — Portfolio Project by Mirza (BS AI)*
