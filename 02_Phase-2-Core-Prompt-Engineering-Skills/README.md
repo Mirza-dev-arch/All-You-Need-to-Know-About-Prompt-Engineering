@@ -200,3 +200,99 @@ It's a type of system prompt that sets clear boundaries and refusal rules to red
 **Pro Tip:** Always place the System Prompt at the very beginning of the conversation. It acts as the "constitution" for the entire session.
 
 **[Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  **[Continue to Prompting Techniques →](#prompting-techniques)**
+
+## Prompting Techniques
+
+<img src="../assets/images/phase2-what-is-prompt-technique.png" 
+     width="45%" 
+     align="center" 
+     style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="What is a Prompt Technique">
+
+Prompt Technique is the high-level method or strategy you employ to elicit the desired response from an LLM. It leverages psychological or logical patterns the model has learned during training.
+
+---
+
+### 1. Basic Reasoning Techniques
+
+| Technique                  | Description with Example                                                                 | Best Use Case                                      | Type of Problem Best For                          | Worst Case (When Not to Use)                          | Models It Works Well On          | Why It Works Well There |
+|----------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------|---------------------------------------------------|-------------------------------------------------------|----------------------------------|-------------------------|
+| Chain-of-Thought (CoT)     | Guides the model to think step-by-step before answering. Example: "Solve 2+34 step-by-step: First, multiply 34=12, then add 2=14." | When you need logical reasoning or to break down complex problems. Use for math or puzzles; avoid for simple facts. | Logical, multi-step reasoning like math, coding, or decision-making. | Simple queries or creative tasks where steps add unnecessary length. | Text-to-Text models like GPT or Grok. | These models are trained on sequential data, so mimicking human reasoning reduces errors in logic-heavy tasks. |
+
+---
+
+### 2. Advanced Reasoning & Exploration
+
+| Technique                  | Description with Example                                                                 | Best Use Case                                      | Type of Problem Best For                          | Worst Case (When Not to Use)                          | Models It Works Well On                  | Why It Works Well There |
+|----------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------|---------------------------------------------------|-------------------------------------------------------|------------------------------------------|-------------------------|
+| Tree-of-Thought (ToT)      | Explores multiple reasoning paths like a tree, evaluating branches to find the best. Example: "Brainstorm 3 ways to solve traffic: Option 1: More roads (pros/cons)... Pick the best." | When finding optimal solutions among options. Use for planning; skip for linear problems. | Optimisation, planning, or creative problem-solving with alternatives. | Straightforward tasks without branches, as it overcomplicates. | Advanced LLMs like Grok or GPT-4 with strong reasoning. | They handle branching logic and self-evaluation well due to large context windows and training on diverse scenarios. |
+| Step-Back Prompting        | Ask the model a generic, high-level question about relevant concepts or facts before delving into reasoning. Example: "What is the core principle of gravity? Now apply this to the apple falling." | Simplifying complex issues. Use for high-level thinking; avoid basics. | Abstract or conceptual problems, like strategy. | Concrete, detail-oriented tasks where abstraction confuses. | Reasoning-focused LLMs like GPT-4 or Grok. | Encourages meta-thinking, leveraging their ability to generalise from training. |
+| Plan-and-Solve             | First plan steps, then execute. Example: "Plan: Step 1 research, Step 2 analyse. Now solve." | Structured problem-solving. Use for multi-phase tasks; avoid singles. | Complex projects like research or strategy. | Basic calculations where planning is redundant. | Planning strong LLMs like GPT-4. | Mimics human planning, reducing errors in sequenced tasks. |
+| Least-to-Most Prompting    | Break into sub-problems, solve the easy first. Example: "First, define terms. Then solve the equation." | Scaling complexity. Use for tough problems; avoid easy ones. | Hierarchical tasks like coding or analysis. | Flat, non-decomposable queries. | Decomposition-strong models like GPT-4. | Trained on breakdowns, helps in managing complexity step-by-step. |
+| Decomposition Prompting    | Breaks the problem into parts explicitly. Example: "Decompose: Part1 math, Part2 logic. Solve each." | Divide and conquer. Use for large problems; avoid small. | Modular tasks like software design. | Indivisible queries. | Modular LLMs like the GPT series. | Reduces overload by processing subsets. |
+| Graph-of-Thought (GoT)     | Models reasoning as a graph with nodes and edges. Example: "Node1: Idea A -> Node2: Connected B. Explore paths." | Non-linear exploration. Use for interconnected ideas; avoid linear. | Knowledge graphs or complex relations. | Simple sequences where the graph overcomplicates. | Advanced reasoning models like Grok. | Handles relational data from graph-like training examples. |
+| Skeleton-of-Thought (SoT)  | Creates an outline or skeleton first, then fills in details. Example: "Outline a business plan: 1. Intro, 2. Market... Now expand each." | Structuring responses. Use for organised content; avoid short answers. | Essay writing, planning, or reports needing structure. | Quick facts or unstructured creativity, as outline adds overhead. | Long-form generation models like Grok or GPT-4. | Handles hierarchical content well due to training on outlined texts. |
+
+---
+
+### 3. Example-Driven & In-Context Learning
+
+| Technique              | Description with Example                                                                 | Best Use Case                                      | Type of Problem Best For                          | Worst Case (When Not to Use)                          | Models It Works Well On                  | Why It Works Well There |
+|------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------|---------------------------------------------------|-------------------------------------------------------|------------------------------------------|-------------------------|
+| Few-Shot Prompting     | Provides 1-5 examples to teach the pattern. Example: "Apple -> Fruit. Dog -> Animal. Car -> ?" | Demonstrating patterns quickly. Use when examples clarify; avoid if no good examples exist. | Classification, translation, or pattern-matching with limited data. | Novel tasks without patterns or when examples might bias the model. | Most LLMs, especially smaller ones like GPT-3. | In-context learning allows them to adapt without fine-tuning. |
+| Many-Shot Prompting    | Uses many (10+) examples for deeper learning. Example: "List 20 Q&A pairs before asking a similar one." | Building a complex understanding. Use for nuanced tasks; limit if the context window is small. | Detailed tasks like style imitation or data extraction need lots of context. | Short contexts or simple queries as it wastes tokens and risk overload. | Large-context models like Grok or Claude. | Big models manage long inputs without forgetting. |
+| Zero-Shot Prompting    | No examples, just direct instruction. Example: "Classify this text as positive or negative: 'I love it!'" | Quick, general queries. Use for built-in knowledge; avoid ambiguous tasks. | Basic tasks like summarisation or fact recall. | Complex or domain-specific problems needing guidance. | All LLMs, but best on fine-tuned ones like instruction-tuned GPT. | Relies on pre-trained knowledge. |
+| Active-Prompt          | Dynamically selects or generates examples. Example: "Pick relevant examples from these, then answer." | Adaptive learning. Use for personalised tasks; skip generics. | Few-shot with selection for relevance. | When examples are fixed or none are available. | Adaptive LLMs like GPT-4. | Improves by choosing the best fits from in-context learning. |
+
+---
+
+### 4. Self-Correction & Evaluation
+
+| Technique                  | Description with Example                                                                 | Best Use Case                                      | Type of Problem Best For                          | Worst Case (When Not to Use)                          | Models It Works Well On                  | Why It Works Well There |
+|----------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------|---------------------------------------------------|-------------------------------------------------------|------------------------------------------|-------------------------|
+| Self-Consistency           | Generate multiple answers and vote on the best. Example: "Solve 3 ways, pick the majority." | Improving reliability. Use for uncertain tasks; avoid deterministic ones. | Math or ambiguous reasoning where variance helps. | Time-sensitive or simple facts are inefficient. | Ensemble-capable LLMs like the GPT series. | Averages out noise from training. |
+| Reflexion                  | The model reflects on its own output and improves. Example: "Generate answer, then critique and revise." | Self-improvement loops. Use for accuracy boosts; skip quick responses. | Iterative tasks like debugging or writing. | Time-constrained or simple queries, as loops take time. | Iterative-capable models like Grok. | Supports self-correction from reflection patterns. |
+| Contrastive Prompting      | Provides good and bad examples to highlight differences. Example: "Good summary: Concise. Bad: Too long. Now summarise this." | Teaching quality standards. Use for quality control; avoid without contrasts. | Evaluation, classification, or style enforcement. | Tasks without clear good/bad, as it confuses. | Discriminative models like GPT series. | Improves by contrasting. |
+| Generated Knowledge        | Prompt to generate facts first, then use them. Example: "List facts about Rome, then summarise history." | Building a knowledge base. Use for recall-heavy tasks; not for real-time data. | Synthesis or explanation from internal knowledge. | Factual accuracy needs an external search, risks hallucinations. | Knowledge-rich models like Grok. | Leverages vast pre-training. |
+
+---
+
+### 5. Role, Creative & Interactive Techniques
+
+| Technique                          | Description with Example                                                                 | Best Use Case                                      | Type of Problem Best For                          | Worst Case (When Not to Use)                          | Models It Works Well On                  | Why It Works Well There |
+|------------------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------|---------------------------------------------------|-------------------------------------------------------|------------------------------------------|-------------------------|
+| Persona-Based (Role-Playing)       | Assigns a role to the model. Example: "As a chef, suggest a recipe for pasta."           | Personalising responses. Use for creative or styled outputs; skip for neutral facts. | Storytelling, advice, or simulations like teaching. | Factual queries where the role adds bias or fluff. | Multimodal or creative models like Grok. | Enhances engagement by tapping into role-play training data. |
+| Emotion Prompting                  | Adds emotional language to influence output. Example: "I'm excited about this! Suggest fun vacation ideas." | Boosting creativity or empathy. Use for motivational content; skip factual needs. | Persuasive writing, storytelling, or user engagement. | Technical or neutral tasks where emotion biases facts. | Sentiment-aware models like Grok. | Trained on emotional texts. |
+| Analogical Prompting               | Uses analogies to explain or solve. Example: "Like water flowing, explain electricity." | Simplifying concepts. Use for education; skip experts. | Teaching or intuitive understanding. | Literal tasks where analogies mislead. | Analogical models like GPT-4. | Draws from vast analogy examples in data. |
+| ReAct (Reason + Act)               | Alternates reasoning and actions (like tool calls). Example: "Reason: I need data. Act: Search the web. Reason: Analyse results..." | Interactive tasks with tools. Use for dynamic problems; avoid static ones. | Agent-like tasks involving searches or calculations. | Pure reasoning without external needs, as it loops unnecessarily. | Agent-capable models like Grok with tools. | Built for integration with functions. |
+| Interview Methods (Self-Ask, RaR, SimToM) | The model asks clarifying questions back before giving a finalize output. Example: "To help, what is your budget? Based on that..." | Gathering info iteratively. Use for vague queries; not for one-shot answers. | User interactions needing clarification, like consulting. | Clear, self-contained questions where questions annoy. | Conversational models like Grok. | Supports dialogue flow. |
+| Directional Stimulus Prompting     | Adds hints or directions to guide. Example: "Think like Einstein: Solve this physics problem." | Steering creativity. Use for inspired outputs; skip strict facts. | Brainstorming or innovative solutions. | Precise tasks where hints bias incorrectly. | Creative LLMs like Grok. | Amplifies associations from training on diverse stimuli. |
+
+---
+
+### 6. Structured & Framework Techniques
+
+| Technique                  | Description with Example                                                                 | Best Use Case                                      | Type of Problem Best For                          | Worst Case (When Not to Use)                          | Models It Works Well On                  | Why It Works Well There |
+|----------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------|---------------------------------------------------|-------------------------------------------------------|------------------------------------------|-------------------------|
+| Co-STAR Framework          | Structured prompt: Context, Objective, Style, Tone, Audience, Response format. Example: "Context: Sci-fi. Objective: Write a story. Style: Descriptive..." | Organised prompting. Use for controlled outputs; skip casual chats. | Content creation with specific formats like reports. | Free-form creative tasks where structure stifles. | Structured LLMs like those for APIs or Grok. | Enforces clarity. |
+| Prompt Chaining            | Sequences multiple prompts in a chain. Example: "First summarise the text, then translate the summary." | Building on outputs. Use for workflows; avoid independents. | Multi-stage processes like analysis, then generation. | Standalone tasks, as chaining adds complexity. | Conversational models like ChatGPT. | Maintains context across steps. |
+| Batch Prompting            | Group multiple queries into one prompt. Example: "Answer these: 1. What is X? 2. What is Y?" | Efficiency in bulk. Use for related questions; avoid unrelated. | Data processing or FAQs in batches. | Single queries or when separation is needed for clarity. | High-capacity models like Claude or Grok. | Handles parallelism well. |
+
+---
+
+### 7. Optimization & Automation Techniques
+
+| Technique                          | Description with Example                                                                 | Best Use Case                                      | Type of Problem Best For                          | Worst Case (When Not to Use)                          | Models It Works Well On                  | Why It Works Well There |
+|------------------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------|---------------------------------------------------|-------------------------------------------------------|------------------------------------------|-------------------------|
+| Automatic Prompt Engineer (APE)    | Uses the model to generate or refine prompts. Example: "Generate a better prompt for summarising articles." | Optimising prompts meta-way. Use for iteration; avoid simple setups. | Prompt refinement or automation in pipelines. | One-off queries where manual crafting is faster. | Self-reflective LLMs like GPT-4 or Grok. | Capable of meta-reasoning. |
+| Meta-Prompting: System 2 Attention (S2A) | Prompts about creating prompts. Example: "Design a prompt for teaching history." | Higher-level design. Use for tool building; avoid direct answers. | Prompt engineering itself or templates. | End-user queries are not about prompts. | Meta-capable LLMs like Grok. | Leverages self-awareness. |
+| Rephrase and Respond (RaR)         | Rephrase the query first, then answer. Example: "Rephrase: User wants X. Now respond." | Clarifying intent. Use for ambiguous queries; avoid clear ones. | Misunderstood or vague questions. | Straightforward asks, as rephrasing adds noise. | Clarification: strong models like Grok. | Improves by refining input. |
+
+---
+
+**Excellent progress!**  
+You now have a comprehensive overview of all major prompting techniques, grouped by category with clear comparison tables.
+
+**[Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  **[Continue to Prompt Structures →](#prompt-structures)**
+
+*Phase 2 of "All You Need to Know About Prompt Engineering" — Portfolio Project by Mirza (BS AI)*
