@@ -331,7 +331,7 @@ However, they may underperform on smaller or raw models (e.g., base GPT-3) with 
 ### Which Prompt Structure Should I Use?
 
 <img src="../assets/images/phase2-which-prompt-structure.png" 
-     width="48%" 
+     width="68%" 
      align="center" 
      style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
      alt="Decision Tree - Which Prompt Structure to Choose">
