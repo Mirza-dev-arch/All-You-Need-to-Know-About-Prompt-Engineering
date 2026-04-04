@@ -104,7 +104,7 @@ As a prompt engineer, inputs for LLMs like Grok include understanding **"prompt 
 ## Setting Up a System Prompt (or Meta Prompt) — The 1st High-Level Instruction
 
 <img src="../assets/images/phase2-system-prompt-setup.png" 
-     width="45%" 
+     width="25%" 
      align="center" 
      style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
      alt="What is a System Prompt">
@@ -137,7 +137,7 @@ It boosts the model's performance by:
 ### Creating Maintainable System Prompts
 
 <img src="../assets/images/phase2-creating-system-prompt-steps.png" 
-     width="45%" 
+     width="75%" 
      align="center" 
      style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
      alt="Steps of Creating a Maintainable System Prompt">
