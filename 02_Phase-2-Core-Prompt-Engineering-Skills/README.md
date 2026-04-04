@@ -26,7 +26,7 @@ In this phase you will master the **three core layers** every professional promp
 - [Top 15 Things to Check Before Layering](#top-15-things-to-check-before-layering-technique-structure-format)
 - [Top 5 Checkpoints](#top-5-checkpoints-that-tell-you-your-layering-is-up-to-mark-or-needs-improvement)
 - [How to Identify Which Problems Can Be Resolved by Layering](#how-to-identify-which-problems-can-be-resolved-by-layering-prosenior-method--step-by-step)
-- [Model Specific Quirks](#model-specific-quirks)
+- [Model Specific Quirks](#model-specific-quirks-tools-and-real-time-knowledge-fetching)
 - [Instruction Engineering Handbook](#instruction-engineering-handbook)
 - [Prompt Evolution Using the Prompt Crafting Handbook](#prompt-evolution-using-the-prompt-crafting-handbook)
 - [How to Optimize and Refine a Prompt](#how-to-optimize-and-refine-a-prompt)
