@@ -539,7 +539,7 @@ You have now completed the core of Phase 2. You understand how to deliberately l
 
 You are no longer guessing — you are **engineering** prompts like a professional.
 
-**[← Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  **[Next → Phase 3: Mastery & Experimentation](../03_Phase-3-Mastery-Experimentation/README.md)**
+**[← Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  
 
 ## Model Specific Quirks (Tools and Real-Time Knowledge Fetching)
 
