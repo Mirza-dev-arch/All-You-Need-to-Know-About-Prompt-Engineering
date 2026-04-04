@@ -16,16 +16,16 @@ In this phase you will master the **three core layers** every professional promp
 - [2. Prompt Structure](#2-prompt-structure)
 - [3. Prompt Format](#3-prompt-format)
 - [Comparison Table](#comparison-table)
-- [Setting Up a System Prompt](#setting-up-a-system-prompt)
+- [Setting Up a System Prompt](#setting-up-a-system-prompt-or-meta-prompt---the-1st-high-level-instruction)
 - [Creating Maintainable System Prompts](#creating-maintainable-system-prompts)
 - [Best Practices & Safety System Messages](#best-practices--safety-system-messages)
 - [Prompting Techniques](#prompting-techniques)
 - [Prompt Structures](#prompt-structures)
 - [Prompting Format](#prompting-format)
 - [How to Combine Technique + Structure + Format](#how-to-combine-technique-structure-format)
-- [Top 15 Things to Check Before Layering](#top-15-things-to-check)
-- [Top 10 Things That Kill Your Prompt](#top-10-things-that-kill-your-prompt)
-- [Model-Specific Quirks](#model-specific-quirks)
+- [Top 15 Things to Check Before Layering](#top-15-things-to-check-before-layering-technique-structure-format)
+- [Top 10 Things That Kill Your Prompt](#top-10-things-that-kill-your-prompt-even-when-it-looks-great-at-first-glance)
+- [Model Specific Quirks](#model-specific-quirks)
 
 **[← Back to Main README](../../README.md)**  **[← Phase 1](../01_Phase-1-Foundations/README.md)**  **[Next → Phase 3](../03_Phase-3-Mastery-Experimentation/README.md)**
 
@@ -412,6 +412,7 @@ Think of the three layers like building a sandwich:
 
 **[Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  **[Continue to Next Section →](#top-15-things-to-check-before-layering)**
 
+
 ## Top 15 Things to Check Before Layering Technique + Structure + Format
 
 Before combining layers, run through this checklist. It prevents most common failures.
@@ -534,20 +535,7 @@ This loop is what separates **beginners** (who throw everything in randomly) fro
 
 ---
 
-**Congratulations!**  
-You have now completed the core of Phase 2. You understand how to deliberately layer **Technique + Structure + Format**, use System Prompts effectively, and avoid the most common prompting mistakes.
-
-You are no longer guessing — you are **engineering** prompts like a professional.
-
-**[← Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  
-
 ## Model Specific Quirks (Tools and Real-Time Knowledge Fetching)
-
-Every model has unique **“quirks”** — especially around tool use (how it calls external functions like search or code execution) and real-time knowledge (whether it can pull fresh data natively or needs explicit prompting).  
-
-These quirks force you to adapt your prompting style, or you’ll waste tokens, get weak results, or trigger hallucinations.
-
-### How a Model’s Specific Quirks Change Prompting Approaches
 
 - **Grok (xAI):** Proactive tool use (decides itself when to search or run code). Native real-time knowledge via X and web.  
   → Prompt casually and trust it. Say “use tools if needed” — no heavy guidance. Short, natural language works best.
@@ -614,8 +602,8 @@ To get maximum performance, adapt the three layers (Technique + Structure + Form
 | Post-Response Review (A/B or rubric) | Continuous improvement                 | Score on 10 metrics → compress or switch model    | Run rubric → if quality drops → edit prompt or change model | Weekly review or after 50+ runs |
 
 ---
-
-**Excellent!** You’ve now mastered the difference between techniques, structures, and formats, plus how to layer them with powerful system prompts and safety rules. You can already write clearer, more reliable prompts than most beginners.  
+**Congratulations!**  
+You’ve now mastered the difference between techniques, structures, and formats, and use System Prompts effectively. You can already write clearer, more reliable prompts than most beginners. Also, you've understood how to deliberately layer **Technique +Structure + Format**, to adapt your prompting style with model-specific quirks, especially around tool use (how it calls external functions like search or code execution) and real-time knowledge (whether it can pull fresh data natively or needs explicit prompting). You are no longer guessing — you are **engineering** prompts like a professional.
 
 The next step is turning all this knowledge into a repeatable system — it’s time to enter the prompt crafting handbook and start experimenting like a pro.
 
