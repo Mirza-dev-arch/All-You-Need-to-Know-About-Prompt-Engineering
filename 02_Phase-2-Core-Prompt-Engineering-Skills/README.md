@@ -636,43 +636,55 @@ This section equips you with practical guidelines to create effective instructio
 
 Here’s how a simple prompt evolves into a highly effective one by applying the guidelines step by step:
 
-**Starting Prompt:**  
-"Tell me about AI."
+**Starting Prompt:**  "Tell me about AI."
 
-**After applying Clarity** →  
-"Explain what AI is. Remember, explain what AI is."
+**After applying Clarity**   
 
-**After Negative Prompting** →  
-"Explain what AI is, but do not include opinions or future predictions. Remember, explain what AI is."
+→→→ "Explain what AI is. Remember, explain what AI is."
 
-**After Constrained and Guided Generation** →  
-"Explain what AI is in a friendly tone, under 200 words, but do not include opinions or future predictions. Remember, explain what AI is."
+**After Negative Prompting**   
 
-**After Be Descriptive** →  
-"Explain what AI is like a smart helper in everyday life, using simple terms, in a friendly tone, under 200 words, but do not include opinions or future predictions. Remember, explain what AI is."
+→→→ "Explain what AI is, but do not include opinions or future predictions. Remember, explain what AI is."
 
-**After Order Matters** →  
-"In a friendly tone, under 200 words, explain what AI is like a smart helper in everyday life, using simple terms, but do not include opinions or future predictions. Remember, explain what AI is."
+**After Constrained and Guided Generation**   
 
-**After Specificity** →  
-"In a friendly tone, under 200 words, explain what AI is like a smart helper in everyday life, using simple terms—follow this outline: Definition, Examples, Benefits—but do not include opinions or future predictions. Remember, explain what AI is."
+→→→ "Explain what AI is in a friendly tone, under 200 words, but do not include opinions or future predictions. Remember, explain what AI is."
 
-**After Output Format** →  
-"In a friendly tone, under 200 words, explain what AI is like a smart helper in everyday life, using simple terms—follow this outline: Definition, Examples, Benefits—but do not include opinions or future predictions. Output in 3 bullet points. Remember, explain what AI is."
+**After Be Descriptive**   
 
-**After Context** →  
-"As a beginner, in a friendly tone, under 200 words, explain what AI is like a smart helper in everyday life, using simple terms—follow this outline: Definition, Examples, Benefits—but do not include opinions or future predictions. Output in 3 bullet points. Remember, explain what AI is."
+→→→ "Explain what AI is like a smart helper in everyday life, using simple terms, in a friendly tone, under 200 words, but do not include opinions or future predictions. Remember, explain what AI is."
 
-**After Be Concise** →  
-"For beginners: Explain AI like a smart helper, friendly tone, under 200 words—outline: Definition, Examples, Benefits. No opinions or predictions. 3 bullet points. Remember, explain AI."
+**After Order Matters**   
 
-**After Avoiding Hallucinations** →  
-"For beginners: Explain AI like a smart helper, friendly tone, under 200 words—outline: Definition, Examples, Benefits. No opinions or predictions. If unsure, say 'I don't know.' Ask for evidence first. Use low temperature. 3 bullet points. Remember, explain AI."
+→→→ "In a friendly tone, under 200 words, explain what AI is like a smart helper in everyday life, using simple terms, but do not include opinions or future predictions. Remember, explain what AI is."
 
-**After Using Relevant Examples** →  
-"For beginners: Explain AI like a smart helper, friendly tone, under 200 words—outline: Definition, Examples, Benefits. No opinions or predictions. If unsure, say 'I don't know.' Ask for evidence first. Use low temperature. Example: Input: 'Machine learning.' Output: '- Definition: Subset of AI. - Examples: Recommendations. - Benefits: Efficiency.' Now, explain AI. 3 bullet points. Remember, explain AI."
+**After Specificity**  
 
-**After Add Clear Syntax** →  
+→→→ "In a friendly tone, under 200 words, explain what AI is like a smart helper in everyday life, using simple terms—follow this outline: Definition, Examples, Benefits—but do not include opinions or future predictions. Remember, explain what AI is."
+
+**After Output Format**   
+
+→→→ "In a friendly tone, under 200 words, explain what AI is like a smart helper in everyday life, using simple terms—follow this outline: Definition, Examples, Benefits—but do not include opinions or future predictions. Output in 3 bullet points. Remember, explain what AI is."
+
+**After Context**  
+
+→→→"As a beginner, in a friendly tone, under 200 words, explain what AI is like a smart helper in everyday life, using simple terms—follow this outline: Definition, Examples, Benefits—but do not include opinions or future predictions. Output in 3 bullet points. Remember, explain what AI is."
+
+**After Be Concise**   
+
+→→→ "For beginners: Explain AI like a smart helper, friendly tone, under 200 words—outline: Definition, Examples, Benefits. No opinions or predictions. 3 bullet points. Remember, explain AI."
+
+**After Avoiding Hallucinations**   
+
+→→→ "For beginners: Explain AI like a smart helper, friendly tone, under 200 words—outline: Definition, Examples, Benefits. No opinions or predictions. If unsure, say 'I don't know.' Ask for evidence first. Use low temperature. 3 bullet points. Remember, explain AI."
+
+**After Using Relevant Examples**   
+
+→→→ "For beginners: Explain AI like a smart helper, friendly tone, under 200 words—outline: Definition, Examples, Benefits. No opinions or predictions. If unsure, say 'I don't know.' Ask for evidence first. Use low temperature. Example: Input: 'Machine learning.' Output: '- Definition: Subset of AI. - Examples: Recommendations. - Benefits: Efficiency.' Now, explain AI. 3 bullet points. Remember, explain AI."
+
+**After Add Clear Syntax**   
+
+→→→
 "System: You explain tech simply.  
 User:  
 For beginners: Explain AI like a smart helper, friendly tone, under 200 words—outline: Definition, Examples, Benefits.  
@@ -681,7 +693,9 @@ If unsure, say 'I don't know.' Ask for evidence first. Use a low temperature.
 Example: Input: 'Machine learning.' Output: '- Definition: Subset of AI. - Examples: Recommendations. - Benefits: Efficiency.'  
 Now, explain AI. 3 bullet points. Remember, explain AI."
 
-**After Break the Task Down** →  
+**After Break the Task Down** 
+
+→→→
 "System: You explain tech simply.  
 User:  
 Step 1: Define AI.  
@@ -692,7 +706,9 @@ No opinions or predictions. If unsure, say 'I don't know.' Ask for evidence firs
 Example: Input: 'Machine learning.' Output: '- Definition: Subset of AI. - Examples: Recommendations. - Benefits: Efficiency.'  
 Now, explain AI. 3 bullet points. Remember, explain AI."
 
-**After Adding System Messages** →  
+**After Adding System Messages**   
+
+→→→
 "System: You are a helpful tutor who explains tech simply.  
 User:  
 Step 1: Define AI.  
