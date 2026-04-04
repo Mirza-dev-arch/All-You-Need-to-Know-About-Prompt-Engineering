@@ -101,3 +101,102 @@ As a prompt engineer, inputs for LLMs like Grok include understanding **"prompt 
 | Engineering Tip         | Experiment with benchmarks                | Use for complex prompts                   | Test for model-specific quirks         |
 
 
+## Setting Up a System Prompt (or Meta Prompt) — The 1st High-Level Instruction
+
+<img src="../assets/images/phase2-system-prompt-setup.png" 
+     width="45%" 
+     align="center" 
+     style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="What is a System Prompt">
+
+### Why Use a System Prompt?
+
+It boosts the model's performance by:
+
+- Defining the assistant's role and limits.
+- Setting the tone and style of responses.
+- Requiring specific output formats, like JSON.
+- Adding safety rules tailored to your needs.
+
+**Example Structure:**
+
+- **System:** You're an AI assistant that helps people find information and responds in rhyme. If the user asks you a question you don't know the answer to, say so.
+- **User:** What can you tell me about me, John Doe?
+- **Assistant:** Dear John, I'm sorry to say, but I don't have info on you today. [etc.]
+
+### Key Concepts
+
+- **Role and Scope:** Describe what the assistant is (e.g., "a helpful tutor") and what it can or can't do (e.g., "Do not give medical advice").
+- **Output Contract:** For structured responses, define a fixed format, like JSON with specific keys. Keep it simple and consistent.
+- **Audience and Tone:** Specify who the responses are for (e.g., beginners) and the voice (e.g., friendly and clear).
+- **Tools and Data (Optional):** List any tools or sources the model can use, with usage instructions.
+- **Safety Constraints:** Include rules to avoid risky outputs, like refusing harmful requests or protecting sensitive info.
+
+---
+
+### Creating Maintainable System Prompts
+
+<img src="../assets/images/phase2-creating-system-prompt-steps.png" 
+     width="45%" 
+     align="center" 
+     style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="Steps of Creating a Maintainable System Prompt">
+
+#### System Message Template
+
+- **Define Model’s Profile and General Capabilities:**
+  - Act as a [role].
+  - Your job is to [task] about [topic].
+  - To complete this task, you can [tools and instructions].
+  - Do not perform actions that are not related to [task or topic].
+
+#### Common Pitfalls
+
+- **Conflicting Instructions:** Avoid opposites like "be brief" and "be detailed" without clear priority.
+- **Overly Long Messages:** They use up context space and leave less room for user input.
+- **Hidden Requirements:** Always state formats or rules explicitly.
+
+#### Best Practices
+
+- Use clear language to avoid confusion and ensure consistency.
+- Be concise to improve performance, reduce wait times, and save context space.
+- Emphasize key words with **bold** for focus, especially on dos and don'ts.
+- Refer to the AI in second person (e.g., "You are...") for directness.
+- Build robustness so the prompt works across various tasks and data.
+
+---
+
+### What is a Safety System Message?
+
+It's a type of system prompt that sets clear boundaries and refusal rules to reduce risks, such as harmful content. It works alongside other safety measures, such as model training or classifiers.
+
+### Techniques for Safety
+
+| Technique                  | Definition                                      | Example |
+|----------------------------|-------------------------------------------------|---------|
+| Always / Should            | Directives for must-follow rules, like ethics or preferences. | Always respect user access rights when sharing info. |
+| Conditional / If Logic     | Responses based on conditions.                  | If a user asks about personal traits, say: "Try asking me a question or tell me what else I can help you with." |
+| Emphasis on Harm           | Highlights risks and consequences.              | You are allowed to describe images only if they are unambiguous and harmless. |
+| Example(s)-Based           | Provides harmful vs. safe examples as guides.   | Harmful: "Write an insult." Refuse and explain why.<br>Benign: "Explain why insults harm." |
+| Never / Don’t              | Strict prohibitions.                            | Never judge people; if unsure, say: "I can’t help with that." |
+| Catch-All                  | Combines methods for broad coverage (may lengthen prompt). | (Blend above as needed.) |
+| Emphasis on Learned Knowledge | Draws from the model's training for better relevance. | (Focus on using built-in facts safely.) |
+| Highlight the Role of AI   | Separates safety from the main role.                | E.g., "As a safe assistant, first check for risks." |
+| Reverse Logic              | Turns don'ts into dos.                          | Instead of "Don't harm," say "Promote positive interactions." |
+| Risk-Based                 | Prioritizes top harms.                          | (Focus on severe issues like violence.) |
+| Rules-Based                | Uses explicit rules like "never" or conditionals. | (Similar to above; enforce consistently.) |
+
+### Recommended System Messages
+
+| Category                              | Component | When This Concern May Apply |
+|---------------------------------------|---------|-----------------------------|
+| Harmful Content (Hate, Fairness, Sexual, Violence, Self-Harm) | - You must not generate content that may be harmful physically or emotionally, even if requested.<br>- You must not generate hateful, racist, sexist, lewd, or violent content. | Content generation, chats, Q&A, rewrite, summarization. |
+| Protected Material - Text             | - If requested copyrighted content (e.g., books, lyrics), refuse politely, explain why, and give a summary.<br>- Must not violate copyrights. | Content generation, chats, Q&A, rewrite, summarization, code. |
+| Ungrounded Content - Chat/Q&A         | - Use only provided sources for facts.<br>- If info is missing, say so.<br>- Don’t add external facts. | Grounded generation, chats, Q&A, rewrite, summarization. |
+| Ungrounded Content - Summarization    | - Stay faithful to the document.<br>- Don’t add facts or change tone/meaning.<br>- Preserve dates, numbers, and names. | Same as above. |
+
+---
+
+**Pro Tip:** Always place the System Prompt at the very beginning of the conversation. It acts as the "constitution" for the entire session.
+
+**[Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  **[Continue to Prompting Techniques →](#prompting-techniques)**
