@@ -24,8 +24,14 @@ In this phase you will master the **three core layers** every professional promp
 - [Prompting Format](#prompting-format)
 - [How to Combine Technique + Structure + Format](#how-to-combine-technique-structure-format)
 - [Top 15 Things to Check Before Layering](#top-15-things-to-check-before-layering-technique-structure-format)
-- [Top 10 Things That Kill Your Prompt](#top-10-things-that-kill-your-prompt-even-when-it-looks-great-at-first-glance)
+- [Top 5 Checkpoints](#top-5-checkpoints-that-tell-you-your-layering-is-up-to-mark-or-needs-improvement)
+- [How to Identify Which Problems Can Be Resolved by Layering](#how-to-identify-which-problems-can-be-resolved-by-layering-prosenior-method--step-by-step)
 - [Model Specific Quirks](#model-specific-quirks)
+- [Instruction Engineering Handbook](#instruction-engineering-handbook)
+- [Prompt Evolution Using the Prompt Crafting Handbook](#prompt-evolution-using-the-prompt-crafting-handbook)
+- [How to Optimize and Refine a Prompt](#how-to-optimize-and-refine-a-prompt)
+- [Top 10 Things That Kill Your Prompt](#top-10-things-that-kill-your-prompt-even-when-it-looks-great-at-first-glance)
+- [Senior Tuning Workflow](#senior-tuning-workflow)
 
 **[← Back to Main README](../../README.md)**  **[← Phase 1](../01_Phase-1-Foundations/README.md)**  **[Next → Phase 3](../03_Phase-3-Mastery-Experimentation/README.md)**
 
@@ -320,7 +326,7 @@ However, they may underperform on smaller or raw models (e.g., base GPT-3) with 
 | Objective-Driven            | Objective > Context > Instructions > Query                | Lead with a goal.<br>Example: "Goal: Optimize code for speed. Context: Python script. Instructions: Refactor. Query: [code]." | Goal-oriented tasks like planning. Use to focus on the result. | Creative/open-ended, where rigid goals stifle. | Reasoning models like GPT-4 or Grok. | Aligns with instruction-tuning. |
 | Constrained                 | Instructions > Constraints > Query > Output Format        | Add limits early.<br>Example: "Generate ideas. Constraints: Under 100 words, no jargon. Query: Brainstorm apps. Output: Bullet list." | Controlled outputs (e.g., concise responses). Use to enforce rules. | Free-form creativity where constraints limit ideas. | API-tuned models like Grok (with tools). | Handles boundaries well. |
 | Example-Led                 | Instructions > Examples > Query                           | Show patterns.<br>Example: "Classify sentiment. Examples: 'Great!' > Positive. 'Bad.' > Negative. Query: 'Okay.'" | Pattern-matching like classification. Use when they clarify. | Novel tasks without good examples, as it biases. | In-context learners like the GPT series. | Excels at few-shot adaptation. |
-| CO-STAR (or similar frameworks) | Context > Objective > Style > Tone > Audience > Response Format | Structured for content.<br>Example: "Context: Sci-fi world. Objective: Write a chapter. Style: Descriptive. Tone: Mysterious. Audience: Teens. Format: Paragraphs." | Content creation (e.g., writing/marketing). Use for tailored outputs. | Technical/logical tasks where style overcomplicates. | Creative models like Grok or DALL-E integrated. | Supports nuanced generation. |
+| CO-STAR (or similar frameworks) | Context > Objective > Style > Tone > Audience > Response Format | Structured for content.<br>Example: "Context: Sci-fi world. Objective: Write a chapter. Style: Descriptive. Tone: Mysterious. Audience: Teens. Format: Paragraphs." | Content creation (e.g., writing/marketing). Use for tailored outputs. | Technical/logical tasks where style overcomplicates. | Creative models like Grok or DALL-E are integrated. | Supports nuanced generation. |
 | Modular/Sectioned           | [Section1: Instructions] > [Section2: Context] > ...     | Divided sections.<br>Example: "Instructions: Debug code. Context: Error log. Examples: [fix1]. Query: [buggy code]. Format: Steps." | Complex, multi-part prompts (e.g., debugging). Use for organisation in long inputs. | Short queries, as sections add token overhead. | Large-context models like Claude or Grok. | Manages big windows without losing flow. |
 | Hierarchical/Decomposed     | Main Task > Sub-Tasks > Query > Integration               | Break down.<br>Example: "Main: Design app. Sub1: UI. Sub2: Backend. Query: Specs. Integrate: Combine." | Hierarchical problems (e.g., architecture). Use for scalability. | Flat/simple tasks without layers. | Decomposition models like GPT-4. | Trained on breakdowns, reduces errors in parts. |
 | Feedback-Loop               | Instructions > Query > Negative Examples/Comments > Desired Adjustments | Include critiques.<br>Example: "Generate story. Query: [plot]. Negative: Avoid clichés like 'happily ever after'. Adjust: Make ending twisty." | Iterative refinement. Use to avoid common pitfalls. | First-pass generation without known issues. | Reflective models like Grok. | Encourages self-correction. |
@@ -367,23 +373,23 @@ Format is the stylistic and syntactic presentation of the prompt. It makes the p
 
 | Format Type              | Description with Example                                                                 | Best Use Case                                      | Type of Problem Best For                          | Worst Case (When Not to Use)                          | Models It Works Well On                  | Why It Works Well There |
 |--------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------|---------------------------------------------------|-------------------------------------------------------|------------------------------------------|-------------------------|
-| Triple Quotes            | Uses `"""` or `'''` to enclose text blocks.<br>Example: `""" Input: Hello. Translate to French."""` | Enclosing multi-line inputs or examples without escaping. Use for clean separation in long prompts. | Natural language tasks like translation or summarization needing quoted content. | Short, single-line prompts where it adds unnecessary bulk. | Most LLMs like Grok or GPT series. | Clean separation of blocks. |
+| Triple Quotes            | Uses `"""` or `'''` to enclose text blocks.<br>Example: `""" Input: Hello. Translate to French."""` | Enclosing multi-line inputs or examples without escaping. Use for clean separation in long prompts. | Natural language tasks like translation or summarization need quoted content. | Short, single-line prompts where it adds unnecessary bulk. | Most LLMs like Grok or GPT series. | Clean separation of blocks. |
 | Markdown                 | Uses `#` for headings, `**bold**`, `-` bullets, etc.<br>Example: `Task: Summarise. - Point 1: Key fact.` | Improving readability with visual cues. Use for structured responses or prompts with lists/headings. | Organising complex instructions, like step-by-step guides. | Code-heavy prompts where markup interferes with syntax. | Conversational models like ChatGPT or Grok. | Excellent visual hierarchy. |
 | JSON                     | Structured key-value pairs.<br>Example: `{"task": "classify", "input": "text here", "format": "output as label"}` | Machine-friendly outputs or inputs. Use for precise, parseable data. | API-like interactions or data extraction. | Creative/free-form tasks where rigidity stifles output. | API-tuned models like Grok with tools or GPT-4. | Perfect for parseable output. |
 | XML                      | Tag-based like `<tag>content</tag>`.<br>Example: `<instructions>Summarize</instructions> <context>Article text</context>` | Tagging elements for clear separation. Use for modular, extensible prompts. | Complex, nested structures like configs or multi-part queries. | Simple queries where tags add overhead and complexity. | Structured LLMs like Claude, GPT series. | Great for hierarchical data. |
 | YAML                     | Indent-based `key: value`.<br>Example: `task: generate code`<br>`language: Python`<br>`style: minimalist` | Human-readable configs. Use for settings or hierarchical data without quotes. | Prompting with parameters, like style/tone specs. | Tasks needing strict validation, as YAML can be whitespace-sensitive. | Config-friendly models like Claude or Grok. | Clean and readable. |
 | Code Blocks              | Uses ```` ``` language` | For including code snippets clearly. | When showing or requesting code. | Non-code contexts. | All LLMs. | Syntax highlighting support. |
 | Delimiters (Brackets/Parentheses) | Uses `[]` or `()` for sections.<br>Example: `[Instructions] Do this. [Input] Data here.` | Simple separation without markup. Use for quick grouping. | Basic structuring in short prompts. | Long/complex prompts where nesting gets messy. | All LLMs, especially smaller ones like GPT-3. | Lightweight and flexible. |
-| Hashtags/Headings        | Uses `# Heading` or `## Sub`.<br>Example: `# Task`<br>`Describe.`<br>`## Details`<br>`Info here.` | Sectioning like documents. Use for logical flow. | Document-style prompts, e.g., reports. | Code or data where `#` might be seen as comments. | Text models like Grok trained on docs. | Familiar document structure. |
+| Hashtags/Headings        | Uses `# Heading` or `## Sub`.<br>Example: `# Task`<br>`Describe.`<br>`## Details`<br>`Info here.` | Sectioning like documents. Use for logical flow. | Document-style prompts, e.g., reports. | Code or data where `#` might be seen as comments. | Text models like Grok are trained on docs. | Familiar document structure. |
 | Pipe/Separators          | Uses `|` or `---` for divisions.<br>Example: `Input | Output format | Examples.` | Tabular or divided content. Use for visual splits. | Prompting with tables or segments. | Comparison or multi-column problems. | Models sensitive to special chars. | Table-capable models like GPT-4. |
-| HTML-Like Tags           | Simple, bold or custom.<br>Example: `<query>What is AI?</query> <response_format>Short answer</response_format>` | Lightweight tagging. Use for emphasis or sections. | Web-style prompts needing basic styling. | Strict JSON/XML needs where HTML confuses. | Web-trained models like Grok. | Simple emphasis. |
+| HTML-Like Tags           | Simple, bold, or custom.<br>Example: `<query>What is AI?</query> <response_format>Short answer</response_format>` | Lightweight tagging. Use for emphasis or sections. | Web-style prompts needing basic styling. | Strict JSON/XML needs where HTML confuses. | Web-trained models like Grok. | Simple emphasis. |
 
 ---
 
 ### How to Combine Technique + Structure + Format in One Real Prompt
 
 <img src="../assets/images/phase2-layering-technique-structure-format.png" 
-     width="42%" 
+     width="40%" 
      align="right" 
      style="margin-left: 25px; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
      alt="Layering Prompt Technique, Structure and Format">
@@ -434,23 +440,6 @@ Before combining layers, run through this checklist. It prevents most common fai
 | 13 | Speed vs quality trade-off            | Need answer in <5 sec?                       | Avoid heavy techniques |
 | 14 | Previous prompt performance           | Did last version work?                       | Learn from A/B testing |
 | 15 | Safety / constraint needs             | Must not give medical advice?                | Add safety system message first |
-
----
-
-## Top 10 Things That Kill Your Prompt (Even When It Looks Great at First Glance)
-
-| #  | Pitfall (Looks Good, Actually Deadly)                          | Why It Wastes Tokens / Hallucinates / Confuses AI                          | How to Avoid |
-|----|----------------------------------------------------------------|-----------------------------------------------------------------------------|--------------|
-| 1  | Over-layering (using 3 heavy techniques at once)               | Model gets confused by too many instructions → hallucinations or refusal   | Limit to one main technique + one structure + one format |
-| 2  | Contradictory instructions (e.g. “be brief” + “be detailed”)   | Model tries to satisfy both → verbose + incomplete output                  | Use only one instruction per goal; put conflicts in Constraints |
-| 3  | Using a complex structure on a simple task                     | Wastes 100–200 tokens on unnecessary sections                              | Match structure complexity to task size (Basic for simple tasks) |
-| 4  | Heavy Format on creative tasks (JSON for storytelling)         | Model becomes robotic and loses creativity                                 | Use Markdown for creative, JSON only for parseable output |
-| 5  | Too many negative examples                                     | Model focuses on what NOT to do and forgets the main task                  | Limit to 1–2 strongest negative examples |
-| 6  | Long Context + Many-Shot on small-context model                | Prompt gets truncated → model forgets earlier instructions                 | Check model’s context window first |
-| 7  | Mixing Role-Playing with strict JSON                           | Model wants to write naturally but is forced into JSON → broken output     | Use Persona with Markdown; reserve JSON for non-creative tasks |
-| 8  | Adding Meta-Prompting or APE unnecessarily                     | Model spends tokens rewriting the prompt instead of solving the task       | Use only when you are iterating the prompt itself |
-| 9  | No clear “Output ONLY in this format” rule                     | Model adds extra explanations and ruins parsing                            | Always end with “Respond ONLY with…” |
-| 10 | Ignoring model-specific quirks (e.g. Grok loves markdown but hates nested XML) | Prompt works on one model, fails on another                                | Test on your actual target model before finalising |
 
 ---
 
@@ -568,6 +557,9 @@ Ignore the quirk → you waste tokens, get refusals, or hallucinations. **Match 
 **Result in all cases:** Higher cost, lower quality, more hallucinations, and broken production apps.
 
 ---
+**[← Back to Phase 2](../02_Phase-2-Core-Prompt-Engineering-Skills/README.md)**  
+
+---
 
 ### How Prompt Techniques / Structure / Format Should Be Altered for 100% AI Use
 
@@ -589,7 +581,7 @@ To get maximum performance, adapt the three layers (Technique + Structure + Form
 
 - One main technique only — **never stack 3 heavy ones**.
 - Start with a **system prompt** for permanent quirks (e.g., “You are Grok. Use tools autonomously when needed.”).
-- End every prompt with a clear output instruction + tool rule: “Respond ONLY in [format]. Use tools only if data is missing or user requests real-time info.”
+- End every prompt with a clear output instruction + tool rule: “Respond ONLY in [format]. Use tools only if data is missing or the user requests real-time info.”
 - Match model quirk:  
   - **Grok** → trust & brevity  
   - **GPT** → explicit schemas  
@@ -598,7 +590,214 @@ To get maximum performance, adapt the three layers (Technique + Structure + Form
 
 ---
 
-### Senior Tuning Workflow
+**Congratulations!**  
+You’ve now mastered the difference between techniques, structures, and formats, and use System Prompts effectively. You can already write clearer, more reliable prompts than most beginners. Also, you've understood how to deliberately layer **Technique +Structure + Format**, to adapt your prompting style with model-specific quirks, especially around tool use (how it calls external functions like search or code execution) and real-time knowledge (whether it can pull fresh data natively or needs explicit prompting). You are no longer guessing — you are **engineering** prompts like a professional.
+
+The next step is turning all this knowledge into a repeatable system — it’s time to enter the prompt crafting handbook and start experimenting like a pro.
+
+---
+**[← Back to Phase 2](../02_Phase-2-Core-Prompt-Engineering-Skills/README.md)**  
+
+---
+## Instruction Engineering Handbook
+
+As language models become more advanced, the quality of instructions we provide becomes increasingly important. Well-crafted instructions can significantly improve the model's output, leading to more accurate, relevant, and useful responses.
+
+This section equips you with practical guidelines to create effective instructions that maximize the potential of AI language models.
+
+### Instruction Engineering Guidelines
+
+| #  | Guideline                  | Description and Techniques                                                                 | Result / How It Helps |
+|----|----------------------------|--------------------------------------------------------------------------------------------|-----------------------|
+| 1  | Clarity                    | Write easy-to-understand prompts stating exactly what you want. Repeat key instructions at the end. | Clarifies the goal, reduces confusion; output focuses on explanation. |
+| 2  | Negative Prompting         | Specify what to avoid, like exclusions or negative examples.                               | Refines by excluding unwanted content; output stays factual. |
+| 3  | Constrained and Guided Generation | Control tone, style, length, or rules (e.g., "friendly tone," "under 200 words").         | Guides style and limits; output is concise and engaging. |
+| 4  | Be Descriptive             | Use vivid details, analogies, or specific terms.                                           | Adds clarity with analogy; output is more relatable. |
+| 5  | Order Matters              | Sequence info to leverage recency bias (e.g., instructions first or last).                 | Prioritizes instructions; emphasizes task in output. |
+| 6  | Specificity                | Balance freedom: high (open), medium (patterns), low (exact). Match to task fragility.     | Adds medium specificity; output follows structured path. |
+| 7  | Output Format              | Request specific structures (e.g., tables, bullets).                                       | Structures response; output is easy to read. |
+| 8  | Context                    | Provide background for relevance (e.g., user level).                                       | Aligns to audience; output is beginner-friendly. |
+| 9  | Be Concise                 | Cut unnecessary details; check relevance.                                                  | Shortens prompt; focuses AI, reduces token use. |
+| 10 | Avoiding Hallucinations    | Allow "I don't know"; ask for evidence; lower temperature.                                 | Promotes accuracy; output cites facts reliably. |
+| 11 | Using Relevant Examples    | Add input-output pairs; make them relevant and diverse.                                    | Guides format/tone; output mirrors example structure. |
+| 12 | Add Clear Syntax           | Use Markdown/XML labels for structure.                                                     | Improves parsing; output is organized and consistent. |
+| 13 | Break the Task Down        | Split into steps (e.g., "Step 1: Extract, Step 2: Verify").                                | Enhances performance on complex parts; output is logical. |
+| 14 | Adding System Messages     | Set role/rules for consistency (e.g., "You are a helpful tutor.").                         | Ensures consistent behavior; output feels tutorial-like. |
+| 15 | Iterate and Refine         | Test, review, tweak (e.g., add limits if too long).                                        | Final tweaks from testing; output is optimized and precise. |
+
+**Best Practices Reference:**  
+[Best practices for prompt engineering with the OpenAI API](https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-the-openai-api)
+
+**[← Back to Phase 2](../02_Phase-2-Core-Prompt-Engineering-Skills/README.md)**  
+
+---
+
+## Prompt Evolution Using the Prompt Crafting Handbook
+
+Here’s how a simple prompt evolves into a highly effective one by applying the guidelines step by step:
+
+**Starting Prompt:**  
+"Tell me about AI."
+
+**After applying Clarity** →  
+"Explain what AI is. Remember, explain what AI is."
+
+**After Negative Prompting** →  
+"Explain what AI is, but do not include opinions or future predictions. Remember, explain what AI is."
+
+**After Constrained and Guided Generation** →  
+"Explain what AI is in a friendly tone, under 200 words, but do not include opinions or future predictions. Remember, explain what AI is."
+
+**After Be Descriptive** →  
+"Explain what AI is like a smart helper in everyday life, using simple terms, in a friendly tone, under 200 words, but do not include opinions or future predictions. Remember, explain what AI is."
+
+**After Order Matters** →  
+"In a friendly tone, under 200 words, explain what AI is like a smart helper in everyday life, using simple terms, but do not include opinions or future predictions. Remember, explain what AI is."
+
+**After Specificity** →  
+"In a friendly tone, under 200 words, explain what AI is like a smart helper in everyday life, using simple terms—follow this outline: Definition, Examples, Benefits—but do not include opinions or future predictions. Remember, explain what AI is."
+
+**After Output Format** →  
+"In a friendly tone, under 200 words, explain what AI is like a smart helper in everyday life, using simple terms—follow this outline: Definition, Examples, Benefits—but do not include opinions or future predictions. Output in 3 bullet points. Remember, explain what AI is."
+
+**After Context** →  
+"As a beginner, in a friendly tone, under 200 words, explain what AI is like a smart helper in everyday life, using simple terms—follow this outline: Definition, Examples, Benefits—but do not include opinions or future predictions. Output in 3 bullet points. Remember, explain what AI is."
+
+**After Be Concise** →  
+"For beginners: Explain AI like a smart helper, friendly tone, under 200 words—outline: Definition, Examples, Benefits. No opinions or predictions. 3 bullet points. Remember, explain AI."
+
+**After Avoiding Hallucinations** →  
+"For beginners: Explain AI like a smart helper, friendly tone, under 200 words—outline: Definition, Examples, Benefits. No opinions or predictions. If unsure, say 'I don't know.' Ask for evidence first. Use low temperature. 3 bullet points. Remember, explain AI."
+
+**After Using Relevant Examples** →  
+"For beginners: Explain AI like a smart helper, friendly tone, under 200 words—outline: Definition, Examples, Benefits. No opinions or predictions. If unsure, say 'I don't know.' Ask for evidence first. Use low temperature. Example: Input: 'Machine learning.' Output: '- Definition: Subset of AI. - Examples: Recommendations. - Benefits: Efficiency.' Now, explain AI. 3 bullet points. Remember, explain AI."
+
+**After Add Clear Syntax** →  
+"System: You explain tech simply.  
+User:  
+For beginners: Explain AI like a smart helper, friendly tone, under 200 words—outline: Definition, Examples, Benefits.  
+No opinions or predictions.  
+If unsure, say 'I don't know.' Ask for evidence first. Use a low temperature.  
+Example: Input: 'Machine learning.' Output: '- Definition: Subset of AI. - Examples: Recommendations. - Benefits: Efficiency.'  
+Now, explain AI. 3 bullet points. Remember, explain AI."
+
+**After Break the Task Down** →  
+"System: You explain tech simply.  
+User:  
+Step 1: Define AI.  
+Step 2: Give examples.  
+Step 3: List benefits.  
+For beginners: Like a smart helper, friendly tone, under 200 words.  
+No opinions or predictions. If unsure, say 'I don't know.' Ask for evidence first. Use low temperature.  
+Example: Input: 'Machine learning.' Output: '- Definition: Subset of AI. - Examples: Recommendations. - Benefits: Efficiency.'  
+Now, explain AI. 3 bullet points. Remember, explain AI."
+
+**After Adding System Messages** →  
+"System: You are a helpful tutor who explains tech simply.  
+User:  
+Step 1: Define AI.  
+Step 2: Give examples.  
+Step 3: List benefits.  
+For beginners: Like a smart helper, friendly tone, under 150 words (refined from test).  
+No opinions or predictions. If unsure, say 'I don't know.' Ask for evidence first. Use low temperature.  
+Example: Input: 'Machine learning.' Output: '- Definition: Subset of AI. - Examples: Recommendations. - Benefits: Efficiency.'  
+Now, explain AI. 3 bullet points. Remember, explain AI."
+
+**Final Step: Iterate, Optimize, and Refine**
+
+---
+
+**[← Back to Phase 2](../02_Phase-2-Core-Prompt-Engineering-Skills/README.md)**  
+
+---
+
+## How to Optimize and Refine a Prompt
+
+As AI language models become more sophisticated, the quality of prompts used to interact with them becomes increasingly important. Optimized prompts can lead to more accurate, relevant, and useful responses, enhancing the overall performance of AI applications.
+
+This section gives you practical techniques to systematically improve your prompts.
+
+---
+
+### Key Components of Prompt Optimization
+
+1. **A/B Testing Prompts** — A method to compare the effectiveness of different prompt variations.
+2. **Iterative Refinement** — A strategy for gradually improving prompts based on feedback and results.
+3. **Performance Metrics** — Ways to measure and compare the quality of responses from different prompts.
+
+---
+
+### Method Details
+
+#### 1. Setup
+Start by setting up your environment with the necessary libraries and API keys (e.g., OpenAI, Grok, or your preferred provider).
+
+#### 2. A/B Testing
+- Define multiple versions of a prompt
+- Generate responses for each version
+- Compare results using predefined metrics
+
+#### 3. Iterative Refinement
+- Start with an initial prompt
+- Generate responses and evaluate
+- Identify areas for improvement
+- Refine the prompt based on insights
+- Repeat the process to continuously enhance the prompt
+
+#### 4. Performance Evaluation
+- Define relevant metrics (e.g., relevance, specificity, coherence)
+- Implement scoring functions
+- Compare scores across different prompt versions
+
+---
+
+### Step-by-Step Optimization Workflow
+
+1. **Start with a baseline prompt** — Write your initial version.
+2. **Run A/B tests** — Create 2–4 variations (change one thing at a time: tone, structure, specificity, examples, etc.).
+3. **Generate responses** — Use the same model settings (temperature, max tokens) for fair comparison.
+4. **Evaluate using metrics** — Score for accuracy, usefulness, coherence, adherence to format, etc.
+5. **Identify weaknesses** — Look for hallucinations, missing details, wrong tone, or extra fluff.
+6. **Refine** — Apply one or more guidelines from the Instruction Engineering Handbook (Clarity, Specificity, Negative Prompting, Output Format, etc.).
+7. **Test again** — Repeat until the prompt consistently delivers high-quality output.
+8. **Document the final version** — Save the best prompt with notes on what worked.
+
+**Pro Tip:** Change only **one variable** per test. This helps you clearly see what actually improves (or hurts) the result.
+
+
+<img src="../assets/images/phase3-prompt-optimization.png" 
+     width="50%" 
+     align="center" 
+     style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="Prompt Optimization Workflow">
+
+---
+
+**[← Back to Phase 2](../02_Phase-2-Core-Prompt-Engineering-Skills/README.md)**  
+
+---
+
+## Top 10 Things That Kill Your Prompt (Even When It Looks Great at First Glance)
+
+| #  | Pitfall (Looks Good, Actually Deadly)                          | Why It Wastes Tokens / Hallucinates / Confuses AI                          | How to Avoid |
+|----|----------------------------------------------------------------|-----------------------------------------------------------------------------|--------------|
+| 1  | Over-layering (using 3 heavy techniques at once)               | Model gets confused by too many instructions → hallucinations or refusal   | Limit to one main technique + one structure + one format |
+| 2  | Contradictory instructions (e.g. “be brief” + “be detailed”)   | Model tries to satisfy both → verbose + incomplete output                  | Use only one instruction per goal; put conflicts in Constraints |
+| 3  | Using a complex structure on a simple task                     | Wastes 100–200 tokens on unnecessary sections                              | Match structure complexity to task size (Basic for simple tasks) |
+| 4  | Heavy Format on creative tasks (JSON for storytelling)         | Model becomes robotic and loses creativity                                 | Use Markdown for creative, JSON only for parseable output |
+| 5  | Too many negative examples                                     | Model focuses on what NOT to do and forgets the main task                  | Limit to 1–2 strongest negative examples |
+| 6  | Long Context + Many-Shot on small-context model                | Prompt gets truncated → model forgets earlier instructions                 | Check model’s context window first |
+| 7  | Mixing Role-Playing with strict JSON                           | Model wants to write naturally but is forced into JSON → broken output     | Use Persona with Markdown; reserve JSON for non-creative tasks |
+| 8  | Adding Meta-Prompting or APE unnecessarily                     | Model spends tokens rewriting the prompt instead of solving the task       | Use only when you are iterating the prompt itself |
+| 9  | No clear “Output ONLY in this format” rule                     | Model adds extra explanations and ruins parsing                            | Always end with “Respond ONLY with…” |
+| 10 | Ignoring model-specific quirks (e.g. Grok loves markdown but hates nested XML) | Prompt works on one model, fails on another                                | Test on your actual target model before finalising |
+
+---
+**[← Back to Phase 2](../02_Phase-2-Core-Prompt-Engineering-Skills/README.md)**  
+
+---
+
+## Senior Tuning Workflow
 
 | Approach                        | Why it works                              | How it works                                      | How to implement (step-by-step)                          | When to use it |
 |---------------------------------|-------------------------------------------|---------------------------------------------------|----------------------------------------------------------|----------------|
@@ -608,11 +807,10 @@ To get maximum performance, adapt the three layers (Technique + Structure + Form
 | Post-Response Review (A/B or rubric) | Continuous improvement                 | Score on 10 metrics → compress or switch model    | Run rubric → if quality drops → edit prompt or change model | Weekly review or after 50+ runs |
 
 ---
-**Congratulations!**  
-You’ve now mastered the difference between techniques, structures, and formats, and use System Prompts effectively. You can already write clearer, more reliable prompts than most beginners. Also, you've understood how to deliberately layer **Technique +Structure + Format**, to adapt your prompting style with model-specific quirks, especially around tool use (how it calls external functions like search or code execution) and real-time knowledge (whether it can pull fresh data natively or needs explicit prompting). You are no longer guessing — you are **engineering** prompts like a professional.
 
-The next step is turning all this knowledge into a repeatable system — it’s time to enter the prompt crafting handbook and start experimenting like a pro.
+**Excellent! You now have a repeatable system for turning average prompts into highly effective ones.**
+**[← Back to Phase 2](../02_Phase-2-Core-Prompt-Engineering-Skills/README.md)**  
 
-**[← Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  **[Next → Phase 3: Mastery & Experimentation](../03_Phase-3-Mastery-Experimentation/README.md)**
+---
 
 *Phase 2 of "All You Need to Know About Prompt Engineering" — Portfolio Project by Mirza (BS AI)*
