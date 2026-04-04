@@ -351,4 +351,274 @@ However, they may underperform on smaller or raw models (e.g., base GPT-3) with 
 
 **[Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  **[Continue to Prompting Format →](#prompting-format)**
 
+## Prompting Format
+
+<img src="../assets/images/phase2-what-is-prompt-format.png" 
+     width="45%" 
+     align="center" 
+     style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="What is Prompting Format">
+
+Format is the stylistic and syntactic presentation of the prompt. It makes the prompt easier for the model to parse and respond to. Think of it as the "punctuation" that reduces ambiguity.
+
+---
+
+### Prompt Format Comparison Table
+
+| Format Type              | Description with Example                                                                 | Best Use Case                                      | Type of Problem Best For                          | Worst Case (When Not to Use)                          | Models It Works Well On                  | Why It Works Well There |
+|--------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------|---------------------------------------------------|-------------------------------------------------------|------------------------------------------|-------------------------|
+| Triple Quotes            | Uses `"""` or `'''` to enclose text blocks.<br>Example: `""" Input: Hello. Translate to French."""` | Enclosing multi-line inputs or examples without escaping. Use for clean separation in long prompts. | Natural language tasks like translation or summarization needing quoted content. | Short, single-line prompts where it adds unnecessary bulk. | Most LLMs like Grok or GPT series. | Clean separation of blocks. |
+| Markdown                 | Uses `#` for headings, `**bold**`, `-` bullets, etc.<br>Example: `Task: Summarise. - Point 1: Key fact.` | Improving readability with visual cues. Use for structured responses or prompts with lists/headings. | Organising complex instructions, like step-by-step guides. | Code-heavy prompts where markup interferes with syntax. | Conversational models like ChatGPT or Grok. | Excellent visual hierarchy. |
+| JSON                     | Structured key-value pairs.<br>Example: `{"task": "classify", "input": "text here", "format": "output as label"}` | Machine-friendly outputs or inputs. Use for precise, parseable data. | API-like interactions or data extraction. | Creative/free-form tasks where rigidity stifles output. | API-tuned models like Grok with tools or GPT-4. | Perfect for parseable output. |
+| XML                      | Tag-based like `<tag>content</tag>`.<br>Example: `<instructions>Summarize</instructions> <context>Article text</context>` | Tagging elements for clear separation. Use for modular, extensible prompts. | Complex, nested structures like configs or multi-part queries. | Simple queries where tags add overhead and complexity. | Structured LLMs like Claude, GPT series. | Great for hierarchical data. |
+| YAML                     | Indent-based `key: value`.<br>Example: `task: generate code`<br>`language: Python`<br>`style: minimalist` | Human-readable configs. Use for settings or hierarchical data without quotes. | Prompting with parameters, like style/tone specs. | Tasks needing strict validation, as YAML can be whitespace-sensitive. | Config-friendly models like Claude or Grok. | Clean and readable. |
+| Code Blocks              | Uses ```` ``` language` | For including code snippets clearly. | When showing or requesting code. | Non-code contexts. | All LLMs. | Syntax highlighting support. |
+| Delimiters (Brackets/Parentheses) | Uses `[]` or `()` for sections.<br>Example: `[Instructions] Do this. [Input] Data here.` | Simple separation without markup. Use for quick grouping. | Basic structuring in short prompts. | Long/complex prompts where nesting gets messy. | All LLMs, especially smaller ones like GPT-3. | Lightweight and flexible. |
+| Hashtags/Headings        | Uses `# Heading` or `## Sub`.<br>Example: `# Task`<br>`Describe.`<br>`## Details`<br>`Info here.` | Sectioning like documents. Use for logical flow. | Document-style prompts, e.g., reports. | Code or data where `#` might be seen as comments. | Text models like Grok trained on docs. | Familiar document structure. |
+| Pipe/Separators          | Uses `|` or `---` for divisions.<br>Example: `Input | Output format | Examples.` | Tabular or divided content. Use for visual splits. | Prompting with tables or segments. | Comparison or multi-column problems. | Models sensitive to special chars. | Table-capable models like GPT-4. |
+| HTML-Like Tags           | Simple, bold or custom.<br>Example: `<query>What is AI?</query> <response_format>Short answer</response_format>` | Lightweight tagging. Use for emphasis or sections. | Web-style prompts needing basic styling. | Strict JSON/XML needs where HTML confuses. | Web-trained models like Grok. | Simple emphasis. |
+
+---
+
+### How to Combine Technique + Structure + Format in One Real Prompt
+
+<img src="../assets/images/phase2-layering-technique-structure-format.png" 
+     width="42%" 
+     align="right" 
+     style="margin-left: 25px; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="Layering Prompt Technique, Structure and Format">
+
+Think of the three layers like building a sandwich:
+
+- **Technique** = the filling (the smart strategy)
+- **Structure** = the bread (the logical order)
+- **Format** = the wrapping (how it looks and gets parsed)
+
+**Which Technique layers best with which Structure & Format?** (and which combinations waste tokens or drop accuracy)
+
+| Technique Category                  | Best Structure                          | Best Format          | Token Risk / Accuracy Warning                          | How to spot it logically in real world |
+|-------------------------------------|-----------------------------------------|----------------------|--------------------------------------------------------|----------------------------------------|
+| Basic Reasoning (CoT, Step-Back)    | Objective-Driven or Full Sequence       | JSON or Markdown     | Low risk – very compatible                             | When you need clear thinking + structured output |
+| Advanced Reasoning (ToT, GoT)       | Hierarchical/Decomposed                 | JSON or XML          | Medium – can explode tokens if branches are many       | When problem has multiple paths; test with short version first |
+| Example-Driven (Few/Many-Shot)      | Example-Led                             | Markdown or JSON     | Low – works perfectly                                  | When pattern-matching is needed |
+| Self-Correction (Reflexion, Self-Consistency) | Feedback-Loop or Modular              | JSON                 | Medium – adds length but greatly reduces hallucinations | When accuracy > speed |
+| Role/Creative (Persona, Emotion)    | CO-STAR                                 | Markdown             | Low – enhances creativity without extra tokens         | When tone/style matters |
+| Structured (Co-STAR, Prompt Chaining) | Modular/Sectioned or CO-STAR          | JSON/YAML            | Very low – designed for each other                     | When output must be machine-readable |
+| Optimization (APE, Meta-Prompting)  | Full Sequence                           | JSON                 | High if overused – can waste tokens on meta-thinking   | When you are iterating prompts, not final output |
+
+<br clear="right"/>
+
+---
+
+**[Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  **[Continue to Next Section →](#top-15-things-to-check-before-layering)**
+
+## Top 15 Things to Check Before Layering Technique + Structure + Format
+
+Before combining layers, run through this checklist. It prevents most common failures.
+
+| #  | Thing to Check                        | Example                                      | Why It’s Important |
+|----|---------------------------------------|----------------------------------------------|--------------------|
+| 1  | Problem type (reasoning vs creative)  | Is it math or storytelling?                  | Wrong technique wastes tokens |
+| 2  | Desired output format                 | JSON, bullet list, or paragraph?             | Prevents post-processing work |
+| 3  | Context window limit                  | 8k vs 128k tokens?                           | Avoids truncation |
+| 4  | Model’s strength                      | Grok vs small model?                         | Some models choke on complex layers |
+| 5  | Token budget                          | How many tokens can I spend?                 | Keeps cost low |
+| 6  | Need for parseability                 | Will output go into code/dashboard?          | JSON vs Markdown decision |
+| 7  | Risk of hallucination                 | High-stakes fact or creative idea?           | Add self-correction layer |
+| 8  | Need for iteration                    | One-shot or multi-turn?                      | Choose chaining or feedback-loop |
+| 9  | Audience/tone requirement             | Professional, friendly, pirate?              | Persona + CO-STAR |
+| 10 | Number of steps required              | 1 step or 10 steps?                          | Choose hierarchical vs basic |
+| 11 | Examples already available            | Do I have 3 good examples?                   | Decide few-shot vs zero-shot |
+| 12 | Output must be machine-readable       | Yes/No                                       | Forces JSON/XML |
+| 13 | Speed vs quality trade-off            | Need answer in <5 sec?                       | Avoid heavy techniques |
+| 14 | Previous prompt performance           | Did last version work?                       | Learn from A/B testing |
+| 15 | Safety / constraint needs             | Must not give medical advice?                | Add safety system message first |
+
+---
+
+## Top 10 Things That Kill Your Prompt (Even When It Looks Great at First Glance)
+
+| #  | Pitfall (Looks Good, Actually Deadly)                          | Why It Wastes Tokens / Hallucinates / Confuses AI                          | How to Avoid |
+|----|----------------------------------------------------------------|-----------------------------------------------------------------------------|--------------|
+| 1  | Over-layering (using 3 heavy techniques at once)               | Model gets confused by too many instructions → hallucinations or refusal   | Limit to one main technique + one structure + one format |
+| 2  | Contradictory instructions (e.g. “be brief” + “be detailed”)   | Model tries to satisfy both → verbose + incomplete output                  | Use only one instruction per goal; put conflicts in Constraints |
+| 3  | Using a complex structure on a simple task                     | Wastes 100–200 tokens on unnecessary sections                              | Match structure complexity to task size (Basic for simple tasks) |
+| 4  | Heavy Format on creative tasks (JSON for storytelling)         | Model becomes robotic and loses creativity                                 | Use Markdown for creative, JSON only for parseable output |
+| 5  | Too many negative examples                                     | Model focuses on what NOT to do and forgets the main task                  | Limit to 1–2 strongest negative examples |
+| 6  | Long Context + Many-Shot on small-context model                | Prompt gets truncated → model forgets earlier instructions                 | Check model’s context window first |
+| 7  | Mixing Role-Playing with strict JSON                           | Model wants to write naturally but is forced into JSON → broken output     | Use Persona with Markdown; reserve JSON for non-creative tasks |
+| 8  | Adding Meta-Prompting or APE unnecessarily                     | Model spends tokens rewriting the prompt instead of solving the task       | Use only when you are iterating the prompt itself |
+| 9  | No clear “Output ONLY in this format” rule                     | Model adds extra explanations and ruins parsing                            | Always end with “Respond ONLY with…” |
+| 10 | Ignoring model-specific quirks (e.g. Grok loves markdown but hates nested XML) | Prompt works on one model, fails on another                                | Test on your actual target model before finalising |
+
+---
+
+## Top 5 Checkpoints That Tell You Your Layering Is Up to Mark (or Needs Improvement)
+
+1. The prompt is **under 400 tokens** and still complete.  
+2. You can read the prompt **once** and instantly understand what the model should do.  
+3. The model’s **first response** is already in the exact format you asked for (no extra explanation).  
+4. When you change only one variable (e.g. temperature), the output **stays consistent**.  
+5. You can hand the prompt to a colleague and they get the **same high-quality result** without extra explanation.
+
+---
+
+## How to Identify Which Problems Can Be Resolved by Layering (Pro/Senior Method – Step by Step)
+
+1. Write the raw task in **one sentence**.
+2. Ask: “What is the **core difficulty**?” (reasoning, creativity, structure, parseability, accuracy, etc.)
+3. Match difficulty to the **Technique** column.
+4. Ask: “How complex is the input/output?” → choose **Structure**.
+5. Ask: “How will I use the output?” → choose **Format**.
+6. Test with a **minimal version** (remove one layer) and compare results.
+7. If output is messy → add Format; if illogical → add Technique; if disorganised → add Structure.
+
+---
+
+**Pro Tip:** Save your best layered prompts in a personal library with notes on which Technique + Structure + Format combination worked best.
+
+**[Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  **[Continue to Layering Template →](#ready-to-paste-layering-template)**
+
+## Ready-to-Paste “Layering Template” (Copy & Reuse for ANY Task)
+
+<img src="../assets/images/phase2-layering-template.png" 
+     width="50%" 
+     align="center" 
+     style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="Ready-to-Paste Layering Template">
+
+This template turns any vague idea into a layered, professional prompt in under 2 minutes.
+
+### Step-by-Step Guide
+
+1. Write the raw task in **1 sentence** → put it in **OBJECTIVE**.
+2. Decide the core difficulty (reasoning? creativity? structure? accuracy?) → pick the matching **TECHNIQUE** from the master list.
+3. Ask “How complex is this?” → choose the **STRUCTURE** (simple = Basic Instruction, complex = Full Sequence or Modular).
+4. Ask “How will I use the output?” → choose the **FORMAT** (parseable = JSON, readable = Markdown).
+5. Fill the **INSTRUCTIONS** as numbered steps (makes the technique actually happen).
+6. Add **CONSTRAINTS** and **NEGATIVE EXAMPLES** (this is where most people skip and regret it).
+7. Test once with a short version. If it works, scale up. If not, remove one layer and test again.
+8. Save the final prompt in your personal library with the layers noted (e.g., “CoT + Full Sequence + JSON”).
+
+---
+
+## 10 Top Patterns Senior Developers Use to Layer Them
+
+<img src="../assets/images/phase2-layering-patterns-table.png" 
+     width="65%" 
+     align="center" 
+     style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="Senior Developer Layering Patterns and Workflow">
+
+### Universal Strategy: “T-S-F Alignment Loop” (Technique → Structure → Format)
+
+**Core Idea:**  
+Always choose in this order:  
+**Technique first** (what cognitive process do I need?)  
+→ **Structure second** (how should the model organise its thinking?)  
+→ **Format last** (how should the final answer look and be used?)
+
+### Powerful Result-Driven Workflow (4 steps)
+
+1. **Define Success** – What does “perfect output” look like? (accuracy, structure, parseability, tone)
+2. **Match Layers** – Use the compatibility chart to pick one from each column.
+3. **Write the Prompt Skeleton** – Use the template above.
+4. **Run the 5-Checkpoint Test**:
+   - Under 400 tokens?
+   - One-read understandable?
+   - Model follows format on first try?
+   - Consistent when temperature changes?
+   - Works when handed to someone else?
+
+This loop is what separates **beginners** (who throw everything in randomly) from **seniors** (who get reliable, production-grade results every time).
+
+---
+
+**Congratulations!**  
+You have now completed the core of Phase 2. You understand how to deliberately layer **Technique + Structure + Format**, use System Prompts effectively, and avoid the most common prompting mistakes.
+
+You are no longer guessing — you are **engineering** prompts like a professional.
+
+**[← Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  **[Next → Phase 3: Mastery & Experimentation](../03_Phase-3-Mastery-Experimentation/README.md)**
+
+## Model Specific Quirks (Tools and Real-Time Knowledge Fetching)
+
+Every model has unique **“quirks”** — especially around tool use (how it calls external functions like search or code execution) and real-time knowledge (whether it can pull fresh data natively or needs explicit prompting).  
+
+These quirks force you to adapt your prompting style, or you’ll waste tokens, get weak results, or trigger hallucinations.
+
+### How a Model’s Specific Quirks Change Prompting Approaches
+
+- **Grok (xAI):** Proactive tool use (decides itself when to search or run code). Native real-time knowledge via X and web.  
+  → Prompt casually and trust it. Say “use tools if needed” — no heavy guidance. Short, natural language works best.
+
+- **GPT-4o / o-series (OpenAI):** Explicit function-calling only. Real-time browsing is optional and must be enabled.  
+  → Be very structured. List every tool, define exact parameters, and tell it when to call tools. Use JSON schemas.
+
+- **Claude (Anthropic):** Conservative tool use — rarely takes initiative, strong at following detailed instructions.  
+  → Give clear safety rules and step-by-step guidance. Explicitly say “use tools only if data is missing”.
+
+- **Llama 3.1/4 (open-weight):** Depends on the inference engine (Ollama/vLLM/llama.cpp). No native real-time unless you add tools.  
+  → You must add tool-calling code yourself and remind it in every prompt. Real-time knowledge requires external RAG or search tools.
+
+**General Rule:**  
+Ignore the quirk → you waste tokens, get refusals, or hallucinations. **Match your prompting style to the model’s default behavior.**
+
+### What Happens If We Ignore These Quirks
+
+- **Grok:** You over-specify tools → wastes tokens and makes it less creative.
+- **GPT:** You don’t define tools clearly → model invents fake function calls or refuses.
+- **Claude:** You give vague instructions → conservative refusals or overly safe answers.
+- **Llama (local):** No tool guidance → no real-time knowledge, more hallucinations.
+
+**Result in all cases:** Higher cost, lower quality, more hallucinations, and broken production apps.
+
+---
+
+### How Prompt Techniques / Structure / Format Should Be Altered for 100% AI Use
+
+To get maximum performance, adapt the three layers (Technique + Structure + Format) to each model’s quirks.
+
+| Technique Category                  | Best Structure (adapted)          | Best Format (adapted) | How to Alter for 100% AI Use (Model-Specific) |
+|-------------------------------------|-----------------------------------|-----------------------|-----------------------------------------------|
+| Basic Reasoning (CoT, Step-Back)    | Objective-Driven or Full Sequence | JSON or Markdown      | Grok: Keep short & natural.<br>GPT/Claude: Add “think step by step before any tool call”.<br>Llama: Explicitly say “reason first, then call tool if needed”. |
+| Advanced Reasoning (ToT, GoT)       | Hierarchical/Decomposed           | JSON or XML           | Grok: Allow free branching.<br>GPT: Add explicit “use tool only after evaluating all branches”.<br>Claude: Add safety clause “stay within provided context”. |
+| Example-Driven (Few/Many-Shot)      | Example-Led                       | Markdown or JSON      | All models: Place examples before any tool instruction.<br>Grok: 2–3 examples max.<br>GPT: Use JSON examples for function-calling pattern. |
+| Self-Correction (Reflexion, Self-Consistency) | Feedback-Loop or Modular     | JSON                  | Grok: “Reflect, then decide if tool is needed”.<br>GPT/Claude: “After tool result, critique and revise before final answer”. Add “cite sources or say I don’t know”. |
+| Role/Creative (Persona, Emotion)    | CO-STAR                           | Markdown              | Grok: Persona works extremely well with natural tone.<br>GPT/Claude: Add “stay in character but use tools if real-time data is required”. |
+| Structured (Co-STAR, Prompt Chaining) | Modular/Sectioned or CO-STAR    | JSON/YAML             | GPT: Perfect for function calling — define tools in system prompt.<br>Grok: Keep chaining short.<br>Llama: Explicitly list available tools in every chain step. |
+| Optimization (APE, Meta-Prompting)  | Full Sequence                     | JSON                  | Use only on Grok/Claude (strong meta-reasoning). GPT: Avoid unless very large context. Always add “do not call tools during meta-reasoning”. |
+
+---
+
+### Quick Rules for 100% AI Use (Apply to Every Prompt)
+
+- One main technique only — **never stack 3 heavy ones**.
+- Start with a **system prompt** for permanent quirks (e.g., “You are Grok. Use tools autonomously when needed.”).
+- End every prompt with a clear output instruction + tool rule: “Respond ONLY in [format]. Use tools only if data is missing or user requests real-time info.”
+- Match model quirk:  
+  - **Grok** → trust & brevity  
+  - **GPT** → explicit schemas  
+  - **Claude** → safety + step-by-step  
+  - **Llama** → you define everything
+
+---
+
+### Senior Tuning Workflow
+
+| Approach                        | Why it works                              | How it works                                      | How to implement (step-by-step)                          | When to use it |
+|---------------------------------|-------------------------------------------|---------------------------------------------------|----------------------------------------------------------|----------------|
+| Pre-Prompt Audit (30 seconds)   | Prevents 80% of failures upfront          | Checks quirks + sets budget + picks layers        | 1. Identify model<br>2. Set token budget (≤70%)<br>3. Choose 1 technique + 1 structure + 1 format | Every single prompt |
+| Layered Prompt Construction     | Uses full model capability safely         | System prompt + T-S-F template + tool clause      | Start with system → add T-S-F user prompt → add “use tools only when needed” | All production prompts |
+| Live Monitoring & Auto-Correction | Catches problems while running          | Check tokens/parse/hallucination after every reply | After reply: log metrics → if bad → auto-summarize or edit previous message | Real-time chatbots |
+| Post-Response Review (A/B or rubric) | Continuous improvement                 | Score on 10 metrics → compress or switch model    | Run rubric → if quality drops → edit prompt or change model | Weekly review or after 50+ runs |
+
+---
+
+**Excellent!** You’ve now mastered the difference between techniques, structures, and formats, plus how to layer them with powerful system prompts and safety rules. You can already write clearer, more reliable prompts than most beginners.  
+
+The next step is turning all this knowledge into a repeatable system — it’s time to enter the prompt crafting handbook and start experimenting like a pro.
+
+**[← Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  **[Next → Phase 3: Mastery & Experimentation](../03_Phase-3-Mastery-Experimentation/README.md)**
+
 *Phase 2 of "All You Need to Know About Prompt Engineering" — Portfolio Project by Mirza (BS AI)*
