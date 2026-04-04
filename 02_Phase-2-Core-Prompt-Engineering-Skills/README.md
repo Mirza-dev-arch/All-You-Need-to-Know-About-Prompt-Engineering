@@ -29,7 +29,7 @@ In this phase you will master the **three core layers** every professional promp
 
 **[← Back to Main README](../../README.md)**  **[← Phase 1](../01_Phase-1-Foundations/README.md)**  **[Next → Phase 3](../03_Phase-3-Mastery-Experimentation/README.md)**
 
----
+---(#top-15-things-to-check-before-layering)
 
 ## Understanding Technique vs Structure vs Format
 
@@ -47,7 +47,7 @@ As a prompt engineer, inputs for LLMs like Grok include understanding **"prompt 
 
 **Examples:**
 - **Chain-of-Thought (CoT):** "Solve this math problem step by step: What is 15% of 200?"
-- **Few-Shot Prompting:** "Translate these: 'Hello' → 'Bonjour'. 'Goodbye' → 'Au revoir'. Now: 'Thank you' →"
+- **Few-Shot Prompting:** "Translate these: 'Hello' → 'Bonjour'. 'Goodbye' → 'Au revoir'. Now: 'Thank you.' →"
 - **Role-Playing:** "You are a pirate captain. Describe finding treasure."
 
 **Prompt Engineer Tip:** Techniques are iterative—test them with A/B variations to measure response accuracy or coherence. They're the "art" side of prompting, often requiring experimentation.
@@ -410,7 +410,7 @@ Think of the three layers like building a sandwich:
 
 ---
 
-**[Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  **[Continue to Next Section →](#top-15-things-to-check-before-layering)**
+**[Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  **[Continue to Next Section →](#top-15-things-to-check-before-layering-technique-structure-format)**
 
 
 ## Top 15 Things to Check Before Layering Technique + Structure + Format
@@ -480,6 +480,8 @@ Before combining layers, run through this checklist. It prevents most common fai
 
 **[Back to Phase 2 Top](#phase-2-core-prompt-engineering-skills)**  **[Continue to Layering Template →](#ready-to-paste-layering-template)**
 
+---
+
 ## Ready-to-Paste “Layering Template” (Copy & Reuse for ANY Task)
 
 <img src="../assets/images/phase2-layering-template.png" 
@@ -511,6 +513,8 @@ This template turns any vague idea into a layered, professional prompt in under 
      style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
      alt="Senior Developer Layering Patterns and Workflow">
 
+---
+
 ### Universal Strategy: “T-S-F Alignment Loop” (Technique → Structure → Format)
 
 **Core Idea:**  
@@ -518,6 +522,8 @@ Always choose in this order:
 **Technique first** (what cognitive process do I need?)  
 → **Structure second** (how should the model organise its thinking?)  
 → **Format last** (how should the final answer look and be used?)
+
+---
 
 ### Powerful Result-Driven Workflow (4 steps)
 
