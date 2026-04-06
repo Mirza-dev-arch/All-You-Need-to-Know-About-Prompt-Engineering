@@ -4,15 +4,14 @@
 
 ---
 
-
-To master prompt engineering, dedicate 20–30% of your time to understanding each AI model’s strengths (sweet spots) and weaknesses. This knowledge helps you pick the right model and adapt your prompts accordingly for better results.
+To master prompt engineering, dedicate 20–30% of your time to understanding each AI model’s strengths (sweet spots) and weaknesses. This knowledge helps you pick the right model and techniques for better results.
 
 ---
 
 ### 1. Start with Official Docs and Model Cards
 
 <img src="../assets/images/phase3-steps-of-scanning.png" 
-     width="30%" 
+     width="42%" 
      align="left" 
      style="margin-right: 25px; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
      alt="Steps of Scanning Official Docs">
@@ -34,7 +33,7 @@ To master prompt engineering, dedicate 20–30% of your time to understanding ea
 ### 2. Explore Benchmarks and Comparisons
 
 <img src="../assets/images/phase3-model-strength-weakness.png" 
-     width="55%" 
+     width="48%" 
      align="center" 
      style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
      alt="Model Strengths and Weaknesses">
@@ -50,7 +49,7 @@ Get objective data from third-party sources:
 - Claude’s consistent outputs suit strict JSON formats
 
 <img src="../assets/images/phase3-model-insight.png" 
-     width="55%" 
+     width="48%" 
      align="center" 
      style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
      alt="Model Insight from Studies">
@@ -88,7 +87,7 @@ Learn from others:
 - Discord servers
 - arXiv papers
 
-Search: “Claude vs GPT for ToT prompting.”
+Search: “Claude vs GPT for ToT prompting”
 
 ---
 
@@ -110,7 +109,8 @@ Models change fast. Re-test every few months and follow newsletters like The Bat
 ---
 
 **Excellent!**  
-You now know how to choose the right model and adapt your prompts to its unique quirks. Lets learn it from an example before we move on to see how to create a selection criteria 
+You now know how to choose the right model and adapt your prompts to its unique quirks.
 
----
+**[← Back to Phase 2](../02_Phase-2-Core-Prompt-Engineering-Skills/README.md)**  **[Continue to Chapter 2 →](../Chapter-2-Advanced-Prompting-Strategies/README.md)**
 
+*Phase 3 of "All You Need to Know About Prompt Engineering" — Portfolio Project by Mirza (BS AI)*
