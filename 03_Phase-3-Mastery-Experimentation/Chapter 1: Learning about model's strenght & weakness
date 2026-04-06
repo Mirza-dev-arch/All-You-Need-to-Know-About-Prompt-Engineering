@@ -1,0 +1,111 @@
+## Chapter 1: Understanding Model Strengths and Weaknesses
+
+---
+
+
+To master prompt engineering, dedicate 20–30% of your time to understanding each AI model’s strengths (sweet spots) and weaknesses. This knowledge helps you pick the right model and adapt your prompts accordingly for better results.
+
+---
+
+### 1. Start with Official Docs and Model Cards
+
+<img src="../assets/images/phase3-steps-of-scanning.png" 
+     width="42%" 
+     align="left" 
+     style="margin-right: 25px; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="Steps of Scanning Official Docs">
+
+* **Where to Find:** Check provider sites like OpenAI’s Models page, Anthropic’s Models Overview, Meta’s Llama docs, or xAI’s Grok page.
+
+* **What They Tell You:** Focus on “capabilities,” “benchmarks,” “use cases,” and “limitations.”
+
+**Strengths Example:** Claude docs note “excels in advanced reasoning, math, coding” and “long context (up to 1M tokens in beta)” — great for Chain-of-Thought or Tree-of-Thought.
+
+**Weaknesses Example:** GPT-4 docs mention higher costs/slower speeds — weak for real-time tasks.
+
+**Prompt-Specific Hints:** Anthropic guides suggest Claude works well with CO-STAR formats.
+
+<br clear="left"/>
+
+---
+
+### 2. Explore Benchmarks and Comparisons
+
+<img src="../assets/images/phase3-model-strength-weakness.png" 
+     width="48%" 
+     align="center" 
+     style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="Model Strengths and Weaknesses">
+
+Get objective data from third-party sources:
+- Hugging Face Open LLM Leaderboard
+- LMSYS Chatbot Arena
+- arXiv papers
+
+**Prompt-Specific Insights:**
+- GPT excels in heuristic/CoT prompts for extraction tasks
+- Llama benefits from Few-Shot to reduce errors
+- Claude’s consistent outputs suit strict JSON formats
+
+<img src="../assets/images/phase3-model-insight.png" 
+     width="48%" 
+     align="center" 
+     style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="Model Insight from Studies">
+
+---
+
+### 3. Do Hands-On Experiments (The Gold Standard)
+
+Test yourself — the best way to learn.
+
+**How:**
+- Use OpenAI Playground, Anthropic Console, or Grok interface.
+- Run the same prompt on different models.
+
+**Example Test:** For a vibe-coding task, try CoT + Modular Structure + Markdown on each model. Rate speed, token usage, and quality.
+
+**Track Sweet Spots & Weaknesses:**
+- Claude consistently follows formats → strong for Constrained structures.
+- Grok integrates real-time data → ideal for ReAct.
+
+**Tools:** LangChain, Promptfoo, or a simple spreadsheet.
+
+<img src="../assets/images/phase3-model-evaluation-chart.png" 
+     width="48%" 
+     align="center" 
+     style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="Model Evaluation Chart">
+
+---
+
+### 4. Tap into Communities and Research
+
+Learn from others:
+- Reddit (r/PromptEngineering, r/MachineLearning)
+- Discord servers
+- arXiv papers
+
+Search: “Claude vs GPT for ToT prompting”
+
+---
+
+### 5. Keep Monitoring Updates
+
+Models change fast. Re-test every few months and follow newsletters like The Batch.
+
+---
+
+### Tips for Optimizing Model Choice
+
+- **Creative ideas?** → Use GPT-4 (strong multimodal)
+- **Logic / debugging?** → Claude (excellent reasoning)
+- **Automation / tools?** → Grok (proactive tool use)
+- **Local / privacy?** → Llama (customizable)
+
+**Avoid Pitfalls:** Never trust marketing hype — always test.
+
+---
+
+**Excellent!**  
+You now know how to choose the right model and adapt your prompts to its unique quirks.
