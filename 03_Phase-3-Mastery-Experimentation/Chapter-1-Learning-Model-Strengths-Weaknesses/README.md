@@ -12,12 +12,11 @@ To master prompt engineering, dedicate 20–30% of your time to understanding ea
 
 Begin here for quick, reliable basics from the creators.
 
-<img src="../assets/images/phase3-steps-of-scanning.png" 
+<img src="/All-You-Need-to-Know-About-Prompt-Engineering/assets/images/phase3-steps-of-scanning.png" 
      width="42%" 
      align="left" 
      style="margin-right: 25px; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
-     alt="Start with official doc and model cards">
-
+     alt="Steps of Scanning Official Docs">
      
 * **Where to Find:** Check provider sites like OpenAI's Models page, Anthropic's Models Overview, Meta's Llama docs, or xAI's Grok page.
 
