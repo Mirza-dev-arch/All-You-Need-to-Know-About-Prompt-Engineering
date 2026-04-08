@@ -12,7 +12,7 @@ To master prompt engineering, dedicate 20–30% of your time to understanding ea
 
 Begin here for quick, reliable basics from the creators.
 
-<img src="/All-You-Need-to-Know-About-Prompt-Engineering/assets/images/phase3-steps-of-scanning.png" 
+<img src="../../assets/images/phase3-steps-of-scanning.png" 
      width="42%" 
      align="left" 
      style="margin-right: 25px; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
@@ -42,13 +42,19 @@ Get objective data from third-party sources.
 
 * **Where:** Hugging Face Open LLM Leaderboard, LMSYS Chatbot Arena, arXiv papers, or comparison blogs (Ideas2IT, LeewayHertz, Medium).
 
-<img src="/All-You-Need-to-Know-About-Prompt-Engineering/assets/images/phase3-model-strength-weakness.png" 
-     width="48%" align="center" style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" alt="Model Strengths and Weaknesses">
+<img src="../../assets/images/phase3-model-strength-weakness.png" 
+     width="48%" 
+     align="center" 
+     style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="Model Strengths and Weaknesses">
 
 * **What They Reveal:** Scores on tasks and how models compare.
 
-<img src="/All-You-Need-to-Know-About-Prompt-Engineering/assets/images/phase3-model-insight.png" 
-     width="48%" align="center" style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" alt="Model Insight from Studies">
+<img src="../../assets/images/phase3-model-insight.png" 
+     width="48%" 
+     align="center" 
+     style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="Model Insight from Studies">
 
 
 
@@ -79,8 +85,11 @@ Test yourself — this is the best way to learn real performance.
 
 * **Tools:** LangChain, Promptfoo, or a simple spreadsheet.
 
-<img src="/All-You-Need-to-Know-About-Prompt-Engineering/assets/images/phase3-model-evaluation-chart.png" 
-     width="48%" align="center" style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" alt="Model Evaluation Chart">
+<img src="../../assets/images/phase3-model-evaluation-chart.png" 
+     width="48%" 
+     align="center" 
+     style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     alt="Model Evaluation Chart">
 
 * **Pros/Cons:** Reveals real traits (e.g., GPT-4’s multimodal for UI ideation), but time-intensive. Aim for 5–10 tests per model weekly.
 
