@@ -1,5 +1,25 @@
 # Chapter 1: Learning about the Model’s Strengths and Weaknesses
 
+## 📋 Table of Contents
+
+- [1. Start with Official Docs and Model Cards](#1-start-with-official-docs-and-model-cards)
+- [2. Explore Benchmarks and Comparisons](#2-explore-benchmarks-and-comparisons)
+- [3. Do Hands-On Experiments (The Gold Standard)](#3-do-hands-on-experiments-the-gold-standard)
+- [4. Tap into Communities and Research](#4-tap-into-communities-and-research)
+- [5. Keep Monitoring Updates](#5-keep-monitoring-updates)
+- [Tips for Optimizing Model Choice](#tips-for-optimizing-model-choice)
+- [Demo: Scanning the Codex Prompting Guide (gpt-5.2-codex) Step-by-Step](#demo-scanning-the-codex-prompting-guide-gpt-52-codex-step-by-step)
+  - [Step 1: Prepare (What I Did)](#step-1-prepare-what-i-did)
+  - [Step 2: Scan Keywords + Revealed vs Hidden Insights](#step-2-scan-keywords--revealed-vs-hidden-insights)
+  - [Step 3: Cross-Reference to Your Tasks (Vibe Coding + SDLC)](#step-3-cross-reference-to-your-tasks-vibe-coding--sdlc)
+  - [Step 4: How to Test Your First Draft Prompt Using These Insights](#step-4-how-to-test-your-first-draft-prompt-using-these-insights)
+  - [Final Takeaways from This Demo Scan](#final-takeaways-from-this-demo-scan)
+- [How to Set Selection Criteria and Do Pre-Experiment Comparisons](#how-to-set-selection-criteria-and-do-pre-experiment-comparisons)
+  - [Why This Approach Matters](#why-this-approach-matters)
+  - [Setting Selection Criteria for Your Task](#setting-selection-criteria-for-your-task)
+  - [Doing a Pre-Experiment Comparison (15–25 Minutes)](#doing-a-pre-experiment-comparison-15-25-minutes)
+  - [Final Advice](#final-advice)
+
 **[← Back to Phase 3](../README.md)**  **[Continue to Chapter 2 →](../Chapter-2-Advanced-Prompting-Strategies/README.md)**
 
 ---
@@ -313,7 +333,7 @@ Use a simple weighted scorecard based purely on their official docs + public ben
 
 ---
 
-**[← Back to Phase 3 Top](#phase-3-mastery--experimentation)**  **[Continue to Next Section →](#next-topic-in-phase-3)**
+**[← Back to Phase 3](../README.md)**  **[Continue to Chapter 2 →](../Chapter-2-Advanced-Prompting-Strategies/README.md)**
 
 *Phase 3 of "All You Need to Know About Prompt Engineering" — Portfolio Project by Mirza (BS AI)*
 
