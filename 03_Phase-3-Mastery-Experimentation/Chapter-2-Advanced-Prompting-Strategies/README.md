@@ -1,6 +1,71 @@
 # Chapter 2: Advanced Prompting Strategies
 
+---
+
+## 📋 Table of Contents
+
+### Core Advanced Strategies
+- [1. Tree of Thoughts (ToT)](#1-tree-of-thoughts-tot)
+- [2. ReAct (Reasoning and Acting)](#2-react-reasoning-and-acting)
+- [3. Self-Consistency](#3-self-consistency)
+- [4. Automatic Prompt Engineer (APE)](#4-automatic-prompt-engineer-ape)
+- [5. Reflexion](#5-reflexion)
+- [6. Graph of Thoughts (GoT)](#6-graph-of-thoughts-got)
+- [7. Auto-CoT (Automatic Chain-of-Thought)](#7-auto-cot-automatic-chain-of-thought)
+- [8. Chain-of-Verification (CoVe)](#8-chain-of-verification-cove)
+- [9. Retrieval-Augmented Generation (RAG)](#9-retrieval-augmented-generation-rag)
+- [10. Active-Prompt](#10-active-prompt)
+
+### Extended Composite Techniques
+- [11. Metacognitive Prompting (MP)](#11-metacognitive-prompting-mp)
+- [12. Chain-of-Knowledge (CoK)](#12-chain-of-knowledge-cok)
+- [13. Decomposed Prompting (DecomP)](#13-decomposed-prompting-decomp)
+- [14. Chain-of-Table](#14-chain-of-table)
+- [15. Ensemble Prompting](#15-ensemble-prompting-via-self-consistency-or-multi-prompt)
+- [16. Model Merging](#16-model-merging-collaborative-strategy)
+- [17. Cooperative Prompting](#17-cooperative-prompting-multi-agent-or-federated)
+- [18. Cumulative Reasoning (CumR)](#18-cumulative-reasoning-cumr)
+- [19. Least-to-Most Prompting (L2M)](#19-least-to-most-prompting-l2m)
+- [20. Plan-and-Solve Prompting (PS)](#20-plan-and-solve-prompting-ps)
+
+### Advanced & Production Techniques
+- [21. Self-Refine](#21-self-refine)
+- [22. Skeleton-of-Thought (SoT)](#22-skeleton-of-thought-sot)
+- [23. Reasoning via Planning (RAP)](#23-reasoning-via-planning-rap)
+- [24. Evolutionary Prompting (EvoPrompt)](#24-evolutionary-prompting-evoprompt)
+- [25. PromptChainer](#25-promptchainer)
+- [26. AlphaCodium](#26-alphacodium)
+- [27. DSPy (Declarative Self-Improving Prompts)](#27-dspy-declarative-self-improving-prompts)
+- [28. Memory-of-Thought](#28-memory-of-thought)
+- [29. Meta-Reasoning over Multiple CoTs (Meta-CoT)](#29-meta-reasoning-over-multiple-cots-meta-cot)
+- [30. Consistency-based Self-adaptive Prompting (COSP) and USP](#30-consistency-based-self-adaptive-prompting-cosp-and-universal-self-adaptive-prompting-usp)
+
+### Specialized & Emerging Techniques
+- [31. Prompt Paraphrasing with Ensembling](#31-prompt-paraphrasing-with-ensembling)
+- [32. Iterative Retrieval Augmentation (FLARE/IRP)](#32-iterative-retrieval-augmentation-eg-flare-iterative-retrieval-prompting-irp)
+- [33. Tool-Integrated Reasoning Agent (ToRA)](#33-tool-integrated-reasoning-agent-tora)
+- [34. Verify-and-Edit](#34-verify-and-edit)
+- [35. Automatic Directed CoT (AutoDiCoT)](#35-automatic-directed-cot-autodicot)
+- [36. G-EVAL with AutoCoT](#36-g-eval-with-autocot)
+- [37. ChatEval](#37-chateval)
+- [38. Self-Ask](#38-self-ask)
+- [39. Step-Back Prompting](#39-step-back-prompting)
+- [40. EmotionPrompt](#40-emotionprompt)
+- [41. Batch Prompting](#41-batch-prompting)
+- [42. Contrastive Chain-of-Thought (CCoT)](#42-contrastive-chain-of-thought-ccot)
+- [43. Multimodal CoT (M-CoT)](#43-multimodal-cot-m-cot)
+- [44. Reciprocal Rank Fusion (RRF) in Prompting](#44-reciprocal-rank-fusion-rrf-in-prompting)
+- [45. Prompt Tuning with Soft Prompts](#45-prompt-tuning-with-soft-prompts)
+- [46. Hybrid Prompting (Code-as-Prompt)](#46-hybrid-prompting-eg-code-as-prompt)
+- [47. Uncertainty-Aware Prompting](#47-uncertainty-aware-prompting)
+- [48. Medprompt](#48-medprompt)
+
 **[← Back to Chapter 1](../Chapter-1-Learning-Model-Strengths-Weaknesses/README.md)**  **[Back to Phase 3](../README.md)**  **[Next → Phase 4](../../04_Phase-4-Prompt-Engineering-in-Developer-Mode/README.md)**
+
+
+
+
+---
 
 ## Advanced Prompting Strategies
 
@@ -13,6 +78,8 @@ These techniques are particularly valuable for prompt engineers aiming to optimi
 
 ---
 
+## Core Advanced Strategies
+
 ### 1. Tree of Thoughts (ToT)
 
 This method extends Chain-of-Thought by modeling reasoning as a tree structure, where the LLM generates multiple potential "thoughts" (intermediate steps) at each node, evaluates them (e.g., via self-assessment or voting), and prunes less promising paths to explore diverse solutions efficiently. It combines CoT with search algorithms like BFS/DFS and self-evaluation for better handling of planning, creative, or multi-step problems, often improving accuracy by 10-20% over standard CoT.
@@ -21,7 +88,7 @@ This method extends Chain-of-Thought by modeling reasoning as a tree structure, 
 - **Study:** [arXiv:2305.10601](https://arxiv.org/abs/2305.10601)
 - **Implementation:** [Princeton NLP Tree-of-Thought](https://github.com/princeton-nlp/tree-of-thought-llm)
 
----
+
 
 ### 2. ReAct (Reasoning and Acting)
 
@@ -30,7 +97,7 @@ ReAct integrates reasoning traces (CoT-style) with action execution, allowing th
 - **Study:** [arXiv:2210.03629](https://arxiv.org/abs/2210.03629)
 - **Implementation:** [Hugging Face ReAct Guide](https://huggingface.co/blog/react)
 
----
+
 
 ### 3. Self-Consistency
 
@@ -39,7 +106,7 @@ Building on CoT, this technique generates multiple diverse reasoning paths (via 
 - **Study:** [arXiv:2203.11171](https://arxiv.org/abs/2203.11171)
 - **Guide:** [PromptingGuide.ai - Self-Consistency](https://www.promptingguide.ai/techniques/consistency)
 
----
+
 
 ### 4. Automatic Prompt Engineer (APE)
 
@@ -48,7 +115,7 @@ APE uses one LLM to automatically generate, evaluate, and refine prompts for ano
 - **Study:** [arXiv:2211.01910](https://arxiv.org/abs/2211.01910)
 - **Implementation:** [Automatic Prompt Engineer](https://github.com/keirp/automatic_prompt_engineer)
 
----
+
 
 ### 5. Reflexion
 
@@ -57,7 +124,7 @@ This method layers self-reflection on top of CoT or ReAct by having the LLM crit
 - **Study:** [arXiv:2303.11366](https://arxiv.org/abs/2303.11366)
 - **Guide:** [PromptingGuide.ai - Reflexion](https://www.promptingguide.ai/techniques/reflexion)
 
----
+
 
 ### 6. Graph of Thoughts (GoT)
 
@@ -66,7 +133,7 @@ GoT represents reasoning as a graph, where nodes are individual thoughts or unit
 - **Study:** [arXiv:2308.09687](https://arxiv.org/abs/2308.09687)
 - **Implementation:** [Graph of Thoughts](https://github.com/spcl/graph-of-thoughts)
 
----
+
 
 ### 7. Auto-CoT (Automatic Chain-of-Thought)
 
@@ -74,7 +141,7 @@ Similar to Medprompt's self-generated CoT, Auto-CoT automatically constructs div
 
 - **Study:** [arXiv:2210.03493](https://arxiv.org/abs/2210.03493)
 
----
+
 
 ### 8. Chain-of-Verification (CoVe)
 
@@ -83,7 +150,7 @@ This method combines chain-of-thought (CoT) reasoning with self-verification loo
 - **Study:** [arXiv:2309.11495](https://arxiv.org/abs/2309.11495)
 - **Guide:** [PromptingGuide.ai - CoVe](https://www.promptingguide.ai/techniques/cove)
 
----
+
 
 ### 9. Retrieval-Augmented Generation (RAG)
 
@@ -92,7 +159,7 @@ RAG integrates external knowledge retrieval with generative prompting, fetching 
 - **Study:** [arXiv:2005.11401](https://arxiv.org/abs/2005.11401)
 - **Implementation:** [Hugging Face RAG](https://huggingface.co/docs/transformers/model_doc/rag)
 
----
+
 
 ### 10. Active-Prompt
 
@@ -103,6 +170,9 @@ This technique uses active learning to select uncertain examples from a dataset,
 
 ---
 
+## Extended Composite Techniques
+
+
 ### 11. Metacognitive Prompting (MP)
 
 MP layers self-reflection stages on CoT: understanding the input, preliminary judgment, critical evaluation, final decision, and confidence scoring. Composite aspects: CoT + multi-stage reflection + uncertainty assessment. Supports ideation (structured brainstorming) and evaluation (self-correction), with consistent gains (up to 8%) over CoT in tasks like natural language inference and relation extraction.
@@ -110,7 +180,6 @@ MP layers self-reflection stages on CoT: understanding the input, preliminary ju
 - **Study:** [arXiv:2308.05342](https://arxiv.org/abs/2308.05342)
 - **Implementation:** [Microsoft Metacognitive Prompting](https://github.com/microsoft/metacognitive-prompting)
 
----
 
 ### 12. Chain-of-Knowledge (CoK)
 
@@ -119,7 +188,6 @@ CoK decomposes tasks into knowledge-gathering steps, dynamically adapts evidence
 - **Study:** [arXiv:2305.13269](https://arxiv.org/abs/2305.13269)
 - **Guide:** [arXiv:2402.07927](https://arxiv.org/html/2402.07927v1)
 
----
 
 ### 13. Decomposed Prompting (DecomP)
 
@@ -128,7 +196,6 @@ This breaks complex problems into sub-tasks, assigns specialized sub-prompts (e.
 - **Study:** [arXiv:2210.02406](https://arxiv.org/abs/2210.02406)
 - **Implementation:** [AllenAI DecomP](https://github.com/allenai/DecomP)
 
----
 
 ### 14. Chain-of-Table
 
@@ -137,7 +204,6 @@ Chain-of-Table prompts iterative table operations (e.g., sorting, filtering) as 
 - **Study:** [arXiv:2401.04398](https://arxiv.org/abs/2401.04398)
 - **Guide:** [PromptingGuide.ai - Chain-of-Table](https://www.promptingguide.ai/techniques/chain_of_table)
 
----
 
 ### 15. Ensemble Prompting (via Self-Consistency or Multi-Prompt)
 
@@ -146,7 +212,6 @@ This generates multiple reasoning paths or prompt variations (e.g., via temperat
 - **Study:** [arXiv:2203.11171](https://arxiv.org/abs/2203.11171)
 - **Guide:** [PromptingGuide.ai - Self-Consistency](https://www.promptingguide.ai/techniques/consistency)
 
----
 
 ### 16. Model Merging (Collaborative Strategy)
 
@@ -155,7 +220,6 @@ Merging fuses parameters from multiple fine-tuned LLMs (e.g., weight averaging o
 - **Study:** [arXiv:2407.06089](https://arxiv.org/abs/2407.06089)
 - **Implementation:** [Model Soups](https://github.com/mlfoundations/model-soups)
 
----
 
 ### 17. Cooperative Prompting (Multi-Agent or Federated)
 
@@ -164,7 +228,6 @@ This orchestrates multiple LLMs as agents (e.g., one for drafting, another for v
 - **Study:** [arXiv:2407.06089](https://arxiv.org/abs/2407.06089)
 - **Guide:** [LangChain Multi-Agent](https://python.langchain.com/docs/modules/agents/agent_types/multi_agent)
 
----
 
 ### 18. Cumulative Reasoning (CumR)
 
@@ -173,7 +236,6 @@ This method builds knowledge incrementally by generating intermediate facts or h
 - **Study:** [arXiv:2304.00733](https://arxiv.org/abs/2304.00733)
 - **Guide:** [PromptingGuide.ai - Cumulative Reasoning](https://www.promptingguide.ai/techniques/cumulative_reasoning)
 
----
 
 ### 19. Least-to-Most Prompting (L2M)
 
@@ -182,7 +244,6 @@ L2M decomposes complex queries into simpler sub-problems, solves them sequential
 - **Study:** [arXiv:2205.10625](https://arxiv.org/abs/2205.10625)
 - **Implementation:** [Microsoft PromptBase - Least-to-Most](https://github.com/microsoft/promptbase/tree/main/prompts/least_to_most)
 
----
 
 ### 20. Plan-and-Solve Prompting (PS)
 
@@ -193,6 +254,9 @@ PS explicitly separates planning (outlining steps) from execution (detailed reas
 
 ---
 
+## Advanced & Production Techniques
+
+
 ### 21. Self-Refine
 
 Self-Refine generates an initial output, then uses the LLM to provide feedback (e.g., strengths/weaknesses) and iteratively refine it in a loop until convergence. Composite aspects: CoT + self-critique + iterative generation. Excellent for evaluation (quality improvement) and ideation (polishing ideas), with 5-15% better coherence in creative and analytical tasks.
@@ -200,7 +264,6 @@ Self-Refine generates an initial output, then uses the LLM to provide feedback (
 - **Study:** [arXiv:2303.17651](https://arxiv.org/abs/2303.17651)
 - **Implementation:** [Self-Refine](https://github.com/madaan/self-refine)
 
----
 
 ### 22. Skeleton-of-Thought (SoT)
 
@@ -209,7 +272,6 @@ SoT prompts the LLM to first generate a high-level skeleton (outline of key poin
 - **Study:** [arXiv:2307.15337](https://arxiv.org/abs/2307.15337)
 - **Guide:** [PromptingGuide.ai - SoT](https://www.promptingguide.ai/techniques/sot)
 
----
 
 ### 23. Reasoning via Planning (RAP)
 
@@ -218,7 +280,6 @@ RAP integrates LLM reasoning with planning algorithms like Monte Carlo Tree Sear
 - **Study:** [arXiv:2305.14992](https://arxiv.org/abs/2305.14992)
 - **Implementation:** [Reasoning via Planning](https://github.com/reasoningvia-planning/rap)
 
----
 
 ### 24. Evolutionary Prompting (EvoPrompt)
 
@@ -227,7 +288,6 @@ EvoPrompt applies evolutionary algorithms to mutate and select optimal prompts f
 - **Study:** [arXiv:2309.08532](https://arxiv.org/abs/2309.08532)
 - **Guide:** [arXiv:2307.12891](https://arxiv.org/abs/2307.12891)
 
----
 
 ### 25. PromptChainer
 
@@ -236,7 +296,6 @@ PromptChainer is a visual framework for composing prompt chains, where outputs f
 - **Study:** [arXiv:2203.06566](https://arxiv.org/abs/2203.06566)
 - **Implementation:** [PromptChainer](https://github.com/SriKris/PromptChainer)
 
----
 
 ### 26. AlphaCodium
 
@@ -245,7 +304,6 @@ Originally for code generation, AlphaCodium flows through problem clarification,
 - **Study:** [arXiv:2401.08500](https://arxiv.org/abs/2401.08500)
 - **Implementation:** [AlphaCodium](https://github.com/CodiumAI/AlphaCodium)
 
----
 
 ### 27. DSPy (Declarative Self-Improving Prompts)
 
@@ -254,7 +312,6 @@ DSPy treats prompts as programs, compiling them with optimizers that tune few-sh
 - **Study:** [arXiv:2310.03714](https://arxiv.org/abs/2310.03714)
 - **Implementation:** [DSPy](https://github.com/stanfordnlp/dspy)
 
----
 
 ### 28. Memory-of-Thought
 
@@ -263,7 +320,6 @@ This method combines in-context learning (ICL) with chain-of-thought (CoT) by us
 - **Study:** [arXiv:2305.17812](https://arxiv.org/abs/2305.17812)
 - **Guide:** [arXiv:2406.06608](https://arxiv.org/abs/2406.06608)
 
----
 
 ### 29. Meta-Reasoning over Multiple CoTs (Meta-CoT)
 
@@ -272,7 +328,6 @@ Meta-CoT generates multiple CoT paths, then applies a meta-layer to evaluate and
 - **Study:** [arXiv:2305.14901](https://arxiv.org/abs/2305.14901)
 - **Implementation:** [Amazon Science Meta-CoT](https://github.com/amazon-science/meta-cot)
 
----
 
 ### 30. Consistency-based Self-adaptive Prompting (COSP) and Universal Self-Adaptive Prompting (USP)
 
@@ -283,6 +338,9 @@ COSP ensembles zero-shot CoT on examples and selects high-consistency subsets fo
 
 ---
 
+## Specialized & Emerging Techniques
+
+
 ### 31. Prompt Paraphrasing with Ensembling
 
 This transforms the base prompt into multiple paraphrased versions (via data augmentation), runs them in parallel, and ensembles outputs. Composite aspects: Prompt diversification + voting/aggregation. Enhances reliability in production-grade apps, mitigating prompt sensitivity in creative coding or ideation for software features.
@@ -290,7 +348,6 @@ This transforms the base prompt into multiple paraphrased versions (via data aug
 - **Study:** [arXiv:2305.16326](https://arxiv.org/abs/2305.16326)
 - **Guide:** [arXiv:2407.12994](https://arxiv.org/abs/2407.12994)
 
----
 
 ### 32. Iterative Retrieval Augmentation (e.g., FLARE, Iterative Retrieval Prompting - IRP)
 
@@ -299,7 +356,6 @@ FLARE generates temporary sentences, retrieves relevant info iteratively, and in
 - **Study:** [arXiv:2305.06983](https://arxiv.org/abs/2305.06983)
 - **Implementation:** [FLARE](https://github.com/jasonphang/flare)
 
----
 
 ### 33. Tool-Integrated Reasoning Agent (ToRA)
 
@@ -308,7 +364,6 @@ ToRA interleaves CoT reasoning with code generation and tool execution (e.g., in
 - **Study:** [arXiv:2309.17452](https://arxiv.org/abs/2309.17452)
 - **Implementation:** [ToRA](https://github.com/microsoft/ToRA)
 
----
 
 ### 34. Verify-and-Edit
 
@@ -317,7 +372,6 @@ This ensembles multiple CoT paths, retrieves external verification, and edits th
 - **Study:** [arXiv:2310.12350](https://arxiv.org/abs/2310.12350)
 - **Guide:** [arXiv:2406.06608](https://arxiv.org/abs/2406.06608)
 
----
 
 ### 35. Automatic Directed CoT (AutoDiCoT)
 
@@ -326,7 +380,6 @@ AutoDiCoT automatically generates CoT chains, including contrastive examples of 
 - **Study:** [arXiv:2402.05457](https://arxiv.org/abs/2402.05457)
 - **Guide:** [PromptingGuide.ai - AutoDiCoT](https://www.promptingguide.ai/techniques/autodicot)
 
----
 
 ### 36. G-EVAL with AutoCoT
 
@@ -335,7 +388,6 @@ G-EVAL prompts the LLM for evaluation using auto-generated CoT steps, weighted b
 - **Study:** [arXiv:2303.17012](https://arxiv.org/abs/2303.17012)
 - **Implementation:** [G-EVAL](https://github.com/nlpyai/GEval)
 
----
 
 ### 37. ChatEval
 
@@ -344,14 +396,13 @@ This uses multi-agent prompting where LLMs debate as roles (e.g., judge, advocat
 - **Study:** [arXiv:2308.08747](https://arxiv.org/abs/2308.08747)
 - **Guide:** [arXiv:2407.12994](https://arxiv.org/abs/2407.12994)
 
----
 
 ### 38. Self-Ask
 
 Combines CoT with self-generated follow-up questions, searching or reasoning to fill knowledge gaps. Composite aspects: CoT + question decomposition + retrieval. Useful for researching incomplete info in software specs.
 
 - **Study:** [arXiv:2203.11171](https://arxiv.org/abs/2203.11171)
----
+
 
 ### 39. Step-Back Prompting
 
@@ -360,7 +411,7 @@ Step-Back Prompting first prompts the model to think at a high level of abstract
 It combines **abstraction + CoT + few-shot**. Enhances performance in abstract software design and complex problem-solving.
   
 - **Study:** [arXiv:2310.06117](https://arxiv.org/abs/2310.06117)
----
+
 
 ### 40. EmotionPrompt
 
@@ -369,7 +420,7 @@ EmotionPrompt incorporates psychological cues (e.g., "This is very important to 
 It combines **instruction augmentation + CoT**. Aids ideation in user-centric software and creative tasks.
 
 - **Study:** [arXiv:2307.11760](https://arxiv.org/abs/2307.11760)
----
+
 
 ### 41. Batch Prompting
 
@@ -379,7 +430,6 @@ It combines **few-shot + parallel reasoning + aggregation**. Excellent for scali
 
 - **Study:** Original Batch Prompting paper on arXiv
 
----
 
 ### 42. Contrastive Chain-of-Thought (CCoT)
 
@@ -389,7 +439,6 @@ It combines **CoT + contrastive learning**. It significantly improves decision-m
 
 - **Study:** [arXiv:2311.09201](https://arxiv.org/abs/2311.09201)
 
----
 
 ### 43. Multimodal CoT (M-CoT)
 
@@ -399,7 +448,6 @@ It combines **CoT + multimodal fusion**. Particularly valuable for vibe coding a
 
 - **Study:** [arXiv:2306.02897](https://arxiv.org/abs/2306.02897)
 
----
 
 ### 44. Reciprocal Rank Fusion (RRF) in Prompting
 
@@ -409,7 +457,6 @@ It combines **ensembling + ranking fusion**. Useful for optimizing scaling in re
 
 - **Study:** [arXiv:2406.06608](https://arxiv.org/abs/2406.06608)
 
----
 
 ### 45. Prompt Tuning with Soft Prompts
 
@@ -419,7 +466,6 @@ It combines **few-shot + optimization**. It serves as a lightweight bridge towar
 
 - **Study:** [arXiv:2104.08691](https://arxiv.org/abs/2104.08691)
 
----
 
 ### 46. Hybrid Prompting (e.g., Code-as-Prompt)
 
@@ -429,7 +475,6 @@ It combines **CoT + code integration**. Core technique for software shipping and
 
 - **Study:** [arXiv:2402.14830](https://arxiv.org/abs/2402.14830)
 
----
 
 ### 47. Uncertainty-Aware Prompting
 
@@ -439,7 +484,6 @@ It combines **self-consistency + uncertainty quantification**. Essential for ens
 
 - **Study:** [arXiv:2402.03808](https://arxiv.org/abs/2402.03808)
 
----
 
 ### 48. Medprompt
 
@@ -466,7 +510,7 @@ Together, these components train the model **inside the prompt itself** to reaso
 Based on comprehensive reviews like **"The Prompt Report" (2024)** and other surveys on AI prompting, the 49 techniques for large language models share several recurring patterns. These patterns improve reasoning, accuracy, and flexibility without changing the underlying model. Most advanced strategies combine **2–3 core patterns** for better results.
 
 <img src="../../assets/images/phase3-common-pattern-in-these-strategies.png" 
-     width="55%" 
+     width="65%" 
      align="center" 
      style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
      alt="Common Patterns in Prompting Strategies">
@@ -536,7 +580,7 @@ Each technique follows a unique internal pattern or flow — typically a sequenc
 Techniques within the same category often share sub-patterns such as similar workflows, focus areas, or extensions of core ideas.
 
 <img src="../../assets/images/phase3-table-of-pattern-category-wise.png" 
-     width="55%" 
+     width="65%" 
      align="center" 
      style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
      alt="Category-wise Patterns in Prompting Strategies">
@@ -548,7 +592,7 @@ Techniques within the same category often share sub-patterns such as similar wor
 As a prompt engineer, you can create new strategies by combining known patterns. This is a practical, trial-based process that leverages the model’s strengths while addressing its weaknesses.
 
 <img src="../../assets/images/phase3-step-of-creating-a-prompt-strategy.png" 
-     width="55%" 
+     width="65%" 
      align="center" 
      style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
      alt="Step-by-Step Guide to Creating Your Own Prompting Strategy">
