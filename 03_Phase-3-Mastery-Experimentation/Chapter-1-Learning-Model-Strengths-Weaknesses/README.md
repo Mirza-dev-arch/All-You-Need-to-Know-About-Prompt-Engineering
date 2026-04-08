@@ -51,7 +51,7 @@ Get objective data from third-party sources.
 * **What They Reveal:** Scores on tasks and how models compare.
 
 <img src="../../assets/images/phase3-model-insight.png" 
-     width="48%" 
+     width="58%" 
      align="center" 
      style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
      alt="Model Insight from Studies">
