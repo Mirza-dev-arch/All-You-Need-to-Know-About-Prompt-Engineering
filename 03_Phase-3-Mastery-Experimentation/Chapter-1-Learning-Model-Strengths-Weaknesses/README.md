@@ -252,11 +252,10 @@ Docs shout positives (e.g., "top reasoning") but whisper issues (e.g., "needs gu
 
 <img src="../../assets/images/phase3-selection-funnel.png" 
      width="42%" 
-     align="right" 
-     style="margin-left: 25px; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     align="center" 
+     style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
      alt="Selection Funnel for Model Choice">
-<br clear="right"/>
-
+     
 ---
 
 ### Setting Selection Criteria for Your Task
