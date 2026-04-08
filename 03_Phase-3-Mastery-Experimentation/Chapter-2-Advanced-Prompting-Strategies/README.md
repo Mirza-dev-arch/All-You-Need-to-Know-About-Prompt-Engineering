@@ -60,6 +60,12 @@
 - [47. Uncertainty-Aware Prompting](#47-uncertainty-aware-prompting)
 - [48. Medprompt](#48-medprompt)
 
+  ### Common Patterns & Creation Guide
+- [Common Patterns in Prompting Strategies](#common-patterns-in-prompting-strategies)
+- [Patterns Followed Individually in Each Strategy](#patterns-followed-individually-in-each-strategy)
+- [Patterns Followed Within the Same Category](#patterns-followed-within-the-same-category)
+- [Step-by-Step Guide to Creating Your Own Prompting Strategies](#step-by-step-guide-to-creating-your-own-prompting-strategies)
+
 **[← Back to Chapter 1](../Chapter-1-Learning-Model-Strengths-Weaknesses/README.md)**  **[Back to Phase 3](../README.md)**  **[Next → Phase 4](../../04_Phase-4-Prompt-Engineering-in-Developer-Mode/README.md)**
 
 
