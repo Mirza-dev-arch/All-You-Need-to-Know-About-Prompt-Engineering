@@ -248,14 +248,13 @@ As a prompt engineer or vibe coder, choosing the right AI model for tasks such a
 
 ### Why This Approach Matters
 
+Docs shout positives (e.g., "top reasoning") but whisper issues (e.g., "needs guidance"). Pre-filtering avoids testing unfit models, like a short-context one for detailed planning. It's triage — not the final choice. Real tests reveal how well a model maintains styles like "minimalist futuristic." Balance docs with testing.
+
 <img src="../../assets/images/phase3-selection-funnel.png" 
      width="42%" 
      align="right" 
      style="margin-left: 25px; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
      alt="Selection Funnel for Model Choice">
-
-Docs shout positives (e.g., "top reasoning") but whisper issues (e.g., "needs guidance"). Pre-filtering avoids testing unfit models, like a short-context one for detailed planning. It's triage — not the final choice. Real tests reveal how well a model maintains styles like "minimalist futuristic." Balance docs with testing.
-
 <br clear="right"/>
 
 ---
