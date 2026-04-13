@@ -13,16 +13,6 @@ This chapter teaches you the exact systems, checklists, metrics, and senior-leve
 
 ---
 
-### 📋 Table of Contents
-
-- [Senior Tuning Workflow – The Professional Process](#senior-tuning-workflow--the-professional-process)
-- [Things That Kill Your Prompt (Even When They Look Good)](#things-that-kill-your-prompt-even-when-they-look-good)
-- [Element Checklist for Hallucination Detection & Spotting Bad Output](#element-checklist-for-hallucination-detection--spotting-bad-output)
-- [Must-Known Metrics to Track (Production-Grade Prompts)](#must-known-metrics-to-track-production-grade-prompts)
-- [Senior Tips & Strategies to Save Tokens](#senior-tips--strategies-to-save-tokens)
-- [Fine-Tune & Compress Prompts (While Improving Efficiency)](#fine-tune--compress-prompts-while-improving-efficiency)
-- [Key Patterns & Senior-Level Insights (The Real Secret Sauce)](#key-patterns--senior-level-insights-the-real-secret-sauce)
-
 **[← Back to Chapter 2](../Chapter-2-Advanced-Prompting-Strategies/README.md)**  **[Back to Phase 3 Top](../README.md)**  **[Next → Phase 4](../../04_Phase-4-Prompt-Engineering-in-Developer-Mode/README.md)**
 
 ---
@@ -150,7 +140,7 @@ These 30 battle-tested strategies reduce cost, latency, and hallucinations while
 
 ---
 
-## Key Patterns (Senior-Level Insights)
+## Key Patterns & Senior-Level Insights (The Real Secret Sauce)
 
 ### 1. Token Efficiency Rule (Golden Principle)
 **“Every unnecessary word = cost + latency + risk”**
