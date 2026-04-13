@@ -30,8 +30,6 @@ In this phase you will master the **three core layers** every professional promp
 - [Instruction Engineering Handbook](#instruction-engineering-handbook)
 - [Prompt Evolution Using the Prompt Crafting Handbook](#prompt-evolution-using-the-prompt-crafting-handbook)
 - [How to Optimize and Refine a Prompt](#how-to-optimize-and-refine-a-prompt)
-- [Top 10 Things That Kill Your Prompt](#top-10-things-that-kill-your-prompt-even-when-it-looks-great-at-first-glance)
-- [Senior Tuning Workflow](#senior-tuning-workflow)
 
 **[← Back to Main README](../../README.md)**  **[← Phase 1](../01_Phase-1-Foundations/README.md)**  **[Next → Phase 3](../03_Phase-3-Mastery-Experimentation/README.md)**
 
