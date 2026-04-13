@@ -17,8 +17,12 @@ Phase 3 is all about **experimentation and mastery**. It is divided into two foc
 ---
 ### 📋 Table of Contents
 
-- [Chapter 1: Learning about the Model’s Strengths and Weaknesses](./Chapter-1-Learning-Model-Strengths-Weaknesses/README.md)
-- [Chapter 2: Advanced Prompting Strategies](./Chapter-2-Advanced-Prompting-Strategies/README.md)
+- **[Chapter 1: Learning about the Model’s Strengths and Weaknesses](./Chapter-1-Learning-Model-Strengths-Weaknesses/README.md)**
+- **[Chapter 2: Advanced Prompting Strategies](./Chapter-2-Advanced-Prompting-Strategies/README.md)**
+- **[Chapter 3: Prompt Writer to Prompt Engineer – Last 20%](./Chapter-3-Prompt-Writer-to-Prompt-Engineer/README.md)** *(optional but recommended)*  
+        → Senior-level strategies: how to stop just “writing prompts” and start **building complete prompting strategies** like an industry expert.
+
+---
 
 **[← Back to Phase 2](../02_Phase-2-Core-Prompt-Engineering-Skills/README.md)**  **[Next → Phase 4](../04_Phase-4-Prompt-Engineering-in-Developer-Mode/README.md)**  **[← Back to Main README](../../README.md)**
 
