@@ -66,10 +66,9 @@
 - [Patterns Followed Within the Same Category](#patterns-followed-within-the-same-category)
 - [Step-by-Step Guide to Creating Your Own Prompting Strategies](#step-by-step-guide-to-creating-your-own-prompting-strategies)
 
-**[← Back to Chapter 1](../Chapter-1-Learning-Model-Strengths-Weaknesses/README.md)**  **[Back to Phase 3](../README.md)**  **[Next → Phase 4](../../04_Phase-4-Prompt-Engineering-in-Developer-Mode/README.md)**
+**[← Back to Chapter 1](../Chapter-1-Learning-Model-Strengths-Weaknesses/README.md)**     **[Next → Chapter 3: Prompt Writer to Prompt Engineer – Last 20%](../Chapter-3-Prompt-Writer-to-Prompt-Engineer/README.md)** *(optional but recommended)*  
 
-
-
+**[Back to Phase 3](../README.md)**  **[Next → Phase 4](../../04_Phase-4-Prompt-Engineering-in-Developer-Mode/README.md)**
 
 ---
 
