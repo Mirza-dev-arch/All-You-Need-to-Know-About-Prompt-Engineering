@@ -731,7 +731,7 @@ Now, explain AI. 3 bullet points. Remember, explain AI."
 
 As AI language models become more sophisticated, the quality of prompts used to interact with them becomes increasingly important. Optimized prompts can lead to more accurate, relevant, and useful responses, enhancing the overall performance of AI applications.
 
-This section gives you practical techniques to systematically improve your prompts.
+This section provides practical techniques to systematically improve your prompts.
 
 ---
 
@@ -789,42 +789,6 @@ Start by setting up your environment with the necessary libraries and API keys (
 
 ---
 
-**[← Back to Phase 2](../02_Phase-2-Core-Prompt-Engineering-Skills/README.md)**  
-
----
-
-## Top 10 Things That Kill Your Prompt (Even When It Looks Great at First Glance)
-
-| #  | Pitfall (Looks Good, Actually Deadly)                          | Why It Wastes Tokens / Hallucinates / Confuses AI                          | How to Avoid |
-|----|----------------------------------------------------------------|-----------------------------------------------------------------------------|--------------|
-| 1  | Over-layering (using 3 heavy techniques at once)               | Model gets confused by too many instructions → hallucinations or refusal   | Limit to one main technique + one structure + one format |
-| 2  | Contradictory instructions (e.g. “be brief” + “be detailed”)   | Model tries to satisfy both → verbose + incomplete output                  | Use only one instruction per goal; put conflicts in Constraints |
-| 3  | Using a complex structure on a simple task                     | Wastes 100–200 tokens on unnecessary sections                              | Match structure complexity to task size (Basic for simple tasks) |
-| 4  | Heavy Format on creative tasks (JSON for storytelling)         | Model becomes robotic and loses creativity                                 | Use Markdown for creative, JSON only for parseable output |
-| 5  | Too many negative examples                                     | Model focuses on what NOT to do and forgets the main task                  | Limit to 1–2 strongest negative examples |
-| 6  | Long Context + Many-Shot on small-context model                | Prompt gets truncated → model forgets earlier instructions                 | Check model’s context window first |
-| 7  | Mixing Role-Playing with strict JSON                           | Model wants to write naturally but is forced into JSON → broken output     | Use Persona with Markdown; reserve JSON for non-creative tasks |
-| 8  | Adding Meta-Prompting or APE unnecessarily                     | Model spends tokens rewriting the prompt instead of solving the task       | Use only when you are iterating the prompt itself |
-| 9  | No clear “Output ONLY in this format” rule                     | Model adds extra explanations and ruins parsing                            | Always end with “Respond ONLY with…” |
-| 10 | Ignoring model-specific quirks (e.g. Grok loves markdown but hates nested XML) | Prompt works on one model, fails on another                                | Test on your actual target model before finalising |
-
----
-**[← Back to Phase 2](../02_Phase-2-Core-Prompt-Engineering-Skills/README.md)**  
-
----
-
-## Senior Tuning Workflow
-
-| Approach                        | Why it works                              | How it works                                      | How to implement (step-by-step)                          | When to use it |
-|---------------------------------|-------------------------------------------|---------------------------------------------------|----------------------------------------------------------|----------------|
-| Pre-Prompt Audit (30 seconds)   | Prevents 80% of failures upfront          | Checks quirks + sets budget + picks layers        | 1. Identify model<br>2. Set token budget (≤70%)<br>3. Choose 1 technique + 1 structure + 1 format | Every single prompt |
-| Layered Prompt Construction     | Uses full model capability safely         | System prompt + T-S-F template + tool clause      | Start with system → add T-S-F user prompt → add “use tools only when needed” | All production prompts |
-| Live Monitoring & Auto-Correction | Catches problems while running          | Check tokens/parse/hallucination after every reply | After reply: log metrics → if bad → auto-summarize or edit previous message | Real-time chatbots |
-| Post-Response Review (A/B or rubric) | Continuous improvement                 | Score on 10 metrics → compress or switch model    | Run rubric → if quality drops → edit prompt or change model | Weekly review or after 50+ runs |
-
----
-
-**Excellent! You now have a repeatable system for turning average prompts into highly effective ones.**
 **[← Back to Phase 2](../02_Phase-2-Core-Prompt-Engineering-Skills/README.md)**  
 
 ---
