@@ -258,7 +258,7 @@ The four core parameters — **Temperature**, **Top-P**, **Max Tokens**, and **S
 While Temperature, Top-P, Max Tokens, and Stop Sequences are the most frequently used, several other parameters give advanced control for production-grade applications.
 
 <img src="../../assets/images/phase4-other-controlling-parameters.png"
-     width="55%" 
+     width="75%" 
      align="center" 
      style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
      alt="Other Controlling Parameters">
