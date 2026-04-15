@@ -8,11 +8,12 @@ This section explains the four most common parameters, how they affect output, w
 - **Text-based prompts** (simple instructions you add)
 - **Developer mode / IDE** (actual code settings)
 
-<img src="../assets/images/phase4-what-parameter-to-choose.png"
+<img src="../../assets/images/phase4-what-parameter-to-choose.png"
      width="55%"
      align="center"
      style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
      alt="What parameter to choose - Guide for selecting Temperature, Top_p, Max Tokens, and Frequency Penalty">
+<br clear="all"/>
 
 ---
 
@@ -24,11 +25,12 @@ This section explains the four most common parameters, how they affect output, w
 - **Medium Temperature (0.4 – 0.7)** → Balances accuracy and creativity
 - **High Temperature (0.8 – 1.5)** → Creative, diverse, and sometimes surprising responses
 
-<img src="../assets/images/phase4-temperature-scale.png"
+<img src="../../assets/images/phase4-temperature-scale.png"
      width="25%"
      align="right"
-     style="display: block; margin: 15px 0 15px 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"
+     style="margin: 15px 0 15px 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"
      alt="Temperature scale showing low, medium, and high creativity levels">
+<br clear="right"/>
 
 
 ### When to Use Different Temperatures?
@@ -66,11 +68,12 @@ response = client.chat.completions.create(
 - **Top-P (0.8 – 1.0)** → Very little or no filtering (AI can pick from almost all words).  
   Allows much more diverse and creative responses.
 
-<img src="../assets/images/phase4-top-p-sampling.png"
+<img src="../../assets/images/phase4-top-p-sampling.png"
      width="25%"
      align="left"
-     style="display: block; margin: 15px 20px 15px 0; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"
+     style="margin: 15px 20px 15px 0; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"
      alt="Top-P Sampling explanation showing how different top_p values affect word selection probability">
+<br clear="left"/>
 
 ### How Top-P Works – Example
 
@@ -254,12 +257,11 @@ The four core parameters — **Temperature**, **Top-P**, **Max Tokens**, and **S
 
 While Temperature, Top-P, Max Tokens, and Stop Sequences are the most frequently used, several other parameters give advanced control for production-grade applications.
 
-<img src="../../assets/images/phase4-other-controlling-parameters.png" 
+<img src="../../assets/images/phase4-other-controlling-parameters.png"
      width="55%" 
      align="center" 
-     style="display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);" 
+     style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
      alt="Other Controlling Parameters">
-
 
 **Pro Tip:**  
 Start simple — change only **temperature** or **max_tokens** first. Test, observe the difference, then add more parameters only when needed. This keeps your prompts clean and your results predictable.
