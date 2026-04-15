@@ -25,7 +25,7 @@ This section explains the four most common parameters, how they affect output, w
 - [Summary of Response Parameters](#summary-of-response-parameters)
 - [Other Less Commonly Used Controlling Parameters](#other-less-commonly-used-controlling-parameters)
 
-**[← Back to Phase 4 Main Page](../README.md)** | **[Next Chapter →](./Chapter-2-API-Calling/README.md)** | **[↑ Back to Top](#chapter-1-controlling-ai-response-parameters-)**
+**[← Back to Phase 4 Main Page](../README.md)** | **[Next Chapter 2: API Calling](./Chapter-2-API-Calling/README.md)**   | **[↑ Back to Top](#chapter-1-controlling-ai-response-parameters-)**
 
 ---
 
