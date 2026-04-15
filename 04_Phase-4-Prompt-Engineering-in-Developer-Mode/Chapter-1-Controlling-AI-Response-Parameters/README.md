@@ -9,7 +9,7 @@ This section explains the four most common parameters, how they affect output, w
 - **Developer mode / IDE** (actual code settings)
 
 <img src="../../assets/images/phase4-what-parameter-to-choose.png"
-     width="55%"
+     width="75%"
      align="center"
      style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
      alt="What parameter to choose - Guide for selecting Temperature, Top_p, Max Tokens, and Frequency Penalty">
@@ -26,11 +26,11 @@ This section explains the four most common parameters, how they affect output, w
 - **High Temperature (0.8 – 1.5)** → Creative, diverse, and sometimes surprising responses
 
 <img src="../../assets/images/phase4-temperature-scale.png"
-     width="25%"
-     align="right"
+     width="45%"
+     align="left"
      style="margin: 15px 0 15px 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"
      alt="Temperature scale showing low, medium, and high creativity levels">
-<br clear="right"/>
+<br clear="left"/>
 
 
 ### When to Use Different Temperatures?
@@ -69,7 +69,7 @@ response = client.chat.completions.create(
   Allows much more diverse and creative responses.
 
 <img src="../../assets/images/phase4-top-p-sampling.png"
-     width="25%"
+     width="45%"
      align="left"
      style="margin: 15px 20px 15px 0; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"
      alt="Top-P Sampling explanation showing how different top_p values affect word selection probability">
