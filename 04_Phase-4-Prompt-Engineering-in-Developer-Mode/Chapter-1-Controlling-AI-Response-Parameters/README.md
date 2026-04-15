@@ -45,7 +45,7 @@ This section explains the four most common parameters, how they affect output, w
 **Text-based prompt** (simulates the effect):
 
 ```python
-Answer factually and precisely with low creativity.
+# Answer factually and precisely with low creativity.
 response = client.chat.completions.create(
     model="gpt-4o",
     temperature=0.3,      # Change this number
@@ -87,7 +87,7 @@ response = client.chat.completions.create(
 **Text-based prompt** (approximates the effect):
 
 ```python
-Only use the most likely and relevant words.
+# Only use the most likely and relevant words.
 response = client.chat.completions.create(
     model="gpt-4o",
     top_p=0.9,           # Change this value
@@ -136,7 +136,7 @@ response = client.chat.completions.create(
 **Text-based prompt** (approximates the effect):
 
 ```python
-Answer in no more than 50 words.
+# Answer in no more than 50 words.
 
 response = client.chat.completions.create(
     model="gpt-4o",
@@ -183,7 +183,7 @@ This gives cleaner control than simply cutting off at `max_tokens`.
 
 **Text-based (in prompt):**
 ```python
-End your answer with the word END.
+# End your answer with the word END.
 response = client.chat.completions.create(
     model="gpt-4o",
     messages=[{"role": "user", "content": "Explain the solar system"}],
@@ -231,7 +231,7 @@ The four core parameters — **Temperature**, **Top-P**, **Max Tokens**, and **S
 3. **Apply in text prompt** (simple):
 
    ```python
-   Answer concisely. Max 100 words. End with the word END.
+   # Answer concisely. Max 100 words. End with the word END.
    response = client.chat.completions.create(
     model="gpt-4o",
     messages=[{"role": "user", "content": "Your prompt here"}],
