@@ -17,6 +17,21 @@ This section explains the four most common parameters, how they affect output, w
 
 ---
 
+## Table of Contents
+- [1. Temperature](#1-temperature)
+- [2. Top-P Sampling (Nucleus Sampling)](#2-top-p-sampling-nucleus-sampling)
+- [3. Max Tokens](#3-max-tokens)
+- [4. Stop Sequences](#4-stop-sequences)
+- [Summary of Response Parameters](#summary-of-response-parameters)
+- [Other Less Commonly Used Controlling Parameters](#other-less-commonly-used-controlling-parameters)
+
+**[← Back to Phase 4 Main Page](../README.md)** | **[Next Chapter →](./Chapter-2-API-Calling/README.md)** | **[↑ Back to Top](#chapter-1-controlling-ai-response-parameters-)**
+
+---
+
+
+---
+
 ## 1. Temperature
 
 **Temperature** controls randomness and creativity. It adjusts how predictable or surprising the AI’s responses will be.
@@ -54,6 +69,8 @@ response = client.chat.completions.create(
     # ... other parameters
 )
 ```
+
+**[↑ Back to Top](#chapter-1-controlling-ai-response-parameters-)**
 
 ---
 
@@ -98,6 +115,8 @@ response = client.chat.completions.create(
 )
 ```
 
+**[↑ Back to Top](#chapter-1-controlling-ai-response-parameters-)**
+
 ---
 
 |              Use Case                               |                  Best Setting                                    |                 Why?                               |
@@ -115,6 +134,9 @@ response = client.chat.completions.create(
 **⚠️ Avoid extremes together (e.g., temperature=1.0 + top_p=0.2). This combination often produces chaotic or incoherent results.**
 
 **Pro Tip: Many developers prefer controlling output with Top-P instead of Temperature because it gives more predictable and stable results while still allowing creativity when needed.**
+
+
+**[↑ Back to Top](#chapter-1-controlling-ai-response-parameters-)**
 
 ---
 
@@ -157,6 +179,8 @@ response = client.chat.completions.create(
 
 **Recommended Practice:**
 Combine **max_tokens** with a clear output instruction (e.g., “Answer in 3 bullet points”) for best control and efficiency.
+
+**[↑ Back to Top](#chapter-1-controlling-ai-response-parameters-)**
 
 ---
 
@@ -203,6 +227,9 @@ response = client.chat.completions.create(
 **Best Practice:
 Always define at least one stop sequence when building chatbots or structured outputs to keep responses clean and predictable.**
 
+
+**[↑ Back to Top](#chapter-1-controlling-ai-response-parameters-)**
+
 ---
 
 ## Summary of Response Parameters
@@ -218,6 +245,8 @@ The four core parameters — **Temperature**, **Top-P**, **Max Tokens**, and **S
 | Max Tokens     | Response length                  | 50 – 1000+          | Keeping answers short or detailed     |
 | Stop           | Exact stopping point             | Any string you choose | Clean structured outputs            |
 
+**[↑ Back to Top](#chapter-1-controlling-ai-response-parameters-)**
+
 ### Best Practice Settings
 
 | Use Case              | Temperature | Top-P | Max Tokens | Stop          |
@@ -226,6 +255,8 @@ The four core parameters — **Temperature**, **Top-P**, **Max Tokens**, and **S
 | Code completion       | 0.2–0.4     | 0.8   | 100–400    | `"###"`       |
 | Customer support      | 0.3–0.6     | 0.85  | 200–300    | `"\nUser:"`   |
 | Data extraction       | 0.0–0.2     | 0.9   | 100–150    | None          |
+
+**[↑ Back to Top](#chapter-1-controlling-ai-response-parameters-)**
 
 ### How to Implement (Step-by-Step Guide)
 
@@ -251,6 +282,8 @@ The four core parameters — **Temperature**, **Top-P**, **Max Tokens**, and **S
 
 **Pro Tip: Start conservative (low temperature + reasonable max_tokens) and only increase creativity when needed. This combination gives you the best balance of quality, cost, and control.**
 
+**[↑ Back to Top](#chapter-1-controlling-ai-response-parameters-)**
+
 ---
 
 ## Other Less Commonly Used Controlling Parameters
@@ -265,6 +298,7 @@ While Temperature, Top-P, Max Tokens, and Stop Sequences are the most frequently
 
 **Pro Tip:**  
 Start simple — change only **temperature** or **max_tokens** first. Test, observe the difference, then add more parameters only when needed. This keeps your prompts clean and your results predictable.
+
 
 #### How to Implement (Step-by-Step Guide)
 
@@ -282,6 +316,8 @@ Start simple — change only **temperature** or **max_tokens** first. Test, obse
        presence_penalty=0.3        # ← Add here
    )
    ```
+**[↑ Back to Top](#chapter-1-controlling-ai-response-parameters-)**
+
 ---
 **Phase 4 of "All You Need to Know About Prompt Engineering" — Portfolio Project by Mirza (BS AI)**
 
