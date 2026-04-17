@@ -306,7 +306,10 @@ Think of the messages list as a notebook that records the entire conversation. E
 * Easy to debug and inspect conversation history
 * Foundation for more advanced memory techniques (summarization, vector memory, etc.)
 
+---
 
+> 💡 **Want to see this in a working chatbot?**  
+> **[🤖 Open Full Single-Agent Chatbot Implementation](../Chapter-10-Chatbot-Evolution/README.md)**
 
 ---
 
