@@ -23,7 +23,7 @@ This chapter explains why LLMs are stateless, how conversation history actually 
 
 
 
-**[← Back to Chatbot 1](#chatbot-1-building-a-single-agent-chatbot-api-calling-memory--system-prompt)** | **[Next Section →](#)** | **[↑ Back to Top](#chapter-3-memory-management--multi-turn-chats-)** | **[Back to Phase 4 Main Page](../README.md)**
+* | **[Back to Phase 4 Main Page](../README.md)**
 
 
 ---
@@ -64,6 +64,11 @@ The user introduced their name earlier
 **Response**:  *"Your name is **Mirza**."*
 The model did not remember — it simply read the earlier message again.
 
+
+---
+
+ **[↑ Back to Top](#chapter-3-memory-management--multi-turn-chats-)** 
+ 
 ---
 
 ## How LLMs Handle & Remember Conversations (Multi-Turn Chat Explained)
@@ -82,6 +87,10 @@ Every time you send a request, the model sees only the exact messages you includ
 **Key Rule:**
 If you want the model to remember names, previous answers, assigned roles, tasks in progress, or any context, you must send the full relevant history as part of every new API call.
 This is exactly how production chat systems (ChatGPT, Claude, custom agents) create the illusion of memory.
+
+---
+
+ **[↑ Back to Top](#chapter-3-memory-management--multi-turn-chats-)** 
 
 ---
 
@@ -109,6 +118,10 @@ Internally, the model receives a single combined sequence of text tokens.
 ```
 You are responsible for maintaining and sending the entire conversation history with every new request. The model reads the whole sequence from top to bottom and generates only the next assistant message.
 
+---
+
+ **[↑ Back to Top](#chapter-3-memory-management--multi-turn-chats-)** 
+ 
 ---
 
 ## Ways Developers Make LLMs “Remember” Things
@@ -155,7 +168,13 @@ response_2 = llama(full_chat_prompt, add_inst=False)   # Disable auto-tagging
 * Needing maximum low-level control
 * Educational projects and experimentation
 
+
 ---
+ 
+ **[↑ Back to Top](#chapter-3-memory-management--multi-turn-chats-)** 
+ 
+---
+
 ### Method 2: Using a Helper Function (llama_chat / chat wrapper)
 
 Most modern libraries and courses provide a helper function that automatically builds the correctly tagged prompt for you — eliminating manual string formatting errors.
@@ -196,6 +215,10 @@ It constructs the same tagged structure shown in Method 1, but automatically han
 Manual tagging (Method 1) teaches you the underlying mechanics. Helper functions (Method 2) save time in real projects. Both approaches follow the same core principle: you must send the full conversation history with every new request.**
 
 ---
+ 
+ **[↑ Back to Top](#chapter-3-memory-management--multi-turn-chats-)** 
+ 
+ ---
 
 ### Method 3: Storing Messages in a List (Most Popular Production Method – OpenAI Style)
 
@@ -330,11 +353,11 @@ Think of the messages list as a notebook that records the entire conversation. E
 
 ---
 
+ **[↑ Back to Top](#chapter-3-memory-management--multi-turn-chats-)** 
 > 💡 **Want to see this in a working chatbot?**  
 > **[🤖 Open Full Single-Agent Chatbot Implementation](../Chapter-10-Chatbot-Evolution/README.md)**
 
 ---
-
 
 ## Relationship to Context Window Limits & Memory Management Strategies
 
@@ -387,7 +410,9 @@ A larger context window improves:
 | Large-scale projects              | 1M+ tokens                 | GPT-4.1, Gemini 3 Pro, Grok 4.1, Llama 4 Scout |
 
 ---
-
+ 
+ **[↑ Back to Top](#chapter-3-memory-management--multi-turn-chats-)** 
+ 
 ---
 
 ## Top 10 Benchmarking & Evaluation Metrics for Choosing the Right Model based on Context Window
@@ -440,6 +465,10 @@ Compare before vs after and track improvement trends.
 - Result: Latency reduced, cost reduced
 
 ---
+ 
+ **[↑ Back to Top](#chapter-3-memory-management--multi-turn-chats-)** 
+ 
+---
 
 ## The Truth About Advertised vs. Actual Context Performance
 
@@ -489,6 +518,11 @@ If you keep adding messages without any control:
 **Best Practice**: Always monitor Context Utilization % and Hallucination Rate. Implement summarization or RAG before you hit the context limit.
 
 ---
+ 
+ **[↑ Back to Top](#chapter-3-memory-management--multi-turn-chats-)** 
+ 
+---
+
 ## Senior Techniques to Avoid Hitting Context Window Limits
 
 Experienced prompt engineers and developers use these practical strategies to stay well below context limits while maintaining high-quality output and controlling costs.
@@ -528,6 +562,10 @@ Combine these techniques with regular monitoring of **Context Utilization %** an
 
 ---
 
+ **[↑ Back to Top](#chapter-3-memory-management--multi-turn-chats-)** 
+
+---
+
 ## Memory Management Strategies
 
 Even with very large context windows (1M–10M tokens), it is still best practice to keep conversations clean and relevant. Sending unnecessary old messages wastes tokens, increases cost, and can dilute the model’s focus.
@@ -561,7 +599,7 @@ def add_to_memory(role, content):
 **Disadvantage:**   -  older context lost
 ---
 
-### Strategy 1: Sliding Window Memory (Buffer)
+### Strategy 2: Memory Summarization 
 **Old messages are replaced by a short summary.**
 
 **Example:**
@@ -628,6 +666,10 @@ LLM (generates reply)
 
 **Pro Tip: Start with Sliding Window + Summarization for most projects. Add Vector Memory (RAG) when your application needs long-term knowledge retention.**
 
+---
+
+ **[↑ Back to Top](#chapter-3-memory-management--multi-turn-chats-)** 
+ 
 ---
 Phase 4 of "All You Need to Know About Prompt Engineering" — Portfolio Project by Mirza (BS AI Student, Karachi)
 ---
