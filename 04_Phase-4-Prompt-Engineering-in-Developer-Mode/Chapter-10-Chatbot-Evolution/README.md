@@ -1,6 +1,7 @@
 # Chapter-10-Chatbot-Evolution
 → From simple chatbots to stateful, memory-aware, production-ready agents.
 
+
 ---
 
 ## Chatbot 1: Building a Single Agent Chatbot (API calling)— memory + system message + loop
@@ -104,6 +105,9 @@ while True:
 **Pro Tip**: Start with a strong, detailed system prompt. It often has more impact on output quality than individual user messages.
 This single-agent chatbot is the foundation for more advanced agents, multi-agent systems, and tool-calling applications you will build later in Phase 4.
 
+---
+  **[↑ Back to Top](#chapter-10-chatboot-evolution-)** 
+  
 ---
 
 ## CHATBOT 2: Multi-Model Research Chatbot with Ollama
