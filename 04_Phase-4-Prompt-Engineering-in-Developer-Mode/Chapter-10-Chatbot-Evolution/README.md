@@ -344,6 +344,221 @@ if __name__ == "__main__":
 ```
 ---
 
+## CHATBOT 3: Multi-Model Research Chatbot with Memory + Auto-Summarization
+Now includes permanent conversation history and smart summarization when the history becomes too long (preventing context overflow).
+
+#### New Features Added
+* Every message (user + assistant) is saved in `conversation = []`
+* Before each new query, the code checks the total length
+* When limit is reached → `update_summary()` compresses old messages
+* New prompts now use: **Summary + Last 4 messages** (keeps context fresh)
+* You can continue long conversations without losing important context
+
+#### Example after many turns:
+
+* Old history gets summarized as: "User is a biology researcher in Berlin preparing a research paper."
+* Recent messages stay full → AI still remembers your name and current topic.
+
+### Installation Guide
+
+#### Step 1 — Install Ollama
+
+**Linux/Mac:**
+
+```Bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+**Windows:**
+Download the installer from [Ollama](https://ollama.com)
 
 
+#### Step 2 — Pull models
 
+```
+ollama pull llama3.1
+```
+
+```
+ollama pull mistral
+```
+
+```
+ollama pull deepseek-r1
+```
+
+
+#### Step 3 — Install Python library
+
+```
+pip install ollama
+```
+
+#### Step 4 — Run the chatbot
+
+python chatbot.py
+
+```python
+
+import ollama
+
+# ====================== GLOBAL MEMORY & SUMMARY ======================
+
+conversation = [ ]   # Stores full history: [{"role": "user/assistant", "content": "..."}]
+
+summary = " "        # Compressed memory of old conversation
+
+
+# ====================== TOKEN LIMIT CHECK (Simple but effective) ======================
+
+MAX_HISTORY_CHARS = 12000   # Approx 3000-4000 tokens for 8B models
+
+def should_summarize():
+    total_chars = sum(len(msg["content"]) for msg in conversation)
+    return total_chars > MAX_HISTORY_CHARS
+
+
+# ====================== UPDATE SUMMARY FUNCTION ======================
+
+def update_summary():
+    global summary
+    if len(conversation) < 4:  # Too short to summarize
+        return
+
+    # Summarize everything except the last 3 messages (keep recent context)
+    old_convo = conversation[:-3]
+    history_text = "\n".join([f"{msg['role'].upper()}: {msg['content']}" for msg in old_convo])
+
+    prompt = f"""   Briefly and accurately summarize the following conversation history. Keep only key facts, user details, goals, and important context. Do NOT add new information.
+CONVERSATION:
+{history_text}  """
+
+    response = ollama.generate(model="llama3.1:8b", prompt=prompt)
+    summary = response["response"].strip()
+    print("📝 Conversation summarized (old history compressed)")
+
+
+# ====================== GENERIC MODEL CALL ======================
+
+def call_model(model, prompt, temperature=0.3):
+    response = ollama.chat (
+        model=model,
+        messages=[{"role": "user", "content": prompt}],
+        options={"temperature": temperature, "top_p": 0.9}
+ )
+
+    return response["message"]["content"]
+
+
+# ====================== SENIOR AGENT (Now uses summary) ======================
+
+def senior_agent(query):
+    global summary
+
+    # Trigger summarization if needed
+    if should_summarize():
+        update_summary()
+
+    # Build prompt with summary + recent history
+    history_recent = "\n".join( [ f"{msg['role'].upper()}: {msg['content']}" for msg in conversation[-4:] ] )
+
+    prompt = f"""You are a senior research analyst.
+{summary}  # ← Compressed memory
+Recent conversation:
+{history_recent}
+New user query: {query}
+Understand the intent and restructure it. Extract: objective, constraints, success metrics, negative cases, required output format. Return ONLY a structured research prompt for the Researcher."""
+
+    return call_model("llama3.1:8b", prompt, temperature=0.2)
+
+
+# =============================================== OTHER AGENTS (unchanged) ===============================================================================
+
+# -------------------------------------------------- Researcher agent --------------------------------------------------
+
+def researcher_agent(senior_prompt):
+    prompt = f"""You are a research analyst.
+Use the structured prompt below and generate a detailed answer.
+PROMPT: {senior_prompt}
+Return in this exact format:
+SUMMARY
+DETAILED ANALYSIS
+METHOD
+RESULT
+REFERENCES
+LIMITATIONS"""
+
+    return call_model("mistral:7b", research_prompt, temperature=0.4)
+
+
+# -------------------------------------------------- Critic agent --------------------------------------------------
+
+def critic_agent(senior_prompt, research_output):
+    critique_prompt= f"""You are a critical reviewer.
+Compare the research output against the senior prompt. Create a critique report and find: missing points, logic errors, hallucinations, and redundancies. Give clear improvement actions. 
+SENIOR PROMPT: {senior_prompt}
+RESEARCH OUTPUT: {research_output}"""
+
+    return call_model("deepseek-r1:8b", critique_prompt, temperature=0.1)
+
+
+# -------------------------------------------------- Supervisor agent --------------------------------------------------
+
+def supervisor_agent(query, research_output, critique):
+    prompt = f"""
+You are a supervisor AI.
+User query: {query}
+Research output: {research_output}
+Critique report: {critique}
+Task:
+1. Fix issues identified    2. Produce final answer   3. Verify requirements met
+Return:
+FINAL_OUTPUT
+QUALITY_CHECK
+REQUIREMENT_MATCH_SCORE  """
+
+    return call_model("llama3.1:8b", prompt, temperature=0.3)
+
+
+# ====================== MAIN COLLABORATIVE CHATBOT ======================
+
+def collaborative_chatbot(query):
+
+    # Add user message to permanent memory
+    conversation.append({"role": "user", "content": query})    # Store query in conversation list
+
+    # Run the pipeline
+    senior_prompt = senior_agent(query)
+    research_output = ""
+    critique = ""
+
+    # Researcher ↔ Critic loop (3 iterations)
+    for _ in range(3):
+        research_output = researcher_agent(senior_prompt)
+        critique = critic_agent(senior_prompt, research_output)
+        senior_prompt += f"\n\nCRITIQUE_FEEDBACK:\n{critique}"
+
+    # Final synthesis
+    final_answer = supervisor_agent(query, research_output, critique)
+
+    # Add AI reply to memory
+    conversation.append({"role": "assistant", "content": final_answer})
+
+    return final_answer
+
+
+# ====================== RUN CHATBOT ======================
+
+if __name__ == "__main__":
+    print(" Hi! Its chatty, your research partner! Tell me where can I assist you… \n")
+    print("Type 'exit' to stop.\n")
+    while True:
+        user_query = input("You: ")
+        if user_query.lower() in ["exit", "quit", "bye"]:
+            print("👋 Goodbye!")
+            break
+        result = collaborative_chatbot(user_query)
+        print(f"\nAI: {result}\n")
+
+```
+---
