@@ -1,8 +1,8 @@
 # Chapter-10-Chatbot-Evolution
 → From simple chatbots to stateful, memory-aware, production-ready agents.
 
-
 ---
+
 
 ## Chatbot 1: Building a Single Agent Chatbot (API calling)— memory + system message + loop
 This project combines everything you’ve learned: API parameters, conversation history (memory), a professional system prompt, and an interactive loop.
@@ -106,9 +106,11 @@ while True:
 This single-agent chatbot is the foundation for more advanced agents, multi-agent systems, and tool-calling applications you will build later in Phase 4.
 
 ---
+
   **[↑ Back to Top](#chapter-10-chatboot-evolution-)** 
   
 ---
+
 
 ## CHATBOT 2: Multi-Model Research Chatbot with Ollama
 
@@ -348,6 +350,11 @@ if __name__ == "__main__":
 ```
 ---
 
+  **[↑ Back to Top](#chapter-10-chatboot-evolution-)** 
+
+---
+
+
 ## CHATBOT 3: Multi-Model Research Chatbot with Memory + Auto-Summarization
 Now includes permanent conversation history and smart summarization when the history becomes too long (preventing context overflow).
 
@@ -565,4 +572,8 @@ if __name__ == "__main__":
         print(f"\nAI: {result}\n")
 
 ```
+---
+  
+  **[↑ Back to Top](#chapter-10-chatboot-evolution-)** 
+
 ---
