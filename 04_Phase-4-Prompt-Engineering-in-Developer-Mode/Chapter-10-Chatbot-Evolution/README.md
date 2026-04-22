@@ -140,7 +140,7 @@ A multi-agent pipeline where each model performs a specific cognitive task.
 ### Pipeline Logic
 
 <img src="../../assets/images/phase4-chatbot2-pipeline.png"
-     width="55%"
+     width="45%"
      align="center"
      style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
      alt="Pipeline logic">
