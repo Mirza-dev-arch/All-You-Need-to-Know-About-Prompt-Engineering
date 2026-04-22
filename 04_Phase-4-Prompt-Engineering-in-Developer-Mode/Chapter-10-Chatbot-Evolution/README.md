@@ -2,8 +2,8 @@
 → From simple chatbots to stateful, memory-aware, production-ready agents.
 ---
 ## Table of Contents
-- [Chatbot 1: Building a Single Agent Chatbot (API calling)— memory + system message + loop](#chatbot-1-building-a-single-agent-chatbot-API-calling)  
-
+- [Chatbot 1: Building a Single Agent Chatbot (API calling)— memory + system message + loop](#chatbot-1-building-a-single-agent-chatbot-API-calling—memory-system-message-loop)  
+- [CHATBOT 2: Multi-Model Research Chatbot with Ollama](#chatbot-2-multi-model-research-chatbot-with-0llama)
 
 ---
 
