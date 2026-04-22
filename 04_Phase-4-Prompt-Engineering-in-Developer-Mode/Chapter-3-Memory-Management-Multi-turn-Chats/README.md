@@ -21,8 +21,6 @@ This chapter explains why LLMs are stateless, how conversation history actually 
 - [Senior Techniques to Avoid Hitting Context Window Limits](#senior-techniques-to-avoid-hitting-context-window-limits)
 - [Memory Management Strategies](#memory-management-strategies)
 
-
-
 * | **[Back to Phase 4 Main Page](../README.md)**
 
 
@@ -667,9 +665,10 @@ LLM (generates reply)
 **Pro Tip: Start with Sliding Window + Summarization for most projects. Add Vector Memory (RAG) when your application needs long-term knowledge retention.**
 
 ---
-
- **[↑ Back to Top](#chapter-3-memory-management--multi-turn-chats-)** 
- 
+  **[↑ Back to Top](#chapter-3-memory-management--multi-turn-chats-)** 
+  
+> 💡 **Want to see this in a working chatbot?**  
+> **[🤖 Open CHATBOT 3: Multi-Model Research Chatbot with Memory + Auto-Summarization](../Chapter-10-Chatbot-Evolution/README.md)**
 ---
 Phase 4 of "All You Need to Know About Prompt Engineering" — Portfolio Project by Mirza (BS AI Student, Karachi)
 ---
