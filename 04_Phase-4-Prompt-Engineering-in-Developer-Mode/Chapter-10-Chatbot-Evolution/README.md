@@ -106,9 +106,243 @@ This single-agent chatbot is the foundation for more advanced agents, multi-agen
 
 ---
 
+## CHATBOT 2: Multi-Model Research Chatbot with Ollama
+
+This is a smart research chatbot that uses 4 specialized models working together like a team. Instead of one model doing everything (and making mistakes), they collaborate in a loop until the answer is accurate and complete.
+The system resembles a research pipeline with role-specialized agents.
+
+[Github Repo you can visit](https://github.com/openai/openai-cookbook/blob/main/examples/Enhance_your_prompts_with_meta_prompting.ipynb)
 
 
+### System Architecture
 
+#### Core Idea
+A multi-agent pipeline where each model performs a specific cognitive task.
+
+| Role                | Function                                                 |     
+|---------------------|----------------------------------------------------------|
+| Senior Model        |  Clarifies and restructures the user query               |
+| Researcher Model    | Generates analysis and a structured answer               | 
+| Critic Model        |  Audits reasoning and identifies gaps                    | 
+| Supervisor Model    |  Produces final answer and quality check                 |
+
+
+### Pipeline Logic
+
+<img src="../../assets/images/phase4-chatbot2-pipeline.png"
+     width="75%"
+     align="center"
+     style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
+     alt="Pipeline logic">
+<br clear="all"/>
+
+
+### Model Selection
+
+Using Ollama-available models optimized for role specialization.
+
+| Role           |  Model                             | Why                                           | Strength                   | Weakness                     |  RAM needed         |            
+|----------------|------------------------------------|-----------------------------------------------|----------------------------|------------------------------|---------------------|   
+| Senior         |  Llama 3.1 8B                      |  strong reasoning and prompt reformulation    | contextual understanding   |  moderate hallucination      | 16GB                |   
+| Researcher     |  Mistral 7B                        |  fast analytical output                       | speed and structure        |  slightly weaker reasoning   | 12GB                |   
+| Critic         |  DeepSeek‑R1 Distill               | chain-of-thought evaluation                   | reasoning accuracy         |  slower                      | 16GB                |   
+| Supervisor     |  Llama 3.1 70B (or 8B locally)     | synthesis and evaluation                      | Coherence                  |  heavy compute               | 16GB                |   
+
+**For minimal setup: Llama3.1 8B, Mistral 7B, DeepSeek-R1 Distill 8B: Minimal setup (runs on most laptops): All 8B/7B models. **
+
+
+### Agent Responsibilities
+
+##### Senior Agent
+
+<img src="../../assets/images/phase4-senior-agent.png"
+     width="75%"
+     align="center"
+     style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
+     alt="Senior Agent architecture">
+<br clear="all"/>
+
+
+#### Researcher Agent
+
+<img src="../../assets/images/phase4-reseacher-agent.png"
+     width="75%"
+     align="center"
+     style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
+     alt="Researcher Agent architecture">
+<br clear="all"/>
+
+
+#### Critic Agent
+
+<img src="../../assets/images/phase4-critics-agent.png"
+     width="75%"
+     align="center"
+     style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
+     alt="Critics Agent architecture">
+<br clear="all"/>
+
+
+#### Supervisor Agent
+
+<img src="../../assets/images/phase4-supervisor-agent.png"
+     width="75%"
+     align="center"
+     style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
+     alt="Supervisor Agent architecture">
+<br clear="all"/>
+
+
+### Installation Guide
+
+#### Step 1 — Install Ollama
+
+**Linux/Mac:**
+
+```Bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+**Windows:**
+Download the installer from [Ollama](https://ollama.com)
+
+
+#### Step 2 — Pull models
+
+```
+ollama pull llama3.1
+```
+
+```
+ollama pull mistral
+```
+
+```
+ollama pull deepseek-r1
+```
+
+
+#### Step 3 — Install Python library
+
+```
+pip install ollama
+```
+
+#### Step 4 — Run the chatbot
+
+python chatbot.py
+
+```python
+
+import ollama
+
+# ------------------- Generic Call Function -------------------
+
+    ""”   Sends a prompt to the Ollama model and returns response text.
+    Parameters:
+    model : str  (Name of ollama model)
+    prompt : str ( Input prompt) 
+    temperature : float  ,  Creativity control    """
+
+
+def call_model(model, prompt, temperature=0.3):
+    response = ollama.chat (
+        model=model,
+        messages=[{"role": "user", "content": prompt}],
+        options={  "temperature": temperature,   "top_p": 0.9    }
+)
+
+    return response["message"]["content"]
+
+
+# -------------------------------------------------- Senior agent --------------------------------------------------
+
+def senior_agent(query):
+    senior_prompt = f"""You are a senior research analyst.
+Understand the user query and restructure it clearly.
+Extract: objective, constraints, success metrics, negative cases, required output format.
+Return ONLY a structured research prompt for the next model.
+USER QUERY: {query}"""
+
+    return call_model("llama3.1:8b", senior_prompt, temperature=0.2)
+
+
+# -------------------------------------------------- Researcher agent --------------------------------------------------
+
+def researcher_agent(senior_prompt):
+    prompt = f"""You are a research analyst.
+Use the structured prompt below and generate a detailed answer.
+PROMPT: {senior_prompt}
+Return in this exact format:
+SUMMARY
+DETAILED ANALYSIS
+METHOD
+RESULT
+REFERENCES
+LIMITATIONS"""
+
+    return call_model("mistral:7b", research_prompt, temperature=0.4)
+
+
+# -------------------------------------------------- Critic agent --------------------------------------------------
+
+def critic_agent(senior_prompt, research_output):
+    critique_prompt= f"""You are a critical reviewer.
+Compare the research output against the senior prompt. Create a critique report and find: missing points, logic errors, hallucinations, and redundancies. Give clear improvement actions. 
+SENIOR PROMPT: {senior_prompt}
+RESEARCH OUTPUT: {research_output}"""
+
+   return call_model("deepseek-r1:8b", critique_prompt, temperature=0.1)
+
+
+# -------------------------------------------------- Supervisor agent --------------------------------------------------
+
+def supervisor_agent(query, research_output, critique):
+    prompt = f"""
+You are a supervisor AI.
+User query: {query}
+Research output: {research_output}
+Critique report: {critique}
+Task:
+1. Fix issues identified    2. Produce final answer   3. Verify requirements met
+Return:
+FINAL_OUTPUT
+QUALITY_CHECK
+REQUIREMENT_MATCH_SCORE  """
+
+    return call_model("llama3.1:8b", prompt, temperature=0.3)
+
+
+# --------------------------------------------------  Main chatbot loop  --------------------------------------------------
+
+def collaborative_chatbot(query):
+    senior_prompt = senior_agent(query)
+    research_output = " "
+    critique = " "
+    # Researcher ↔ Critic loop (3 iterations)
+    for i in range(3):
+        research_output = researcher_agent(senior_prompt)
+        critique = critic_agent(senior_prompt, research_output)
+         # append critique feedback
+        senior_prompt += f"\n\nCRITIQUE_FEEDBACK:\n{critique}"
+    # supervisor synthesis
+    final_answer = supervisor_agent(query, research_output, critique)
+    return final_answer
+
+
+# -------------------------------------------------- Run chatbot --------------------------------------------------
+
+if __name__ == "__main__":
+    user_query = input("Enter your research question: ")
+    result = collaborative_chatbot(user_query)
+    print("\n" + "="*50)
+    print("FINAL ANSWER")
+    print("="*50)
+    print(result)
+
+
+```
+---
 
 
 
