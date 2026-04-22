@@ -166,7 +166,7 @@ Using Ollama-available models optimized for role specialization.
 ##### Senior Agent
 
 <img src="../../assets/images/phase4-senior-agent.png"
-     width="75%"
+     width="555%"
      align="center"
      style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
      alt="Senior Agent architecture">
@@ -176,7 +176,7 @@ Using Ollama-available models optimized for role specialization.
 #### Researcher Agent
 
 <img src="../../assets/images/phase4-reseacher-agent.png"
-     width="75%"
+     width="55%"
      align="center"
      style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
      alt="Researcher Agent architecture">
@@ -186,7 +186,7 @@ Using Ollama-available models optimized for role specialization.
 #### Critic Agent
 
 <img src="../../assets/images/phase4-critics-agent.png"
-     width="75%"
+     width="55%"
      align="center"
      style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
      alt="Critics Agent architecture">
@@ -196,7 +196,7 @@ Using Ollama-available models optimized for role specialization.
 #### Supervisor Agent
 
 <img src="../../assets/images/phase4-supervisor-agent.png"
-     width="75%"
+     width="55%"
      align="center"
      style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
      alt="Supervisor Agent architecture">
