@@ -251,7 +251,9 @@ Simply change the `prompt` variable to any reasoning, summarization, or coding q
 
 This is the exact workflow used by professional LLM developers in 2026 to decide which model to use in production.
 
-
+---
+> 💡 **Want to see how multiple local LLMs work in a single chatbot?**  
+> **[🤖 Open CHATBOT 2 & 3: Multi-Model Research Chatbot with Ollama](../Chapter-10-Chatbot-Evolution/README.md)**
 
 
 ---
