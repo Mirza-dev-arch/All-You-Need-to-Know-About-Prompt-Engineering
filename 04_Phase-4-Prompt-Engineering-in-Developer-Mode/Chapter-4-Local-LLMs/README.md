@@ -390,7 +390,7 @@ print(response['message']['content'])
 
 Running big LLMs (70B+ parameters) on limited hardware is always a trade-off between **quality**, **speed**, **cost**, **privacy**, and **control**. 
 
-The good news? You don’t need a supercomputer. You just need the **right strategy**. Most experienced developers combine the following three approaches.
+The good news? You don’t need a supercomputer. You just need the **right strategy**. Most experienced developers combine the following approaches.
 
 
 ### 1. API-based Inference (Remote Inference) – Easiest & Best Quality
