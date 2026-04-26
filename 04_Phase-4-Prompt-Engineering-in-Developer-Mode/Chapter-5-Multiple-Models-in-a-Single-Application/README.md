@@ -253,7 +253,7 @@ This is the exact workflow used by professional LLM developers in 2026 to decide
 
 ---
 > 💡 **Want to see how multiple local LLMs work in a single chatbot?**  
-> **[🤖 Open CHATBOT 2 & 3: Multi-Model Research Chatbot with Ollama](../Chapter-10-Chatbot-Evolution/README.md)**
+> **[🤖 Open CHATBOT 4: Multi-Model Research Chatbot with Ollama](../Chapter-10-Chatbot-Evolution/README.md)**
 
 
 ---
