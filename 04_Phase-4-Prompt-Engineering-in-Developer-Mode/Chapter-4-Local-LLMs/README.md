@@ -652,6 +652,18 @@ ollama ps            # shows currently running models
 
 ---
 
+### Quick Decision Guide
+
+| Your Situation                     | Best Strategy                  |
+|------------------------------------|--------------------------------|
+| Beginner / Low RAM                 | Start with API                 |
+| Want maximum privacy + zero cost   | Pure Quantized Local (Ollama)  |
+| Need absolute maximum quality      | Pure API (Together.ai / Groq)  |
+| Must work completely offline       | Quantized Local                |
+
+
+---
+
 **Phase 4 of "All You Need to Know About Prompt Engineering" — Portfolio Project by Mirza (BS AI Student, Karachi)**
 
 **[← Back to Chapter 3](../Chapter-3-Memory-Management-Multi-turn-Chats/README.md)** | **[Next Section →](#)** | **[↑ Back to Top](#chapter-4-local-llms--running-models-on-your-machine-)** | **[Back to Phase 4 Main Page](../README.md)**
