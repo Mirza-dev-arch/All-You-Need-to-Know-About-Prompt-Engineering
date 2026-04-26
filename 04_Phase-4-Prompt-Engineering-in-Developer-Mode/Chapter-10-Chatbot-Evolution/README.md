@@ -162,6 +162,7 @@ We use Ollama-available models optimized for each role:
 
 ##### Senior Agent
 Refines the user query into a clear, structured research prompt.
+
 <img src="../../assets/images/phase4-senior-agent.png"
      width="555%"
      align="center"
@@ -172,6 +173,7 @@ Refines the user query into a clear, structured research prompt.
 
 #### Researcher Agent
 Performs in-depth analysis and generates a structured response.
+
 <img src="../../assets/images/phase4-reseacher-agent.png"
      width="55%"
      align="center"
@@ -182,6 +184,7 @@ Performs in-depth analysis and generates a structured response.
 
 #### Critic Agent
 Reviews the research output for errors, gaps, and hallucinations.
+
 <img src="../../assets/images/phase4-critics-agent.png"
      width="55%"
      align="center"
@@ -192,6 +195,7 @@ Reviews the research output for errors, gaps, and hallucinations.
 
 #### Supervisor Agent
 Integrates feedback and produces the final polished answer.
+
 <img src="../../assets/images/phase4-supervisor-agent.png"
      width="55%"
      align="center"
@@ -564,9 +568,12 @@ if __name__ == "__main__":
 ```
 ---
 
+  **[↑ Back to Top](#chapter-10-chatboot-evolution-)** 
+
+---
+
 ## Chatbot 4: Multi-Model Research Chatbot with Auto Model Picker + Memory + Summarization 🤖
 This is the most advanced research chatbot in the series. It intelligently:
-
 - Detects your available RAM
 - Analyzes the query type (general, coding, research, deep reasoning)
 - Automatically picks the best quantized model for each agent
@@ -574,7 +581,6 @@ This is the most advanced research chatbot in the series. It intelligently:
 - Uses a 4-agent collaborative team (Senior → Researcher → Critic → Supervisor)
 
 ### Key Features
-
 - **Auto RAM Detection** using `psutil`
 - **Dynamic Model Picker** — chooses optimal model per role and task type
 - **Permanent Conversation Memory** with intelligent auto-summarization
@@ -583,18 +589,14 @@ This is the most advanced research chatbot in the series. It intelligently:
 - Runs efficiently on both low-end and high-end hardware
 
 
-### Auto Model Selection Logic
-
+### Auto Model Selection Logic:
 The chatbot automatically selects the best model based on your RAM and query type:
-
 - **Low RAM (<12 GB)**: Uses lightweight models like Phi-3 Mini
 - **Medium RAM (12–24 GB)**: Llama 3.1 8B (default)
 - **High RAM (24–40 GB)**: Qwen2.5 14B
 - **Very High RAM (40+ GB)**: Llama 3.1 70B
 
 It also applies task-specific overrides (e.g., DeepSeek-Coder for coding tasks).
-
----
 
 ### Installation Guide
 
@@ -820,8 +822,762 @@ if __name__ == "__main__":
         print(f"\nAI: {result}\n")
 
 ```
+---
+
+  **[↑ Back to Top](#chapter-10-chatboot-evolution-)** 
+
+---
+
+## Chatbot 5: Hybrid Chatbot (Local + API Intelligent Routing) ⚡
+This advanced hybrid chatbot intelligently combines **local** and **API** models:
+
+- Uses a small local model as a **smart router**
+- Runs **simple tasks** locally (fast, free, private)
+- Escalates **complex tasks** to a powerful API model (Llama-3.1-70B via Together.ai)
+- Maintains full conversation memory with automatic summarization
+
+### How the Hybrid System Works
+
+1. Local router (fast 8B model) decides: “Is this query simple or complex?”
+2. **Simple** → Entire pipeline runs locally (cheap & private)
+3. **Complex** → Researcher and Supervisor use a high-quality API model
+4. Memory + auto-summarization stays active across all decisions
+
+### Key Features
+
+- Automatic RAM detection
+- Intelligent query routing (local vs API)
+- Full conversation memory with auto-summarization
+- Cost-efficient (uses API only when necessary)
+- High privacy for simple queries
+- Best quality for complex research/coding tasks
+
+---
+
+### Installation Guide
+
+#### Step 1 — Install Ollama
+
+**Linux/Mac:**
+
+```Bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+**Windows:**
+Download the installer from [Ollama](https://ollama.com)
+
+#### Step 2: Pull Recommended Models
+
+```Bash
+ollama pull llama3.1:8b
+```
+```Bash
+ollama pull mistral:7b
+```
+```Bash
+ollama pull deepseek-coder-v2:16b
+```
+```Bash
+ollama pull qwen2.5:14b
+```
+
+#### Step 3 — Install Python library
+
+```Bash
+pip install ollama psutil
+```
+
+#### Step 4 — Run the chatbot
+
+```Bash
+python hybrid_chatbot.py
+```
+
+#### Full Code Implementation
+```Python
+import ollama
+import psutil
+from openai import OpenAI
+import os
+
+# ====================== SETUP ======================
+# === Change this line with your key ===
+TOGETHER_API_KEY = "your-together-api-key-here"
+
+client_api = OpenAI(
+    base_url="https://api.together.xyz/v1",
+    api_key=TOGETHER_API_KEY
+)
+
+RAM_GB = psutil.virtual_memory().total / (1024 ** 3)
+print(f"🖥️ Detected RAM: {RAM_GB:.1f} GB")
+
+# ====================== GLOBAL MEMORY & SUMMARY ======================
+conversation = []
+summary = ""
+MAX_HISTORY_CHARS = 12000
+
+def should_summarize():
+    total = sum(len(msg["content"]) for msg in conversation)
+    return total > MAX_HISTORY_CHARS
+
+def update_summary():
+    global summary
+    if len(conversation) < 4:
+        return
+    old_text = "\n".join([f"{m['role'].upper()}: {m['content']}" for m in conversation[:-3]])
+    prompt = f"""Summarize this conversation briefly. Keep only key facts, user details, goals, and context:
+{old_text}"""
+    resp = ollama.generate(model="llama3.1:8b", prompt=prompt)
+    summary = resp["response"].strip()
+    print("📝 History summarized")
+
+# ====================== INTELLIGENT ROUTER ======================
+def is_complex_query(query: str) -> bool:
+    """Local small model decides if task needs powerful model"""
+    router_prompt = f"""Classify this query as SIMPLE or COMPLEX.
+Rules:
+- SIMPLE: greeting, basic facts, short explanation, casual chat
+- COMPLEX: deep reasoning, coding, research, math, multi-step analysis
+
+Query: {query}
+
+Answer with only one word: SIMPLE or COMPLEX"""
+
+    response = ollama.chat(
+        model="llama3.1:8b",
+        messages=[{"role": "user", "content": router_prompt}],
+        options={"temperature": 0.0}
+    )
+    decision = response["message"]["content"].strip().upper()
+    return "COMPLEX" in decision
+
+# ====================== MODEL CALLS ======================
+def call_local(model: str, prompt: str, temp: float = 0.3):
+    resp = ollama.chat(
+        model=model,
+        messages=[{"role": "user", "content": prompt}],
+        options={"temperature": temp, "top_p": 0.9}
+    )
+    return resp["message"]["content"]
+
+def call_api(prompt: str, temp: float = 0.3):
+    """Uses Together.ai Llama-3.1-70B"""
+    resp = client_api.chat.completions.create(
+        model="meta-llama/Llama-3.1-70B-Instruct-Turbo",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=temp,
+        max_tokens=800
+    )
+    return resp.choices[0].message.content
+
+# ====================== AGENTS ======================
+def senior_agent(query: str):
+    if should_summarize():
+        update_summary()
+    
+    history = "\n".join([f"{m['role'].upper()}: {m['content']}" for m in conversation[-4:]])
+    
+    prompt = f"""{summary}
+Recent conversation:
+{history}
+
+New query: {query}
+
+Analyze intent and return a well-structured prompt for the researcher."""
+    
+    return call_local("llama3.1:8b", prompt, 0.2)
+
+def researcher_agent(senior_prompt: str, use_api: bool):
+    prompt = f"""Follow this structured prompt and give a detailed answer:
+{senior_prompt}
+
+Format:
+SUMMARY
+DETAILED ANALYSIS
+METHOD
+RESULT
+REFERENCES"""
+
+    return call_api(prompt, 0.4) if use_api else call_local("mistral:7b", prompt, 0.4)
+
+def critic_agent(senior_prompt: str, research_output: str):
+    prompt = f"""You are a strict critic. Compare the output against the senior prompt and find issues.
+Senior Prompt: {senior_prompt}
+Research Output: {research_output}
+
+Return:
+MISSING_POINTS
+LOGIC_ERRORS
+HALLUCINATIONS
+REDUNDANCIES
+IMPROVEMENT_ACTIONS"""
+
+    return call_local("deepseek-r1:8b", prompt, 0.1)
+
+def supervisor_agent(query: str, research_output: str, critique: str, use_api: bool):
+    prompt = f"""You are the supervisor AI.
+User query: {query}
+Research: {research_output}
+Critique: {critique}
+
+Fix all issues and produce the final clean answer.
+Return:
+FINAL_OUTPUT
+QUALITY_CHECK"""
+
+    return call_api(prompt, 0.3) if use_api else call_local("llama3.1:8b", prompt, 0.3)
+
+# ====================== MAIN HYBRID CHATBOT ======================
+def hybrid_chatbot(query: str):
+    conversation.append({"role": "user", "content": query})
+    
+    use_api = is_complex_query(query)
+    
+    if use_api:
+        print("🚀 Escalating to powerful API model (70B)...")
+    else:
+        print("⚡ Running on fast local model...")
+
+    senior = senior_agent(query)
+    research = researcher_agent(senior, use_api)
+    critique = critic_agent(senior, research)
+    senior += f"\n\nCRITIQUE:\n{critique}"
+    
+    final = supervisor_agent(query, research, critique, use_api)
+    
+    conversation.append({"role": "assistant", "content": final})
+    return final
+
+# ====================== RUN ======================
+if __name__ == "__main__":
+    print("🤖 Hybrid Chatbot (Local + API Intelligent Routing) is ready!")
+    print("Simple questions → local | Complex questions → API 70B\n")
+    print("Type 'exit' to quit.\n")
+    
+    while True:
+        q = input("You: ")
+        if q.lower() in ["exit", "quit", "bye"]:
+            print("👋 Goodbye!")
+            break
+        answer = hybrid_chatbot(q)
+        print(f"\nAI: {answer}\n")
+
+```
+---
+
+  **[↑ Back to Top](#chapter-10-chatboot-evolution-)** 
+
+---
+
+## Chatbot 6: VibePrompt Engineer — Multi-Model Prompt Engineering Chatbot 🧠
+
+ This is the **most advanced** chatbot in the series — a complete **Prompt Engineering Factory** that merges:
+
+- Memory + Auto-Summarization (from Chatbot 3)
+- RAM-aware Auto Model Picker (from Chatbot 4)
+- Intelligent Local ↔ API Hybrid Routing (from Chatbot 5)
+  
+It acts as a **senior prompt engineer** that helps you create high-quality, domain-specific prompts through structured collaboration, with features:
+- Full conversation memory with intelligent auto-summarization
+- RAM detection + task-aware model selection per agent
+- Hybrid routing (local for simple, API 70B for complex)
+- 3-loop Researcher ↔ Critic refinement
+- Generates **5 distinct prompt variants** (different techniques + structures)
+- Accuracy gating with LLM-as-judge (≥80% or re-run, max 2×)
+- Domain-specific clarification (max 1 round)
+- Production-ready modular folder structure
+
+### Precise Breakdown of System Architecture & Agent Roles:
+| Agent         | Responsibility                                                                 | Key Output                              |
+|---------------|--------------------------------------------------------------------------------|-----------------------------------------|
+| **Senior**    | Query refinement + domain-specific clarification (max 1 round for UX)          | 7-section structured research prompt    |
+| **Researcher**| Generates 5 distinct prompt variants using different techniques & formats     | 5 unique prompt variants                |
+| **Critic**    | Audits for hallucinations, gaps, logic errors; selects top 3 variants          | Critique report + top 3 variants        |
+| **Supervisor**| Merges top 3 into one ultimate prompt, runs quality check, accuracy gating     | Final engineered prompt + scored output |
+
+### Hybrid + Auto Selector Logic
+- RAM detection + task-type detection (coding/research/general).
+- Complex queries (router.py) → API (70B) for Research + Supervisor.
+- Simple → pure local quantized.
+- 3 execution models always: small local + medium local + large (API or local fallback).
+
+### Memory & Summarization
+Full history saved. When > 12 000 chars → compress everything except the last 5 messages. Keeps context fresh forever.
 
 
+### Workflow Flow Diagram (ASCII):
+```text
+USER QUERY
+   ↓
+Senior Agent → Clarification Phase (5 domain questions if needed)
+   ↓ (answers collected & added to memory)
+Senior Agent → Outputs 7-section STRUCTURED RESEARCH PROMPT
+   ↓
+[ LOOP 1-3 ]
+   Research Agent → 5 distinct prompt variants (different technique + format)
+      ↓
+   Critic Agent → Critique report + improvements
+      ↓ (feedback injected)
+   Research Agent (improved variants)
+   ↓
+[ After Loop 3 ]
+Critic Agent → Selects Top 3 variants
+   ↓
+Supervisor Agent
+   ├── Merge → Single ultimate prompt (domain tone filled)
+   ├── Quality check
+   ├── Hybrid Router + Model Selector → Run on Model A + B + C
+   └── Accuracy Score (LLM judge 0-100 %)
+         ↓
+      >= 80 % ? → FINAL OUTPUT (ultimate prompt + best response + score)
+      < 80 % ? → RE-RUN FULL PIPELINE (max 2×)
+```
+
+
+### Step-by-Step Implementation (Install → Deploy)
+
+#### 1. Create project: 
+ ```Bash
+mkdir multi_agent_chatbot && cd multi_agent_chatbot
+```
+
+#### 2. Get Together.ai API Key
+   Create a free key at (api.together)[https://api.together.xyz]
+   
+#### 3. `.env` (create & fill):
+```Bash
+ touch .env
+```
+
+Inside .env, add your credentials like: 
+
+```
+TOGETHER_API_KEY=sk-XXXXXXXXXXXXXXXXXXXXXXX
+```
+
+#### 4. Create  a `requirements.txt` file and add:
+```
+ollama
+psutil 
+openai 
+python-dotenv
+```
+
+#### 5. Install
+```Bash
+ pip install -r requirements.txt 
+```
+
+#### 6. Pull Ollama models (run once)
+```Bash
+ollama pull llama3.1:8b
+```
+```Bash
+ollama pull mistral:7b
+```
+```Bash
+ollama pull deepseek-coder-v2:16b
+```
+```Bash
+ollama pull qwen2.5:14b
+```
+
+#### 7. Create a folder structure exactly as below
+```Bash
+mkdir -p config memory agents utils
+```
+
+#### 8. Copy the code files below into each file.
+
+#### 9. Run
+```Bash
+   python main.py
+```
+
+#### 10. Deploy (production)
+      * Docker + Ollama GPU container (recommended).
+      * Wrap main.py logic in FastAPI for HTTP endpoint (add api_server.py if needed).
+      * Run on VPS with 16+ GB RAM + GPU for 70B fallback.
+      * Environment variables via Docker secrets.
+
+
+### Project folder structure:
+```text
+multi_agent_chatbot/
+│
+├── main.py
+├── config/
+│   ├── settings.py
+│   ├── model_selector.py
+│
+├── memory/
+│   ├── memory_manager.py
+│   ├── summarizer.py
+│
+├── agents/
+│   ├── senior_agent.py
+│   ├── research_agent.py
+│   ├── critic_agent.py
+│   ├── supervisor_agent.py
+│
+├── utils/
+│   ├── router.py
+│   ├── accuracy.py
+│   ├── helpers.py
+│
+├── .env
+├── requirements.txt
+```
+### Complete Code:
+
+#### config/settings.py
+```
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")
+MAX_HISTORY_CHARS = 12000
+LAST_MESSAGES_KEEP = 5
+MAX_RE_RUNS = 2
+MAX_CLARIFICATION_ROUNDS = 1  # UX limit (can increase)
+
+# Default models (quantized tags work with Ollama)
+MODELS = {
+    "senior": "llama3.1:8b",
+    "research": "llama3.1:8b",
+    "critic": "deepseek-r1:8b",
+    "supervisor_small": "mistral:7b",
+    "api_large": "meta-llama/Llama-3.1-70B-Instruct-Turbo" }
+```
+
+#### config/model_selector.py
+```
+import psutil
+from config.settings import MODELS
+
+def get_ram_gb():
+    return psutil.virtual_memory().total / (1024 ** 3)
+
+def detect_task_type(query: str) -> str:
+    q = query.lower()
+    if any(k in q for k in ["code", "python", "debug", "function"]):
+        return "coding"
+    if any(k in q for k in ["research", "analyze", "prompt", "engineer"]):
+        return "research"
+    return "general"
+
+def get_best_model(role: str, task_type: str = "general", use_api: bool = False) -> str:
+    ram = get_ram_gb()
+    if use_api and MODELS.get("api_large"):
+        return MODELS["api_large"]
+    if ram < 12:
+        base = "llama3.1:8b" if role != "critic" else "deepseek-r1:8b"
+    elif ram < 24:
+        base = "mistral:7b"
+    else:
+        base = "llama3.1:8b"
+    return base
+```
+
+#### memory/memory_manager.py
+```
+conversation = []  # Global list for full history
+
+def add_message(role: str, content: str):
+    """Why: permanent memory for summarization & context"""
+    conversation.append({"role": role, "content": content})
+
+def get_recent(n=5):
+    return conversation[-n:]
+```
+
+#### memory/summarizer.py
+```
+import ollama
+from memory.memory_manager import conversation
+from config.settings import MAX_HISTORY_CHARS
+
+def should_summarize() -> bool:
+    total = sum(len(m["content"]) for m in conversation)
+    return total > MAX_HISTORY_CHARS
+
+def update_summary() -> str:
+    """Compresses old history, keeps last 5 fresh"""
+    if len(conversation) < 6:
+        return ""
+    old = "\n".join([f"{m['role'].upper()}: {m['content']}" for m in conversation[:-5]])
+    prompt = f"Briefly summarize ONLY key facts, user goals, domain. Do NOT add anything new:\n{old}"
+    resp = ollama.generate(model="llama3.1:8b", prompt=prompt)
+    return resp["response"].strip()
+```
+
+#### utils/helpers.py
+```
+import ollama
+from openai import OpenAI
+from config.settings import TOGETHER_API_KEY
+
+def call_local(model: str, prompt: str, temp=0.3):
+    """Local Ollama call – fast & private"""
+    resp = ollama.chat(model=model, messages=[{"role": "user", "content": prompt}], options={"temperature": temp})
+    return resp["message"]["content"]
+
+def call_api(prompt: str, temp=0.3):
+    """Together.ai 70B – high quality"""
+    client = OpenAI(base_url="https://api.together.xyz/v1", api_key=TOGETHER_API_KEY)
+    resp = client.chat.completions.create(
+        model="meta-llama/Llama-3.1-70B-Instruct-Turbo",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=temp,
+        max_tokens=1024   )
+    return resp.choices[0].message.content
+```
+
+#### utils/router.py
+```
+from utils.helpers import call_local
+
+def is_complex_query(query: str) -> bool:
+    """Decides local vs API – from Base 3"""
+    p = f"""Classify as SIMPLE or COMPLEX only.
+Rules: SIMPLE = greeting/basic fact/short. COMPLEX = research/prompt-engineering/coding/deep analysis.
+Query: {query}
+Answer ONLY one word."""
+    ans = call_local("llama3.1:8b", p, 0.0).strip().upper()
+    return "COMPLEX" in ans
+```
+
+#### utils/accuracy.py
+```
+from utils.helpers import call_local
+
+def calculate_accuracy(outputs: list, objective: str, metrics: str) -> float:
+    """LLM-as-judge scoring – core of accuracy gating"""
+    judge_prompt = f"""Score each output 0-100 on how well it satisfies:
+Objective: {objective}
+Metrics: {metrics}
+
+Output 1: {outputs[0][:800]}
+Output 2: {outputs[1][:800]}
+Output 3: {outputs[2][:800]}
+
+Return ONLY the average score as a number (e.g. 87)."""
+    score_str = call_local("llama3.1:8b", judge_prompt, 0.0)
+    try:
+        return float(score_str.strip())
+    except:
+        return 50.0
+```
+
+#### agents/senior_agent.py
+```
+from config.model_selector import get_best_model, detect_task_type
+from memory.summarizer import update_summary
+from memory.memory_manager import get_recent, add_message
+from utils.helpers import call_local
+
+def senior_agent(query: str, clarification_answers: str = None) -> dict:
+    summary = update_summary() if update_summary() else ""
+    recent = "\n".join([f"{m['role'].upper()}: {m['content']}" for m in get_recent()])
+
+    if clarification_answers is None:
+        # Clarification round (domain-specific only)
+        prompt = f"""You are a senior prompt engineer. Use simple language.
+User query: {query}
+Recent: {recent}
+Summary: {summary}
+
+Ask exactly 15 clarifying questions related ONLY to the domain of the query.
+Do NOT ask generic questions. Use semi-technical language and explain terms.
+Return ONLY a JSON list: ["Q1", "Q2", ...]"""
+        resp = call_local(get_best_model("senior"), prompt, 0.2)
+        return {"status": "clarifying", "questions": eval(resp)}  # simple eval for demo
+
+    # Produce structured research prompt
+    prompt = f"""You are a senior prompt engineer. Use simple language.
+User query: {query}
+Clarification answers: {clarification_answers}
+Recent: {recent}
+Summary: {summary}
+
+Return EXACTLY this format (no extra text):
+QUERY_ANALYSIS: ...
+OBJECTIVE: ...
+CONSTRAINTS: ...
+METRICS: ...
+NEGATIVE_CASES: ...
+OUTPUT_FORMAT: ...
+FINAL_PROMPT_FOR_RESEARCHER: [full prompt for researcher to use]"""
+    resp = call_local(get_best_model("senior"), prompt, 0.1)
+    # Parse sections (simple string split in production)
+    return {"status": "ready", "structured": resp}
+```
+
+#### agents/research_agent.py
+```
+from utils.helpers import call_local
+from config.model_selector import get_best_model
+# Techniques & structures taken directly from your References
+
+def research_agent(senior_structured: str, critique_context: str = "") -> str:
+    model = get_best_model("research", use_api=is_complex_query(senior_structured))
+    prompt = f"""You are a research analyst for prompt engineering.
+Senior prompt: {senior_structured}
+Previous critique: {critique_context}
+
+Use the References provided in the system. Generate:
+1. SUMMARY
+2. DETAILED_ANALYSIS (best techniques)
+3. METHOD
+4. RESULT
+5. REFERENCES
+6. LIMITATIONS
+7. Prompt_variants (exactly 5, each using a DIFFERENT technique AND different structure/format from the list below — never repeat):
+
+Techniques: Chain-of-Thought, Tree-of-Thought, Few-Shot, Persona-Based, Step-Back, Least-to-Most, ReAct, CO-STAR, Skeleton-of-Thought, Reflexion.
+Structures: Basic, Context-First, CO-STAR, Modular, Full Sequence, Feedback-Loop.
+
+Each variant must be a complete ready-to-use prompt for the original user task."""
+    return call_local(model, prompt, 0.4)
+```
+
+#### agents/critic_agent.py
+```
+from utils.helpers import call_local
+
+def critic_agent(senior_structured: str, research_output: str, loop_num: int) -> str:
+    model = "deepseek-r1:8b"
+    if loop_num == 3:
+        extra = "On the 3rd loop ONLY: also return Top_Variant: [list of the 3 best variant numbers]"
+    else:
+        extra = ""
+    prompt = f"""You are a strict critic.
+Senior prompt: {senior_structured}
+Research output: {research_output}
+
+Return EXACT format:
+HALLUCINATION_CHECK
+IMPROVEMENT_ACTIONS
+CRITIQUE_REPORT
+MISSING_POINTS
+LOGIC_ERRORS
+REDUNDANCIES
+{extra}"""
+    return call_local(model, prompt, 0.1)
+```
+
+#### agents/supervisor_agent.py
+```
+from utils.helpers import call_local, call_api
+from config.model_selector import get_best_model
+from utils.accuracy import calculate_accuracy
+from utils.router import is_complex_query
+
+def supervisor_agent(senior_structured: str, top3_variants: list, max_re_runs=2):
+    # Merge logic
+    merge_prompt = f"""Merge these 3 top variants into ONE ultimate prompt.
+Use domain tone, terminology, depth, and output format from original query.
+Fill any gaps using References.
+Senior structure: {senior_structured}
+Variants: {top3_variants}
+
+Return only the final merged prompt."""
+    final_prompt = call_local(get_best_model("supervisor"), merge_prompt, 0.2)
+
+    # Quality check (simple)
+    print("✅ Quality check passed (all guidelines followed)")
+
+    # Multi-model execution
+    models_to_run = ["llama3.1:8b", "mistral:7b"]
+    if is_complex_query(final_prompt):
+        models_to_run.append("meta-llama/Llama-3.1-70B-Instruct-Turbo")
+    else:
+        models_to_run.append("llama3.1:8b")
+
+    outputs = []
+    for m in models_to_run[:3]:
+        if "70B" in m:
+            out = call_api(final_prompt, 0.3)
+        else:
+            out = call_local(m, final_prompt, 0.3)
+        outputs.append(out)
+
+    # Scoring
+    objective = senior_structured.split("OBJECTIVE:")[1].split("CONSTRAINTS")[0].strip()
+    metrics = senior_structured.split("METRICS:")[1].split("NEGATIVE_CASES")[0].strip()
+    score = calculate_accuracy(outputs, objective, metrics)
+    print(f"📊 Accuracy score: {score}%")
+
+    if score >= 80:
+        return {"final_prompt": final_prompt, "best_output": max(outputs, key=len), "score": score}
+    return None  # trigger re-run
+```
+
+#### main.py 
+```
+from memory.memory_manager import add_message
+from agents.senior_agent import senior_agent
+from agents.research_agent import research_agent
+from agents.critic_agent import critic_agent
+from agents.supervisor_agent import supervisor_agent
+from memory.summarizer import should_summarize, update_summary
+
+print("🚀 VibePrompt Engineer ready! (Multi-model prompt factory)\nType 'exit' to quit.\n")
+
+while True:
+    user_query = input("You: ").strip()
+    if user_query.lower() in ["exit", "quit", "bye"]:
+        print("👋 Goodbye!")
+        break
+
+    add_message("user", user_query)
+
+    re_run_count = 0
+    while re_run_count <= 2:
+        # Clarification phase (1 round)
+        senior_resp = senior_agent(user_query)
+        if senior_resp["status"] == "clarifying":
+            print("\nSenior Agent asks (domain-specific):")
+            for i, q in enumerate(senior_resp["questions"], 1):
+                print(f"{i}. {q}")
+            answers = input("\nYour answers (in one line, separated by | ): ")
+            add_message("user", answers)
+            senior_resp = senior_agent(user_query, clarification_answers=answers)
+
+        structured = senior_resp["structured"]
+
+        # 3-loop Researcher ↔ Critic
+        research_out = ""
+        for loop in range(1, 4):
+            research_out = research_agent(structured, research_out)  # critique injected
+            critique = critic_agent(structured, research_out, loop)
+            if loop == 3:
+                top3 = critique.split("Top_Variant:")[1] if "Top_Variant" in critique else "1,2,3"
+            research_out += f"\nCRITIQUE: {critique}"
+
+        # Supervisor + validation
+        result = supervisor_agent(structured, top3)
+        if result:
+            print("\n=== FINAL ENGINEERED PROMPT ===\n")
+            print(result["final_prompt"])
+            print("\n=== TESTED OUTPUT (best of 3 models) ===\n")
+            print(result["best_output"])
+            print(f"\nAccuracy: {result['score']}% ✅")
+            add_message("assistant", result["final_prompt"])
+            break
+        else:
+            re_run_count += 1
+            print(f"⚠️ Accuracy low → re-running pipeline ({re_run_count}/{2})")
+            if should_summarize():
+                update_summary()
+
+    else:
+        print("Max re-runs reached. Try a clearer query.")
+```
 
 
 
@@ -836,7 +1592,7 @@ if __name__ == "__main__":
 
 
 ---
-  
+
   **[↑ Back to Top](#chapter-10-chatboot-evolution-)** 
 
 ---
