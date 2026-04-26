@@ -9,7 +9,7 @@
 - [LLaMA Family Overview (2023–2026)](#llama-family-overview-2023-2026)
 - [Three Main Types of LLaMA Models](#three-main-types-of-llama-models)
 - [Ways to Access LLaMA Models](#ways-to-access-llama-models)
-
+- [How to Run LLaMA Locally – Quick Start Guide](#how-to-run-llama-locally-quick-start-guide)
   
 **[← Back to Chapter 3](../Chapter-3-Memory-Management-Multi-turn-Chats/README.md)** | **[Next Section →](#)** | **[↑ Back to Top](#chapter-4-local-llms--running-models-on-your-machine-)** | **[Back to Phase 4 Main Page](../README.md)**
 
@@ -44,7 +44,7 @@ Downloading weights = downloading the **“brain”** of the AI.
 ### Open-Weight vs Closed Models
 
 <img src="../../assets/images/phase4-openvs-closed-weight.png"
-     width="75%"
+     width="25%"
      align="center"
      style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
      alt="Open-weight vs Closed-weight models comparison - LLaMA vs proprietary models like GPT and Claude">
@@ -81,7 +81,7 @@ After LLaMA:
 ## Three Main Types of LLaMA Models
 
 <img src="../../assets/images/phase4-types-of-llama-model.png"
-     width="75%"
+     width="45%"
      align="center"
      style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
      alt="Three main types of LLaMA models - Base, Chat, and Fine-tuned variants">
@@ -222,11 +222,173 @@ print(response['message']['content'])
 
 ---
 
+# Chapter 4: Local LLMs & Running Models on Your Machine 💻
+
+**Phase 4: Prompt Engineering in Developer Mode**
+
+---
+
+## How to Run LLaMA Locally – Quick Start Guide
+
+Running LLaMA models locally means you **download the model files** and use them on your own computer. Benefits include:
+- Full privacy (no data leaves your machine)
+- Zero API costs after download
+- Works completely offline
+- Full control over the model
+
+This guide focuses on the **easiest and most popular method in 2026**: **Ollama** — still the #1 choice for beginners and intermediate users.
+
+---
+
+### Option 1: Easiest & Recommended – Ollama (Beginner-Friendly)
+
+<img src="../../assets/images/phase4-installing-ollama.png"
+     width="45%"
+     align="center"
+     style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
+     alt="Installing Ollama - Step by step guide for Windows, Mac and Linux">
+<br clear="all"/>
+
+#### Step 1: Install Ollama (One-Time, ~2 minutes)
+
+**Windows:**
+1. Go to [https://ollama.com](https://ollama.com)
+2. Click **Download** → choose Windows
+3. Run the `.exe` installer (just like any normal program)
+4. Let it finish — Ollama will run in the background automatically
+
+**Mac / Linux:**
+```bash
+curl -fsSL https://ollama.com/install.sh | sh          
+```
+After installation, open a terminal/command prompt.
+
+#### Step 2: Download and Run Your First Model
+In the terminal, type one of these commands:
+
+```Bash
+# Best general-purpose chat model (excellent quality, runs on most laptops)
+ollama run llama3.1:8b
+```
+
+```Bash
+# Much stronger reasoning (needs more RAM/GPU)
+ollama run llama3.1:70b
+```
+
+```Bash
+# Very fast & lightweight alternative
+ollama run mistral:7b
+```
+
+```Bash
+# Excellent for coding tasks
+ollama run deepseek-coder-v2:16b
+```
+
+#### First time only:
+
+* Ollama will download the model (4–45 GB depending on size)
+* This may take 5–40 minutes depending on your internet speed
+* After download, the model starts instantly every time
+
+You will see the prompt:
+
+```text
+>>>
+```
+
+Now just type questions like you would in ChatGPT.
+Example:
+
+```text
+>>> Write a short poem about rain in Karachi at night
+```
+
+To exit the chat:
+
+```text
+/bye
+```
+
+#### Step 3: Run It Again Later
+Simply type the same command again:
+
+```Bash
+ollama run llama3.1:8b
+```
+It starts in 2–5 seconds because the model is already saved on your disk.
+
+#### Useful Ollama Commands:
+
+```Bash
+ollama list                    # See all downloaded models
+ollama rm llama3.1:8b          # Remove a model to free space
+ollama pull llama3.1:70b       # Download without starting chat
+ollama run llama3.1:8b-instruct-q4_0   # Run a quantized version (faster, less RAM)
+```
+
+#### Hardware Reality Check
+
+| Model Size | Approx Download Size | Minimum RAM | Realistic Speed (tokens/sec) | Runs well on               | 
+|------------|----------------------|-------------|------------------------------|----------------------------| 
+| 3B–8B      | 2–5 GB               | 8–16 GB     | 40–120 t/s                   | Most laptops (2020+)       | 
+| 13B–34B    | 7–20 GB              | 20–40 GB    | 20–60 t/s                    | Gaming laptop / desktop    | 
+| 70B        | 40–50 GB             | 48–80 GB    | 8–30 t/s (quantized)         | High-end desktop / server  | 
+| 405B       | 200+ GB              | 300+ GB     | Very slow                    | Cloud or serious cluster   | 
+** Tip: Start with llama3.1:8b or a quantized version like llama3.1:8b-instruct-q5_K_M (almost same quality, much faster and uses less RAM). **
 
 
+### Option 2: GUI Tools (Even Easier, No Terminal Needed)
+
+If you prefer a beautiful graphical interface instead of the terminal, these tools make running LLaMA models extremely beginner-friendly.
+
+| Tool          | Why Choose It                              | Download Link          |
+|---------------|--------------------------------------------|------------------------|
+| **LM Studio** | Beautiful interface, built-in model search, easy model management | [lmstudio.ai](https://lmstudio.ai) |
+| **GPT4All**   | Simple desktop app, supports many models   | [gpt4all.io](https://gpt4all.io)   |
+| **Jan**       | Clean UI, very beginner-friendly           | [jan.ai](https://jan.ai)           |
+| **Faraday.dev** | Focused on roleplay & creative writing   | [faraday.dev](https://faraday.dev) |
+
+These GUI tools are excellent for users who want to chat with models without writing any code.
 
 
+### Option 3: Developer / Code Style (Python)
 
+For building scripts, applications, or integrating LLaMA into your projects, use the Python library.
+
+#### Quick Ollama Python Example
+
+```python
+
+import ollama
+
+response = ollama.chat(
+    model='llama3.1:8b',
+    messages=[
+        {'role': 'user', 'content': 'Explain quantum entanglement like I’m 12 years old.'}
+    ]
+)
+
+print(response['message']['content'])
+
+```
+** This approach gives you full programmatic control and is the foundation for building local AI agents and applications.**
+
+### Summary: Choosing the Right Way to Run LLaMA (2026)
+
+| Your Goal                                  | Best Choice (2026)        | Setup Time  | Hardware Needed         | 
+|--------------------------------------------|---------------------------|-------------|-------------------------|
+| Just try LLaMA right now                   | Ollama + llama3.1:8b      | 5–20 min    | Normal laptop           | 
+| Want nice buttons & interface              | LM Studio or Jan          | 5 min       | Normal laptop           | 
+| Building an app or script                  | Ollama Python library     | 10 min      | Any computer            | 
+| Need best quality possible locally         | llama3.1:70b (quantized)  | 30–60 min   | 48+ GB RAM / GPU        | 
+| "Want zero hassle, don’t care about local" | Together.ai / Groq API    | 2 min       | Any computer + internet | 
+**Pro Tip: Most people start with Ollama (terminal or GUI via LM Studio/Jan). Once comfortable, move to the Python library when building real applications.**
+
+---
+> 💡 **Want to see this in a working chatbot?**  
+> **[🤖 Open CHATBOT 2 & 3: Multi-Model Research Chatbot with Ollama](../Chapter-10-Chatbot-Evolution/README.md)**
 
 ---
 
