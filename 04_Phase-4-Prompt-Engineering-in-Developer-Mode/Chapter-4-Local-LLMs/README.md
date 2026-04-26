@@ -385,10 +385,6 @@ print(response['message']['content'])
 **Pro Tip: Most people start with Ollama (terminal or GUI via LM Studio/Jan). Once comfortable, move to the Python library when building real applications.**
 
 ---
-> 💡 **Want to see how local LLMs work in a chatbot?**  
-> **[🤖 Open CHATBOT 2 & 3: Multi-Model Research Chatbot with Ollama](../Chapter-10-Chatbot-Evolution/README.md)**
-
----
 
 ## Running Large Models with Low Hardware – Practical Strategies
 
@@ -509,8 +505,6 @@ In the next sections, we will explore Quantized Local Inference and Hybrid Archi
 
 **Note**: Add 20–30% extra for KV cache during generation.
 
----
-
 #### Recommended Quantized Models by Hardware (2026)
 
 | RAM          | Best Model                          | Quantization   | Ollama Command                          | Speed (tokens/sec) | Quality (out of 10) | Hardware Notes              |
@@ -525,8 +519,6 @@ In the next sections, we will explore Quantized Local Inference and Hybrid Archi
 - **Sweet spot for most people**: `Llama-3.1-8B Q5_K_M` (16 GB RAM)
 - Use **Q5_K_M** or **Q6_K** for daily use (best quality/speed trade-off)
 - Use **Q4_K_M** if you want to run 70B on 32–40 GB RAM
-
----
 
 #### Task-Based Selection Guide
 
@@ -586,8 +578,6 @@ Here are the most popular tools used in 2026 for running quantized LLaMA and oth
 - You need a robust API server for multiple users
 - Deploying in production environments
 
----
-
 #### Tool Selection Strategy
 
 | Use Case                  | Recommended Tool      |
@@ -596,8 +586,6 @@ Here are the most popular tools used in 2026 for running quantized LLaMA and oth
 | CPU-only system           | **llama.cpp**         |
 | GPU + performance         | **vLLM**              |
 | Production API server     | **TGI**               |
-
----
 
 #### Practical Steps – How to Select & Use Quantized Models
 
