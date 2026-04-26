@@ -1153,12 +1153,12 @@ mkdir multi_agent_chatbot && cd multi_agent_chatbot
 
 Inside .env, add your credentials like: 
 
-```
+```text
 TOGETHER_API_KEY=sk-XXXXXXXXXXXXXXXXXXXXXXX
 ```
 
 #### 4. Create  a `requirements.txt` file and add:
-```
+```text
 ollama
 psutil 
 openai 
@@ -1233,7 +1233,7 @@ multi_agent_chatbot/
 ### Complete Code:
 
 #### config/settings.py
-```
+```python
 import os
 from dotenv import load_dotenv
 
@@ -1255,7 +1255,7 @@ MODELS = {
 ```
 
 #### config/model_selector.py
-```
+```python
 import psutil
 from config.settings import MODELS
 
@@ -1284,7 +1284,7 @@ def get_best_model(role: str, task_type: str = "general", use_api: bool = False)
 ```
 
 #### memory/memory_manager.py
-```
+```python
 conversation = []  # Global list for full history
 
 def add_message(role: str, content: str):
@@ -1296,7 +1296,7 @@ def get_recent(n=5):
 ```
 
 #### memory/summarizer.py
-```
+```python
 import ollama
 from memory.memory_manager import conversation
 from config.settings import MAX_HISTORY_CHARS
@@ -1316,7 +1316,7 @@ def update_summary() -> str:
 ```
 
 #### utils/helpers.py
-```
+```python
 import ollama
 from openai import OpenAI
 from config.settings import TOGETHER_API_KEY
@@ -1338,7 +1338,7 @@ def call_api(prompt: str, temp=0.3):
 ```
 
 #### utils/router.py
-```
+```python
 from utils.helpers import call_local
 
 def is_complex_query(query: str) -> bool:
@@ -1352,7 +1352,7 @@ Answer ONLY one word."""
 ```
 
 #### utils/accuracy.py
-```
+```python
 from utils.helpers import call_local
 
 def calculate_accuracy(outputs: list, objective: str, metrics: str) -> float:
@@ -1374,7 +1374,7 @@ Return ONLY the average score as a number (e.g. 87)."""
 ```
 
 #### agents/senior_agent.py
-```
+```python
 from config.model_selector import get_best_model, detect_task_type
 from memory.summarizer import update_summary
 from memory.memory_manager import get_recent, add_message
@@ -1418,7 +1418,7 @@ FINAL_PROMPT_FOR_RESEARCHER: [full prompt for researcher to use]"""
 ```
 
 #### agents/research_agent.py
-```
+```python
 from utils.helpers import call_local
 from config.model_selector import get_best_model
 # Techniques & structures taken directly from your References
@@ -1446,7 +1446,7 @@ Each variant must be a complete ready-to-use prompt for the original user task."
 ```
 
 #### agents/critic_agent.py
-```
+```python
 from utils.helpers import call_local
 
 def critic_agent(senior_structured: str, research_output: str, loop_num: int) -> str:
@@ -1471,7 +1471,7 @@ REDUNDANCIES
 ```
 
 #### agents/supervisor_agent.py
-```
+```python
 from utils.helpers import call_local, call_api
 from config.model_selector import get_best_model
 from utils.accuracy import calculate_accuracy
@@ -1518,7 +1518,7 @@ Return only the final merged prompt."""
 ```
 
 #### main.py 
-```
+```python
 from memory.memory_manager import add_message
 from agents.senior_agent import senior_agent
 from agents.research_agent import research_agent
@@ -1578,19 +1578,6 @@ while True:
     else:
         print("Max re-runs reached. Try a clearer query.")
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
   **[↑ Back to Top](#chapter-10-chatboot-evolution-)** 
