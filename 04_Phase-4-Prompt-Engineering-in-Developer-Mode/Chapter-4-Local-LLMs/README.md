@@ -222,12 +222,6 @@ print(response['message']['content'])
 
 ---
 
-# Chapter 4: Local LLMs & Running Models on Your Machine 💻
-
-**Phase 4: Prompt Engineering in Developer Mode**
-
----
-
 ## How to Run LLaMA Locally – Quick Start Guide
 
 Running LLaMA models locally means you **download the model files** and use them on your own computer. Benefits include:
@@ -336,7 +330,8 @@ ollama run llama3.1:8b-instruct-q4_0   # Run a quantized version (faster, less R
 | 13B–34B    | 7–20 GB              | 20–40 GB    | 20–60 t/s                    | Gaming laptop / desktop    | 
 | 70B        | 40–50 GB             | 48–80 GB    | 8–30 t/s (quantized)         | High-end desktop / server  | 
 | 405B       | 200+ GB              | 300+ GB     | Very slow                    | Cloud or serious cluster   | 
-** Tip: Start with llama3.1:8b or a quantized version like llama3.1:8b-instruct-q5_K_M (almost same quality, much faster and uses less RAM). **
+
+**Tip: Start with llama3.1:8b or a quantized version like llama3.1:8b-instruct-q5_K_M (almost same quality, much faster and uses less RAM).**
 
 
 ### Option 2: GUI Tools (Even Easier, No Terminal Needed)
@@ -349,6 +344,7 @@ If you prefer a beautiful graphical interface instead of the terminal, these too
 | **GPT4All**   | Simple desktop app, supports many models   | [gpt4all.io](https://gpt4all.io)   |
 | **Jan**       | Clean UI, very beginner-friendly           | [jan.ai](https://jan.ai)           |
 | **Faraday.dev** | Focused on roleplay & creative writing   | [faraday.dev](https://faraday.dev) |
+
 
 These GUI tools are excellent for users who want to chat with models without writing any code.
 
@@ -373,7 +369,7 @@ response = ollama.chat(
 print(response['message']['content'])
 
 ```
-** This approach gives you full programmatic control and is the foundation for building local AI agents and applications.**
+**This approach gives you full programmatic control and is the foundation for building local AI agents and applications.**
 
 ### Summary: Choosing the Right Way to Run LLaMA (2026)
 
@@ -384,6 +380,7 @@ print(response['message']['content'])
 | Building an app or script                  | Ollama Python library     | 10 min      | Any computer            | 
 | Need best quality possible locally         | llama3.1:70b (quantized)  | 30–60 min   | 48+ GB RAM / GPU        | 
 | "Want zero hassle, don’t care about local" | Together.ai / Groq API    | 2 min       | Any computer + internet | 
+
 **Pro Tip: Most people start with Ollama (terminal or GUI via LM Studio/Jan). Once comfortable, move to the Python library when building real applications.**
 
 ---
