@@ -1,7 +1,5 @@
 # Chapter 4: Local LLMs & Running Models on Your Machine 💻
-
 ---
-
 ## Table of Contents
 - [Introduction to LLaMA Models – Running LLMs Locally](#introduction-to-llama-models--running-llms-locally)
 - [What is LLaMA?](#what-is-llama)
@@ -11,19 +9,16 @@
 - [Ways to Access LLaMA Models](#ways-to-access-llama-models)
 - [How to Run LLaMA Locally – Quick Start Guide](#how-to-run-llama-locally-quick-start-guide)
 - [Running Large Models with Low Hardware – Practical Strategies](#running-large-models-with-low-hardware-feasibility)
-  
-**[← Back to Chapter 3](../Chapter-3-Memory-Management-Multi-turn-Chats/README.md)** | **[Next Section →](#)** | **[↑ Back to Top](#chapter-4-local-llms--running-models-on-your-machine-)** | **[Back to Phase 4 Main Page](../README.md)**
 
+**[← Previous Chapter](../Chapter-3-Memory-Management-Multi-turn-Chats/README.md)** | **[Next Chapter →](../Chapter-5-Multiple-Models-in-a-Single-Application/README.md)** | **[Back to Phase 4 Main Page](../README.md)**
 ---
 
 ## Introduction to LLaMA Models – Running LLMs Locally
-
 LLaMA is one of the most influential **open-weight** large language model families ever released. It made powerful AI accessible to everyone — not just companies with huge server farms.
 
 ---
 
 ## What is LLaMA?
-
 **LLaMA** stands for **Large Language Model Meta AI**. It is a family of open-weight models created by Meta AI.
 
 LLaMA models excel at:
@@ -50,6 +45,9 @@ Downloading weights = downloading the **“brain”** of the AI.
      style="display: block; margin: 25px auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.18);"
      alt="Open-weight vs Closed-weight models comparison - LLaMA vs proprietary models like GPT and Claude">
 <br clear="all"/>
+
+---
+**[↑ Back to Top](#chapter-4-local-llms--running-models-on-your-machine-)**
 
 ---
 
@@ -89,6 +87,9 @@ After LLaMA:
 <br clear="all"/>
 
 ---
+**[↑ Back to Top](#chapter-4-local-llms--running-models-on-your-machine-)**
+
+---
 
 ## Ways to Access LLaMA Models
 
@@ -96,7 +97,6 @@ LLaMA models (Meta’s open-weight family) can be used in three main ways, each 
 
 Here are the three common approaches, ranked from **easiest** to **most advanced**:
 
----
 
 ### 1. Hosted API (Recommended for Most People)
 
@@ -137,6 +137,7 @@ print(response.choices[0].message.content)
 * Access to the newest LLaMA variants within days of release
 * Easy to switch between models
 
+---
 
 ### 2. Cloud Deployment (You Host It)
 You rent GPU servers and run the model yourself.
@@ -162,6 +163,8 @@ You rent GPU servers and run the model yourself.
 * Full data privacy
 * Running custom fine-tuned versions
 * Very high volume usage (becomes cheaper than APIs after ~10–20M tokens/day)
+
+---
   
 ### 3. Local Installation (Run on Your Own Computer)
 Download and run models completely offline on your laptop or desktop.
@@ -220,6 +223,9 @@ print(response['message']['content'])
 | Fine-tune your own version              | Local + LoRA on RunPod/Vast.ai  | Full control                 |
 | Need 70B+ quality on low budget         | Together.ai Llama-3.1-70B       | Best price/performance       |
 | Enterprise / compliance                 | Amazon Bedrock or Azure         | "Audits, SLAs, security"     |
+
+---
+**[↑ Back to Top](#chapter-4-local-llms--running-models-on-your-machine-)**
 
 ---
 
@@ -307,7 +313,7 @@ To exit the chat:
 ```
 
 #### Step 3: Run It Again Later
-Simply type the same command again:
+Type the same command again:
 
 ```Bash
 ollama run llama3.1:8b
@@ -334,6 +340,10 @@ ollama run llama3.1:8b-instruct-q4_0   # Run a quantized version (faster, less R
 
 **Tip: Start with llama3.1:8b or a quantized version like llama3.1:8b-instruct-q5_K_M (almost same quality, much faster and uses less RAM).**
 
+---
+**[↑ Back to Top](#chapter-4-local-llms--running-models-on-your-machine-)**
+
+---
 
 ### Option 2: GUI Tools (Even Easier, No Terminal Needed)
 
@@ -348,7 +358,10 @@ If you prefer a beautiful graphical interface instead of the terminal, these too
 
 
 These GUI tools are excellent for users who want to chat with models without writing any code.
+---
+**[↑ Back to Top](#chapter-4-local-llms--running-models-on-your-machine-)**
 
+---
 
 ### Option 3: Developer / Code Style (Python)
 
@@ -371,6 +384,10 @@ print(response['message']['content'])
 
 ```
 **This approach gives you full programmatic control and is the foundation for building local AI agents and applications.**
+---
+**[↑ Back to Top](#chapter-4-local-llms--running-models-on-your-machine-)**
+
+---
 
 ### Summary: Choosing the Right Way to Run LLaMA (2026)
 
@@ -383,6 +400,9 @@ print(response['message']['content'])
 | "Want zero hassle, don’t care about local" | Together.ai / Groq API    | 2 min       | Any computer + internet | 
 
 **Pro Tip: Most people start with Ollama (terminal or GUI via LM Studio/Jan). Once comfortable, move to the Python library when building real applications.**
+
+---
+**[↑ Back to Top](#chapter-4-local-llms--running-models-on-your-machine-)**
 
 ---
 
@@ -440,6 +460,9 @@ response = client.chat.completions.create(
 In the next sections, we will explore Quantized Local Inference and Hybrid Architectures — the other two powerful strategies for running large models efficiently.**
 
 ---
+**[↑ Back to Top](#chapter-4-local-llms--running-models-on-your-machine-)**
+
+---
 
 ### Quantized Local Models – Best for Privacy & Zero Cost
 
@@ -482,16 +505,14 @@ In the next sections, we will explore Quantized Local Inference and Hybrid Archi
 #### When to Use Quantized Local Models
 
 - You need full privacy
-- Working in offline / air-gapped environments
+- Working in offline/air-gapped environments
 - You want zero ongoing running cost
 - You plan to do custom fine-tuning
 
 #### When to Avoid
 
-- You need absolute best reasoning (complex math, advanced coding, research)
+- You need the absolute best reasoning (complex math, advanced coding, research)
 - You have extremely low RAM (<8 GB)
-
----
 
 #### Hardware Feasibility Calculation
 
@@ -666,5 +687,5 @@ ollama ps            # shows currently running models
 
 **Phase 4 of "All You Need to Know About Prompt Engineering" — Portfolio Project by Mirza (BS AI Student, Karachi)**
 
-**[← Back to Chapter 3](../Chapter-3-Memory-Management-Multi-turn-Chats/README.md)** | **[Next Section →](#)** | **[↑ Back to Top](#chapter-4-local-llms--running-models-on-your-machine-)** | **[Back to Phase 4 Main Page](../README.md)**
+**[← Previous Chapter](../Chapter-3-Memory-Management-Multi-turn-Chats/README.md)** | **[Next Chapter →](../Chapter-5-Multiple-Models-in-a-Single-Application/README.md)** | **[Back to Phase 4 Main Page](../README.md)** | **[↑ Back to Top](#chapter-4-local-llms--running-models-on-your-machine-)**
 
